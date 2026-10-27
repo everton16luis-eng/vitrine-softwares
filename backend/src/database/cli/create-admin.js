@@ -49,7 +49,8 @@ try {
         "INSERT INTO usuarios (tipo, nome, email, senha_hash, senha_alterada_em) VALUES ('equipe', $1, $2, $3, now()) RETURNING id",
         [value.nome, value.email, await hashPassword(senha)]);
       await tx.query('INSERT INTO usuarios_perfis (usuario_id, perfil_id) VALUES ($1, $2)', [user.id, role.id]);
-      await tx.query("INSERT INTO auditoria (usuario_id, usuario_nome, acao, entidade, entidade_id) VALUES ($1, $2, 'criar_primeiro_admin', 'usuario', $1)", [user.id, value.nome]);
+      await tx.query("INSERT INTO auditoria (usuario_id, usuario_nome, acao, entidade, entidade_id) VALUES ($1, $2, 'criar_primeiro_admin', 'usuario', $3)",
+        [user.id, value.nome, String(user.id)]);
     });
     console.log(`Administrador criado: ${value.email}. Acesse /admin para entrar.`);
     if (fromEnv) console.log('Lembre-se de remover ADMIN_PASSWORD do arquivo .env.');
