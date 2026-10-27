@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" width="960" height="600" font-family="Segoe UI, Inter, Arial, sans-serif" role="img" aria-label="ChurchFlow — Membros e visitantes (ilustração com dados fictícios)">
+  <rect width="960" height="600" rx="18" fill="#0e1525"/>
+  <rect x="0" y="0" width="960" height="44" rx="18" fill="#0a101c"/><rect x="0" y="26" width="960" height="18" fill="#0a101c"/>
+  <circle cx="24" cy="22" r="6" fill="#ff6b6b"/><circle cx="44" cy="22" r="6" fill="#ffd166"/><circle cx="64" cy="22" r="6" fill="#2fd8a4"/>
+  <rect x="330" y="12" width="300" height="20" rx="10" fill="#151e31"/>
+  <text x="480" y="26" font-size="11" fill="#8792a8" text-anchor="middle">churchflow.demo — dados fictícios</text>
+  <rect x="0" y="44" width="208" height="556" fill="#0f1626"/>
+  <rect x="20" y="58" width="22" height="22" rx="6" fill="#7c9cff"/>
+  <text x="50" y="74" font-size="15" font-weight="700" fill="#fff">ChurchFlow</text>
+  
+    <rect x="16" y="92" width="176" height="32" rx="8" fill="none" fill-opacity="0"/>
+    <rect x="30" y="103" width="10" height="10" rx="3" fill="#8792a8"/>
+    <text x="50" y="113" font-size="13" fill="#8792a8">Painel</text>
+    <rect x="16" y="132" width="176" height="32" rx="8" fill="#7c9cff" fill-opacity="0.16"/>
+    <rect x="30" y="143" width="10" height="10" rx="3" fill="#7c9cff"/>
+    <text x="50" y="153" font-size="13" fill="#fff">Membros</text>
+    <rect x="16" y="172" width="176" height="32" rx="8" fill="none" fill-opacity="0"/>
+    <rect x="30" y="183" width="10" height="10" rx="3" fill="#8792a8"/>
+    <text x="50" y="193" font-size="13" fill="#8792a8">Voluntários</text>
+    <rect x="16" y="212" width="176" height="32" rx="8" fill="none" fill-opacity="0"/>
+    <rect x="30" y="223" width="10" height="10" rx="3" fill="#8792a8"/>
+    <text x="50" y="233" font-size="13" fill="#8792a8">Escalas</text>
+    <rect x="16" y="252" width="176" height="32" rx="8" fill="none" fill-opacity="0"/>
+    <rect x="30" y="263" width="10" height="10" rx="3" fill="#8792a8"/>
+    <text x="50" y="273" font-size="13" fill="#8792a8">Eventos</text>
+    <rect x="16" y="292" width="176" height="32" rx="8" fill="none" fill-opacity="0"/>
+    <rect x="30" y="303" width="10" height="10" rx="3" fill="#8792a8"/>
+    <text x="50" y="313" font-size="13" fill="#8792a8">Relatórios</text>
+  <text x="236" y="86" font-size="20" font-weight="700" fill="#fff">Membros e visitantes</text>
+  <rect x="820" y="68" width="112" height="26" rx="8" fill="#7c9cff"/>
+  <text x="876" y="85" font-size="12" font-weight="700" fill="#0e1525" text-anchor="middle">+ Novo</text>
+  <rect x="236" y="112" width="222.66666666666666" height="78" rx="12" fill="#131c2e" stroke="#22304a"/>
+      <text x="252" y="140" font-size="11" fill="#8792a8" letter-spacing=".5">MEMBROS</text>
+      <text x="252" y="172" font-size="24" font-weight="700" fill="#7c9cff">248</text><rect x="472.66666666666663" y="112" width="222.66666666666666" height="78" rx="12" fill="#131c2e" stroke="#22304a"/>
+      <text x="488.66666666666663" y="140" font-size="11" fill="#8792a8" letter-spacing=".5">VISITANTES (30D)</text>
+      <text x="488.66666666666663" y="172" font-size="24" font-weight="700" fill="#fff">19</text><rect x="709.3333333333333" y="112" width="222.66666666666666" height="78" rx="12" fill="#131c2e" stroke="#22304a"/>
+      <text x="725.3333333333333" y="140" font-size="11" fill="#8792a8" letter-spacing=".5">NOVOS CADASTROS</text>
+      <text x="725.3333333333333" y="172" font-size="24" font-weight="700" fill="#fff">6</text><rect x="236" y="210" width="696" height="214" rx="12" fill="#131c2e" stroke="#22304a"/><text x="254" y="240" font-size="11" fill="#8792a8" letter-spacing=".5">NOME</text><text x="428" y="240" font-size="11" fill="#8792a8" letter-spacing=".5">TIPO</text><text x="602" y="240" font-size="11" fill="#8792a8" letter-spacing=".5">DESDE</text><text x="776" y="240" font-size="11" fill="#8792a8" letter-spacing=".5">SITUAÇÃO</text><line x1="236" x2="932" y1="256" y2="256" stroke="#22304a"/><text x="254" y="282" font-size="13" fill="#fff">Pessoa Exemplo 01</text><text x="428" y="282" font-size="13" fill="#e6ebf3">Membro</text><text x="602" y="282" font-size="13" fill="#e6ebf3">2019</text><rect x="770" y="267" width="70" height="20" rx="10" fill="#2fd8a4" fill-opacity=".16"/><text x="780" y="281" font-size="11" font-weight="600" fill="#2fd8a4">Ativo</text><line x1="236" x2="932" y1="296" y2="296" stroke="#22304a"/><text x="254" y="322" font-size="13" fill="#fff">Pessoa Exemplo 02</text><text x="428" y="322" font-size="13" fill="#e6ebf3">Visitante</text><text x="602" y="322" font-size="13" fill="#e6ebf3">2026</text><rect x="770" y="307" width="88" height="20" rx="10" fill="#9bbcff" fill-opacity=".16"/><text x="780" y="321" font-size="11" font-weight="600" fill="#9bbcff">Acompanhar</text><line x1="236" x2="932" y1="336" y2="336" stroke="#22304a"/><text x="254" y="362" font-size="13" fill="#fff">Pessoa Exemplo 03</text><text x="428" y="362" font-size="13" fill="#e6ebf3">Membro</text><text x="602" y="362" font-size="13" fill="#e6ebf3">2021</text><rect x="770" y="347" width="70" height="20" rx="10" fill="#2fd8a4" fill-opacity=".16"/><text x="780" y="361" font-size="11" font-weight="600" fill="#2fd8a4">Ativo</text><line x1="236" x2="932" y1="376" y2="376" stroke="#22304a"/><text x="254" y="402" font-size="13" fill="#fff">Pessoa Exemplo 04</text><text x="428" y="402" font-size="13" fill="#e6ebf3">Visitante</text><text x="602" y="402" font-size="13" fill="#e6ebf3">2026</text><rect x="770" y="387" width="88" height="20" rx="10" fill="#9bbcff" fill-opacity=".16"/><text x="780" y="401" font-size="11" font-weight="600" fill="#9bbcff">Acompanhar</text>
+</svg>

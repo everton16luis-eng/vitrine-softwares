@@ -1,0 +1,44 @@
+{
+  "name": "vitrine-softwares",
+  "version": "1.0.0",
+  "description": "Plataforma de portfólio, divulgação e comercialização de softwares, com painel administrativo e área do cliente.",
+  "type": "module",
+  "private": true,
+  "main": "backend/src/server.js",
+  "engines": {
+    "node": ">=20.11"
+  },
+  "scripts": {
+    "start": "node backend/src/server.js",
+    "dev": "node --watch-path=backend --watch-preserve-output backend/src/server.js",
+    "db:create": "node backend/src/database/cli/create-database.js",
+    "db:migrate": "node backend/src/database/cli/migrate.js",
+    "db:seed": "node backend/src/database/cli/seed.js",
+    "db:setup": "npm run db:create && npm run db:migrate && npm run db:seed",
+    "admin:create": "node backend/src/database/cli/create-admin.js",
+    "test": "node --test --test-concurrency=1 \"tests/**/*.test.js\"",
+    "test:unit": "node --test \"tests/unit/*.test.js\"",
+    "test:integration": "node --test --test-concurrency=1 \"tests/integration/*.test.js\"",
+    "images": "node scripts/generate-images.js"
+  },
+  "dependencies": {
+    "argon2": "^0.41.1",
+    "bootstrap": "^5.3.3",
+    "bootstrap-icons": "^1.11.3",
+    "chart.js": "^4.4.7",
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^16.4.7",
+    "express": "^5.1.0",
+    "express-rate-limit": "^7.5.0",
+    "helmet": "^8.0.0",
+    "multer": "^2.0.1",
+    "nodemailer": "^6.10.0",
+    "pg": "^8.13.1"
+  },
+  "optionalDependencies": {
+    "sharp": "^0.33.5"
+  },
+  "devDependencies": {
+    "supertest": "^7.0.0"
+  }
+}

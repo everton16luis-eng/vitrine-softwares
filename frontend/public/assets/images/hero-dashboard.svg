@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 640" width="960" height="640" font-family="Segoe UI, Inter, Arial, sans-serif" role="img" aria-label="Painel — Visão geral (ilustração com dados fictícios)">
+  <rect width="960" height="640" rx="18" fill="#0e1525"/>
+  <rect x="0" y="0" width="960" height="44" rx="18" fill="#0a101c"/><rect x="0" y="26" width="960" height="18" fill="#0a101c"/>
+  <circle cx="24" cy="22" r="6" fill="#ff6b6b"/><circle cx="44" cy="22" r="6" fill="#ffd166"/><circle cx="64" cy="22" r="6" fill="#2fd8a4"/>
+  <rect x="330" y="12" width="300" height="20" rx="10" fill="#151e31"/>
+  <text x="480" y="26" font-size="11" fill="#8792a8" text-anchor="middle">painel.demo — dados fictícios</text>
+  <rect x="0" y="44" width="208" height="596" fill="#0f1626"/>
+  <rect x="20" y="58" width="22" height="22" rx="6" fill="#2fd8a4"/>
+  <text x="50" y="74" font-size="15" font-weight="700" fill="#fff">Painel</text>
+  
+    <rect x="16" y="92" width="176" height="32" rx="8" fill="#2fd8a4" fill-opacity="0.16"/>
+    <rect x="30" y="103" width="10" height="10" rx="3" fill="#2fd8a4"/>
+    <text x="50" y="113" font-size="13" fill="#fff">Visão geral</text>
+    <rect x="16" y="132" width="176" height="32" rx="8" fill="none" fill-opacity="0"/>
+    <rect x="30" y="143" width="10" height="10" rx="3" fill="#8792a8"/>
+    <text x="50" y="153" font-size="13" fill="#8792a8">Cadastros</text>
+    <rect x="16" y="172" width="176" height="32" rx="8" fill="none" fill-opacity="0"/>
+    <rect x="30" y="183" width="10" height="10" rx="3" fill="#8792a8"/>
+    <text x="50" y="193" font-size="13" fill="#8792a8">Operações</text>
+    <rect x="16" y="212" width="176" height="32" rx="8" fill="none" fill-opacity="0"/>
+    <rect x="30" y="223" width="10" height="10" rx="3" fill="#8792a8"/>
+    <text x="50" y="233" font-size="13" fill="#8792a8">Financeiro</text>
+    <rect x="16" y="252" width="176" height="32" rx="8" fill="none" fill-opacity="0"/>
+    <rect x="30" y="263" width="10" height="10" rx="3" fill="#8792a8"/>
+    <text x="50" y="273" font-size="13" fill="#8792a8">Relatórios</text>
+    <rect x="16" y="292" width="176" height="32" rx="8" fill="none" fill-opacity="0"/>
+    <rect x="30" y="303" width="10" height="10" rx="3" fill="#8792a8"/>
+    <text x="50" y="313" font-size="13" fill="#8792a8">Configurações</text>
+  <text x="236" y="86" font-size="20" font-weight="700" fill="#fff">Visão geral</text>
+  <rect x="820" y="68" width="112" height="26" rx="8" fill="#2fd8a4"/>
+  <text x="876" y="85" font-size="12" font-weight="700" fill="#0e1525" text-anchor="middle">+ Novo</text>
+  <rect x="236" y="112" width="222.66666666666666" height="78" rx="12" fill="#131c2e" stroke="#22304a"/>
+      <text x="252" y="140" font-size="11" fill="#8792a8" letter-spacing=".5">REGISTROS</text>
+      <text x="252" y="172" font-size="24" font-weight="700" fill="#2fd8a4">1.284</text><rect x="472.66666666666663" y="112" width="222.66666666666666" height="78" rx="12" fill="#131c2e" stroke="#22304a"/>
+      <text x="488.66666666666663" y="140" font-size="11" fill="#8792a8" letter-spacing=".5">PENDÊNCIAS</text>
+      <text x="488.66666666666663" y="172" font-size="24" font-weight="700" fill="#fff">12</text><rect x="709.3333333333333" y="112" width="222.66666666666666" height="78" rx="12" fill="#131c2e" stroke="#22304a"/>
+      <text x="725.3333333333333" y="140" font-size="11" fill="#8792a8" letter-spacing=".5">CONCLUÍDOS</text>
+      <text x="725.3333333333333" y="172" font-size="24" font-weight="700" fill="#fff">96%</text><rect x="236" y="210" width="696" height="330" rx="12" fill="#131c2e" stroke="#22304a"/>
+    <text x="254" y="240" font-size="13" font-weight="600" fill="#fff">Evolução semanal (ilustrativo)</text><line x1="256" x2="912" y1="324" y2="324" stroke="#22304a" stroke-dasharray="4 6"/><line x1="256" x2="912" y1="384" y2="384" stroke="#22304a" stroke-dasharray="4 6"/><line x1="256" x2="912" y1="444" y2="444" stroke="#22304a" stroke-dasharray="4 6"/><rect x="281.9" y="414" width="47.699999999999996" height="90" rx="6" fill="#2fd8a4" fill-opacity="0.45"/>
+      <text x="305.75" y="526" font-size="11" fill="#8792a8" text-anchor="middle">s1</text><rect x="361.4" y="378" width="47.699999999999996" height="126" rx="6" fill="#2fd8a4" fill-opacity="0.51875"/>
+      <text x="385.25" y="526" font-size="11" fill="#8792a8" text-anchor="middle">s2</text><rect x="440.9" y="390" width="47.699999999999996" height="114" rx="6" fill="#2fd8a4" fill-opacity="0.5875"/>
+      <text x="464.75" y="526" font-size="11" fill="#8792a8" text-anchor="middle">s3</text><rect x="520.4" y="339" width="47.699999999999996" height="165" rx="6" fill="#2fd8a4" fill-opacity="0.65625"/>
+      <text x="544.25" y="526" font-size="11" fill="#8792a8" text-anchor="middle">s4</text><rect x="599.9" y="321" width="47.699999999999996" height="183" rx="6" fill="#2fd8a4" fill-opacity="0.7250000000000001"/>
+      <text x="623.75" y="526" font-size="11" fill="#8792a8" text-anchor="middle">s5</text><rect x="679.4" y="330" width="47.699999999999996" height="174" rx="6" fill="#2fd8a4" fill-opacity="0.79375"/>
+      <text x="703.25" y="526" font-size="11" fill="#8792a8" text-anchor="middle">s6</text><rect x="758.9" y="288" width="47.699999999999996" height="216" rx="6" fill="#2fd8a4" fill-opacity="0.8625"/>
+      <text x="782.75" y="526" font-size="11" fill="#8792a8" text-anchor="middle">s7</text><rect x="838.4" y="264" width="47.699999999999996" height="240" rx="6" fill="#2fd8a4" fill-opacity="0.9312500000000001"/>
+      <text x="862.25" y="526" font-size="11" fill="#8792a8" text-anchor="middle">s8</text><rect x="236" y="556" width="696" height="56" rx="12" fill="#131c2e" stroke="#22304a"/><circle cx="262" cy="584" r="8" fill="#2fd8a4"/><text x="282" y="589" font-size="13" fill="#e6ebf3">Fluxo concluído • atualização registrada no histórico</text>
+</svg>

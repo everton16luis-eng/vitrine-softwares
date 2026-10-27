@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" font-family="Segoe UI, Arial, sans-serif">
+  <defs><radialGradient id="g" cx="85%" cy="0%" r="70%"><stop offset="0" stop-color="#2fd8a4" stop-opacity=".35"/><stop offset="1" stop-color="#0e1525" stop-opacity="0"/></radialGradient></defs>
+  <rect width="1200" height="630" fill="#0e1525"/><rect width="1200" height="630" fill="url(#g)"/>
+  <rect x="80" y="90" width="64" height="64" rx="18" fill="#2fd8a4"/><path d="M98 136 110 104h7l12 32h-7l-2.5-6h-12l-2.5 6Zm11.7-11.5h7.6L113.5 114Z" fill="#0e1525"/>
+  <text x="80" y="290" font-size="64" font-weight="700" fill="#fff">Softwares de gestão</text>
+  <text x="80" y="370" font-size="64" font-weight="700" fill="#fff">e desenvolvimento sob medida</text>
+  <text x="80" y="450" font-size="28" fill="#aab3c5">Portfólio de sistemas web • demonstrações • orçamentos</text>
+</svg>

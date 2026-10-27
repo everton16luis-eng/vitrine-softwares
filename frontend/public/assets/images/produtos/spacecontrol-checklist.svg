@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" width="960" height="600" font-family="Segoe UI, Inter, Arial, sans-serif" role="img" aria-label="SpaceControl — Checklist de devolução — CT-0039 (ilustração com dados fictícios)">
+  <rect width="960" height="600" rx="18" fill="#0e1525"/>
+  <rect x="0" y="0" width="960" height="44" rx="18" fill="#0a101c"/><rect x="0" y="26" width="960" height="18" fill="#0a101c"/>
+  <circle cx="24" cy="22" r="6" fill="#ff6b6b"/><circle cx="44" cy="22" r="6" fill="#ffd166"/><circle cx="64" cy="22" r="6" fill="#2fd8a4"/>
+  <rect x="330" y="12" width="300" height="20" rx="10" fill="#151e31"/>
+  <text x="480" y="26" font-size="11" fill="#8792a8" text-anchor="middle">spacecontrol.demo — dados fictícios</text>
+  <rect x="0" y="44" width="208" height="556" fill="#0f1626"/>
+  <rect x="20" y="58" width="22" height="22" rx="6" fill="#2fd8a4"/>
+  <text x="50" y="74" font-size="15" font-weight="700" fill="#fff">SpaceControl</text>
+  
+    <rect x="16" y="92" width="176" height="32" rx="8" fill="none" fill-opacity="0"/>
+    <rect x="30" y="103" width="10" height="10" rx="3" fill="#8792a8"/>
+    <text x="50" y="113" font-size="13" fill="#8792a8">Painel</text>
+    <rect x="16" y="132" width="176" height="32" rx="8" fill="none" fill-opacity="0"/>
+    <rect x="30" y="143" width="10" height="10" rx="3" fill="#8792a8"/>
+    <text x="50" y="153" font-size="13" fill="#8792a8">Reservas</text>
+    <rect x="16" y="172" width="176" height="32" rx="8" fill="none" fill-opacity="0"/>
+    <rect x="30" y="183" width="10" height="10" rx="3" fill="#8792a8"/>
+    <text x="50" y="193" font-size="13" fill="#8792a8">Espaços</text>
+    <rect x="16" y="212" width="176" height="32" rx="8" fill="none" fill-opacity="0"/>
+    <rect x="30" y="223" width="10" height="10" rx="3" fill="#8792a8"/>
+    <text x="50" y="233" font-size="13" fill="#8792a8">Locatários</text>
+    <rect x="16" y="252" width="176" height="32" rx="8" fill="#2fd8a4" fill-opacity="0.16"/>
+    <rect x="30" y="263" width="10" height="10" rx="3" fill="#2fd8a4"/>
+    <text x="50" y="273" font-size="13" fill="#fff">Checklist</text>
+    <rect x="16" y="292" width="176" height="32" rx="8" fill="none" fill-opacity="0"/>
+    <rect x="30" y="303" width="10" height="10" rx="3" fill="#8792a8"/>
+    <text x="50" y="313" font-size="13" fill="#8792a8">Inventário</text>
+  <text x="236" y="86" font-size="20" font-weight="700" fill="#fff">Checklist de devolução — CT-0039</text>
+  <rect x="820" y="68" width="112" height="26" rx="8" fill="#2fd8a4"/>
+  <text x="876" y="85" font-size="12" font-weight="700" fill="#0e1525" text-anchor="middle">+ Novo</text>
+  <rect x="236" y="112" width="696" height="214" rx="12" fill="#131c2e" stroke="#22304a"/><text x="254" y="142" font-size="11" fill="#8792a8" letter-spacing=".5">ITEM</text><text x="428" y="142" font-size="11" fill="#8792a8" letter-spacing=".5">ENTREGUE</text><text x="602" y="142" font-size="11" fill="#8792a8" letter-spacing=".5">DEVOLVIDO</text><text x="776" y="142" font-size="11" fill="#8792a8" letter-spacing=".5">SITUAÇÃO</text><line x1="236" x2="932" y1="158" y2="158" stroke="#22304a"/><text x="254" y="184" font-size="13" fill="#fff">Cadeira</text><text x="428" y="184" font-size="13" fill="#e6ebf3">40</text><text x="602" y="184" font-size="13" fill="#e6ebf3">40</text><rect x="770" y="169" width="70" height="20" rx="10" fill="#2fd8a4" fill-opacity=".16"/><text x="780" y="183" font-size="11" font-weight="600" fill="#2fd8a4">OK</text><line x1="236" x2="932" y1="198" y2="198" stroke="#22304a"/><text x="254" y="224" font-size="13" fill="#fff">Mesa redonda</text><text x="428" y="224" font-size="13" fill="#e6ebf3">6</text><text x="602" y="224" font-size="13" fill="#e6ebf3">6</text><rect x="770" y="209" width="70" height="20" rx="10" fill="#2fd8a4" fill-opacity=".16"/><text x="780" y="223" font-size="11" font-weight="600" fill="#2fd8a4">OK</text><line x1="236" x2="932" y1="238" y2="238" stroke="#22304a"/><text x="254" y="264" font-size="13" fill="#fff">Taça de vidro</text><text x="428" y="264" font-size="13" fill="#e6ebf3">60</text><text x="602" y="264" font-size="13" fill="#e6ebf3">57</text><rect x="770" y="249" width="81" height="20" rx="10" fill="#ff8a8a" fill-opacity=".16"/><text x="780" y="263" font-size="11" font-weight="600" fill="#ff8a8a">3 avarias</text><line x1="236" x2="932" y1="278" y2="278" stroke="#22304a"/><text x="254" y="304" font-size="13" fill="#fff">Toalha de mesa</text><text x="428" y="304" font-size="13" fill="#e6ebf3">8</text><text x="602" y="304" font-size="13" fill="#e6ebf3">7</text><rect x="770" y="289" width="88" height="20" rx="10" fill="#ffd166" fill-opacity=".16"/><text x="780" y="303" font-size="11" font-weight="600" fill="#ffd166">1 faltante</text><rect x="236" y="342" width="696" height="70" rx="12" fill="#131c2e" stroke="#22304a"/><text x="254" y="372" font-size="12" fill="#8792a8">COBRANÇA ADICIONAL CALCULADA</text><text x="254" y="398" font-size="20" font-weight="700" fill="#ffd166">R$ 99,00</text>
+</svg>

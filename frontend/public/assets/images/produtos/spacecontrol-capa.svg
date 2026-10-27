@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" width="960" height="600" font-family="Segoe UI, Inter, Arial, sans-serif" role="img" aria-label="SpaceControl — Agenda de reservas (ilustração com dados fictícios)">
+  <rect width="960" height="600" rx="18" fill="#0e1525"/>
+  <rect x="0" y="0" width="960" height="44" rx="18" fill="#0a101c"/><rect x="0" y="26" width="960" height="18" fill="#0a101c"/>
+  <circle cx="24" cy="22" r="6" fill="#ff6b6b"/><circle cx="44" cy="22" r="6" fill="#ffd166"/><circle cx="64" cy="22" r="6" fill="#2fd8a4"/>
+  <rect x="330" y="12" width="300" height="20" rx="10" fill="#151e31"/>
+  <text x="480" y="26" font-size="11" fill="#8792a8" text-anchor="middle">spacecontrol.demo — dados fictícios</text>
+  <rect x="0" y="44" width="208" height="556" fill="#0f1626"/>
+  <rect x="20" y="58" width="22" height="22" rx="6" fill="#2fd8a4"/>
+  <text x="50" y="74" font-size="15" font-weight="700" fill="#fff">SpaceControl</text>
+  
+    <rect x="16" y="92" width="176" height="32" rx="8" fill="#2fd8a4" fill-opacity="0.16"/>
+    <rect x="30" y="103" width="10" height="10" rx="3" fill="#2fd8a4"/>
+    <text x="50" y="113" font-size="13" fill="#fff">Painel</text>
+    <rect x="16" y="132" width="176" height="32" rx="8" fill="none" fill-opacity="0"/>
+    <rect x="30" y="143" width="10" height="10" rx="3" fill="#8792a8"/>
+    <text x="50" y="153" font-size="13" fill="#8792a8">Reservas</text>
+    <rect x="16" y="172" width="176" height="32" rx="8" fill="none" fill-opacity="0"/>
+    <rect x="30" y="183" width="10" height="10" rx="3" fill="#8792a8"/>
+    <text x="50" y="193" font-size="13" fill="#8792a8">Espaços</text>
+    <rect x="16" y="212" width="176" height="32" rx="8" fill="none" fill-opacity="0"/>
+    <rect x="30" y="223" width="10" height="10" rx="3" fill="#8792a8"/>
+    <text x="50" y="233" font-size="13" fill="#8792a8">Locatários</text>
+    <rect x="16" y="252" width="176" height="32" rx="8" fill="none" fill-opacity="0"/>
+    <rect x="30" y="263" width="10" height="10" rx="3" fill="#8792a8"/>
+    <text x="50" y="273" font-size="13" fill="#8792a8">Checklist</text>
+    <rect x="16" y="292" width="176" height="32" rx="8" fill="none" fill-opacity="0"/>
+    <rect x="30" y="303" width="10" height="10" rx="3" fill="#8792a8"/>
+    <text x="50" y="313" font-size="13" fill="#8792a8">Inventário</text>
+  <text x="236" y="86" font-size="20" font-weight="700" fill="#fff">Agenda de reservas</text>
+  <rect x="820" y="68" width="112" height="26" rx="8" fill="#2fd8a4"/>
+  <text x="876" y="85" font-size="12" font-weight="700" fill="#0e1525" text-anchor="middle">+ Novo</text>
+  <rect x="236" y="112" width="696" height="436" rx="12" fill="#131c2e" stroke="#22304a"/><text x="285.7142857142857" y="138" font-size="11" fill="#8792a8" text-anchor="middle">DOM</text><text x="385.14285714285717" y="138" font-size="11" fill="#8792a8" text-anchor="middle">SEG</text><text x="484.5714285714286" y="138" font-size="11" fill="#8792a8" text-anchor="middle">TER</text><text x="583.9999999999999" y="138" font-size="11" fill="#8792a8" text-anchor="middle">QUA</text><text x="683.4285714285714" y="138" font-size="11" fill="#8792a8" text-anchor="middle">QUI</text><text x="782.8571428571428" y="138" font-size="11" fill="#8792a8" text-anchor="middle">SEX</text><text x="882.2857142857142" y="138" font-size="11" fill="#8792a8" text-anchor="middle">SÁB</text><rect x="240" y="156" width="91.42857142857143" height="58" rx="8" fill="#0f1626"/>
+      <text x="250" y="174" font-size="11" fill="#8792a8">1</text><rect x="339.42857142857144" y="156" width="91.42857142857143" height="58" rx="8" fill="#0f1626"/>
+      <text x="349.42857142857144" y="174" font-size="11" fill="#8792a8">2</text><rect x="438.8571428571429" y="156" width="91.42857142857143" height="58" rx="8" fill="#0f1626"/>
+      <text x="448.8571428571429" y="174" font-size="11" fill="#8792a8">3</text><rect x="538.2857142857142" y="156" width="91.42857142857143" height="58" rx="8" fill="#0f1626"/>
+      <text x="548.2857142857142" y="174" font-size="11" fill="#8792a8">4</text><rect x="544.2857142857142" y="184" width="79.42857142857143" height="20" rx="6" fill="#2fd8a4" fill-opacity=".2"/><text x="550.2857142857142" y="198" font-size="10" font-weight="600" fill="#2fd8a4">Salão</text><rect x="637.7142857142858" y="156" width="91.42857142857143" height="58" rx="8" fill="#0f1626"/>
+      <text x="647.7142857142858" y="174" font-size="11" fill="#8792a8">5</text><rect x="737.1428571428571" y="156" width="91.42857142857143" height="58" rx="8" fill="#0f1626"/>
+      <text x="747.1428571428571" y="174" font-size="11" fill="#8792a8">6</text><rect x="743.1428571428571" y="184" width="79.42857142857143" height="20" rx="6" fill="#2fd8a4" fill-opacity=".2"/><text x="749.1428571428571" y="198" font-size="10" font-weight="600" fill="#2fd8a4">Sala A</text><rect x="836.5714285714286" y="156" width="91.42857142857143" height="58" rx="8" fill="#0f1626"/>
+      <text x="846.5714285714286" y="174" font-size="11" fill="#8792a8">7</text><rect x="240" y="222" width="91.42857142857143" height="58" rx="8" fill="#0f1626"/>
+      <text x="250" y="240" font-size="11" fill="#8792a8">8</text><rect x="339.42857142857144" y="222" width="91.42857142857143" height="58" rx="8" fill="#0f1626"/>
+      <text x="349.42857142857144" y="240" font-size="11" fill="#8792a8">9</text><rect x="438.8571428571429" y="222" width="91.42857142857143" height="58" rx="8" fill="#0f1626"/>
+      <text x="448.8571428571429" y="240" font-size="11" fill="#8792a8">10</text><rect x="444.8571428571429" y="250" width="79.42857142857143" height="20" rx="6" fill="#2fd8a4" fill-opacity=".2"/><text x="450.8571428571429" y="264" font-size="10" font-weight="600" fill="#2fd8a4">Gourmet</text><rect x="538.2857142857142" y="222" width="91.42857142857143" height="58" rx="8" fill="#0f1626"/>
+      <text x="548.2857142857142" y="240" font-size="11" fill="#8792a8">11</text><rect x="637.7142857142858" y="222" width="91.42857142857143" height="58" rx="8" fill="#0f1626"/>
+      <text x="647.7142857142858" y="240" font-size="11" fill="#8792a8">12</text><rect x="737.1428571428571" y="222" width="91.42857142857143" height="58" rx="8" fill="#0f1626"/>
+      <text x="747.1428571428571" y="240" font-size="11" fill="#8792a8">13</text><rect x="743.1428571428571" y="250" width="79.42857142857143" height="20" rx="6" fill="#2fd8a4" fill-opacity=".2"/><text x="749.1428571428571" y="264" font-size="10" font-weight="600" fill="#2fd8a4">Salão</text><rect x="836.5714285714286" y="222" width="91.42857142857143" height="58" rx="8" fill="#0f1626"/>
+      <text x="846.5714285714286" y="240" font-size="11" fill="#8792a8">14</text><rect x="842.5714285714286" y="250" width="79.42857142857143" height="20" rx="6" fill="#ffd166" fill-opacity=".2"/><text x="848.5714285714286" y="264" font-size="10" font-weight="600" fill="#ffd166">Sala A</text><rect x="240" y="288" width="91.42857142857143" height="58" rx="8" fill="#0f1626"/>
+      <text x="250" y="306" font-size="11" fill="#8792a8">15</text><rect x="339.42857142857144" y="288" width="91.42857142857143" height="58" rx="8" fill="#0f1626"/>
+      <text x="349.42857142857144" y="306" font-size="11" fill="#8792a8">16</text><rect x="438.8571428571429" y="288" width="91.42857142857143" height="58" rx="8" fill="#0f1626"/>
+      <text x="448.8571428571429" y="306" font-size="11" fill="#8792a8">17</text><rect x="538.2857142857142" y="288" width="91.42857142857143" height="58" rx="8" fill="#0f1626"/>
+      <text x="548.2857142857142" y="306" font-size="11" fill="#8792a8">18</text><rect x="637.7142857142858" y="288" width="91.42857142857143" height="58" rx="8" fill="#0f1626"/>
+      <text x="647.7142857142858" y="306" font-size="11" fill="#8792a8">19</text><rect x="643.7142857142858" y="316" width="79.42857142857143" height="20" rx="6" fill="#2fd8a4" fill-opacity=".2"/><text x="649.7142857142858" y="330" font-size="10" font-weight="600" fill="#2fd8a4">Salão</text><rect x="737.1428571428571" y="288" width="91.42857142857143" height="58" rx="8" fill="#0f1626"/>
+      <text x="747.1428571428571" y="306" font-size="11" fill="#8792a8">20</text><rect x="836.5714285714286" y="288" width="91.42857142857143" height="58" rx="8" fill="#0f1626"/>
+      <text x="846.5714285714286" y="306" font-size="11" fill="#8792a8">21</text><rect x="240" y="354" width="91.42857142857143" height="58" rx="8" fill="#0f1626"/>
+      <text x="250" y="372" font-size="11" fill="#8792a8">22</text><rect x="339.42857142857144" y="354" width="91.42857142857143" height="58" rx="8" fill="#0f1626"/>
+      <text x="349.42857142857144" y="372" font-size="11" fill="#8792a8">23</text><rect x="345.42857142857144" y="382" width="79.42857142857143" height="20" rx="6" fill="#2fd8a4" fill-opacity=".2"/><text x="351.42857142857144" y="396" font-size="10" font-weight="600" fill="#2fd8a4">Gourmet</text><rect x="438.8571428571429" y="354" width="91.42857142857143" height="58" rx="8" fill="#0f1626"/>
+      <text x="448.8571428571429" y="372" font-size="11" fill="#8792a8">24</text><rect x="538.2857142857142" y="354" width="91.42857142857143" height="58" rx="8" fill="#0f1626"/>
+      <text x="548.2857142857142" y="372" font-size="11" fill="#8792a8">25</text><rect x="637.7142857142858" y="354" width="91.42857142857143" height="58" rx="8" fill="#0f1626"/>
+      <text x="647.7142857142858" y="372" font-size="11" fill="#8792a8">26</text><rect x="737.1428571428571" y="354" width="91.42857142857143" height="58" rx="8" fill="#0f1626"/>
+      <text x="747.1428571428571" y="372" font-size="11" fill="#8792a8">27</text><rect x="743.1428571428571" y="382" width="79.42857142857143" height="20" rx="6" fill="#2fd8a4" fill-opacity=".2"/><text x="749.1428571428571" y="396" font-size="10" font-weight="600" fill="#2fd8a4">Sala A</text><rect x="836.5714285714286" y="354" width="91.42857142857143" height="58" rx="8" fill="#0f1626"/>
+      <text x="846.5714285714286" y="372" font-size="11" fill="#8792a8">28</text><rect x="240" y="420" width="91.42857142857143" height="58" rx="8" fill="#0f1626"/>
+      <text x="250" y="438" font-size="11" fill="#8792a8">29</text><rect x="339.42857142857144" y="420" width="91.42857142857143" height="58" rx="8" fill="#0f1626"/>
+      <text x="349.42857142857144" y="438" font-size="11" fill="#8792a8">30</text><rect x="438.8571428571429" y="420" width="91.42857142857143" height="58" rx="8" fill="#0f1626"/>
+      <text x="448.8571428571429" y="438" font-size="11" fill="#8792a8">31</text><rect x="444.8571428571429" y="448" width="79.42857142857143" height="20" rx="6" fill="#2fd8a4" fill-opacity=".2"/><text x="450.8571428571429" y="462" font-size="10" font-weight="600" fill="#2fd8a4">Salão</text><rect x="538.2857142857142" y="420" width="91.42857142857143" height="58" rx="8" fill="#0f1626"/>
+      <text x="548.2857142857142" y="438" font-size="11" fill="#8792a8">1</text><rect x="637.7142857142858" y="420" width="91.42857142857143" height="58" rx="8" fill="#0f1626"/>
+      <text x="647.7142857142858" y="438" font-size="11" fill="#8792a8">2</text><rect x="737.1428571428571" y="420" width="91.42857142857143" height="58" rx="8" fill="#0f1626"/>
+      <text x="747.1428571428571" y="438" font-size="11" fill="#8792a8">3</text><rect x="836.5714285714286" y="420" width="91.42857142857143" height="58" rx="8" fill="#0f1626"/>
+      <text x="846.5714285714286" y="438" font-size="11" fill="#8792a8">4</text>
+</svg>
