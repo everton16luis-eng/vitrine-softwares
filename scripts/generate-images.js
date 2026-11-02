@@ -108,14 +108,36 @@ function calendar(accent, y = 112, events = {}) {
   return out;
 }
 
-const C = { churchflow: '#7c9cff', spacecontrol: '#2fd8a4', fleetmanager: '#ffb547' };
+const C = { churchflow: '#7c9cff', spacecontrol: '#2fd8a4', fleetmanager: '#ffb547', portal: '#0EA5E9' };
 const NAV = {
   churchflow: ['Painel', 'Membros', 'Voluntários', 'Escalas', 'Eventos', 'Relatórios'],
   spacecontrol: ['Painel', 'Reservas', 'Espaços', 'Locatários', 'Checklist', 'Inventário'],
-  fleetmanager: ['Painel', 'Veículos', 'Manutenções', 'Abastecimentos', 'Documentos', 'Custos']
+  fleetmanager: ['Painel', 'Veículos', 'Manutenções', 'Abastecimentos', 'Documentos', 'Custos'],
+  portal: ['Painel', 'Fila de revisão', 'Notícias', 'Fontes', 'Publicidade', 'Redes sociais']
 };
 
 const IMAGES = {
+  'portal-de-noticias-capa': () => frame({ title: 'Portal de Notícias', accent: C.portal, nav: NAV.portal, heading: 'Painel editorial', body:
+    kpiRow([['Na fila', '7'], ['Publicadas hoje', '12'], ['Fontes ativas', '18'], ['Duplicados', '23']], C.portal)
+    + tableBlock(['Notícia', 'Fonte', 'Categoria', 'Situação'], [['Alerta de chuva intensa', 'Defesa Civil', 'Clima', 'Publicada'], ['Novo horário de atendimento', 'Prefeitura', 'Cidades', 'Pendente'], ['Projeto de incentivo ao esporte', 'Câmara', 'Esportes', 'Em revisão'], ['Festival de inverno', 'Prefeitura', 'Cidades', 'Agendada']], C.portal, 210, ['ok', 'warn', 'info', 'info']) }),
+  'portal-de-noticias-revisao': () => frame({ title: 'Portal de Notícias', accent: C.portal, nav: NAV.portal, active: 1, heading: 'Fila de revisão', body:
+    `<rect x="236" y="112" width="696" height="210" rx="12" fill="${PANEL}" stroke="${LINE}"/>
+    <text x="254" y="142" font-size="11" fill="${MUTED}">ORIGINAL • DEFESA CIVIL (EXEMPLO)</text>
+    <text x="254" y="166" font-size="14" fill="${TEXT}">BOLETIM 14 - NÍVEL DO RIO EM ELEVAÇÃO</text>
+    <rect x="254" y="184" width="660" height="84" rx="10" fill="#8B5CF6" fill-opacity=".14" stroke="#8B5CF6" stroke-opacity=".5"/>
+    <text x="272" y="208" font-size="11" font-weight="700" fill="#c4b5fd">SUGESTÃO DA IA</text>
+    <text x="272" y="232" font-size="15" font-weight="700" fill="#fff">Nível do rio sobe e Defesa Civil mantém monitoramento</text>
+    <text x="272" y="254" font-size="12" fill="${MUTED}">Boletim indica elevação gradual; sem registro de desalojados.</text>
+    <rect x="254" y="282" width="150" height="28" rx="8" fill="${C.portal}"/><text x="329" y="301" font-size="12" font-weight="700" fill="${INK}" text-anchor="middle">Aprovar e publicar</text>
+    <rect x="414" y="282" width="90" height="28" rx="8" fill="none" stroke="${LINE}"/><text x="459" y="301" font-size="12" fill="${TEXT}" text-anchor="middle">Agendar</text>`
+    + tableBlock(['Item coletado', 'Fonte', 'Situação'], [['Nota oficial de atendimento', 'Prefeitura', 'Pendente'], ['Sessão aprova projeto', 'Câmara', 'Em revisão']], C.portal, 340, ['warn', 'info']) }),
+  'portal-de-noticias-fontes': () => frame({ title: 'Portal de Notícias', accent: C.portal, nav: NAV.portal, active: 3, heading: 'Fontes e coletas', body:
+    kpiRow([['Itens coletados (7d)', '214'], ['Duplicados ignorados', '61'], ['Fontes com erro', '1']], C.portal)
+    + tableBlock(['Fonte', 'Tipo', 'Última coleta', 'Situação'], [['Defesa Civil (exemplo)', 'RSS', 'há 12 min', 'Ativa'], ['Prefeitura A (exemplo)', 'RSS', 'há 25 min', 'Ativa'], ['Câmara B (exemplo)', 'Página', 'ontem', 'Erro'], ['Associação (exemplo)', 'RSS', '—', 'Inativa']], C.portal, 210, ['ok', 'ok', 'bad', 'info']) }),
+  'portal-de-noticias-publicidade': () => frame({ title: 'Portal de Notícias', accent: C.portal, nav: NAV.portal, active: 4, heading: 'Campanhas publicitárias', body:
+    kpiRow([['Campanhas no ar', '2'], ['Impressões (30d)', '27.630'], ['CTR médio', '1,64%']], C.portal)
+    + barChart([3.1, 3.8, 4.2, 3.9, 4.6, 5.1, 4.8], ['seg', 'ter', 'qua', 'qui', 'sex', 'sáb', 'dom'], C.portal, 210, 'Impressões por dia (mil, ilustrativo)') }),
+
   'churchflow-capa': () => frame({ title: 'ChurchFlow', accent: C.churchflow, nav: NAV.churchflow, heading: 'Visão geral', body:
     kpiRow([['Membros', '248'], ['Voluntários', '64'], ['Eventos no mês', '12'], ['Pendentes', '7']], C.churchflow)
     + tableBlock(['Evento', 'Data', 'Equipe', 'Situação'], [['Encontro de domingo', '02/nov', 'Recepção', 'Confirmado'], ['Ensaio geral', '04/nov', 'Louvor', 'Pendente'], ['Ação social', '09/nov', 'Infantil', 'Confirmado'], ['Reunião de líderes', '12/nov', 'Coordenação', 'Pendente']], C.churchflow, 210, ['ok', 'warn', 'ok', 'warn']) }),

@@ -20,7 +20,7 @@ describe('inicialização do banco de dados', { skip }, () => {
     const perfis = await h.db.many('SELECT codigo FROM perfis ORDER BY codigo');
     assert.deepEqual(perfis.map((p) => p.codigo), ['administrador', 'consulta', 'editor_conteudo', 'gerente_comercial']);
     const produtos = await h.db.many('SELECT slug, dados_demonstrativos, preco, status_comercial FROM produtos ORDER BY ordem');
-    assert.deepEqual(produtos.map((p) => p.slug), ['churchflow', 'spacecontrol', 'fleetmanager', 'sistemas-personalizados']);
+    assert.deepEqual(produtos.map((p) => p.slug), ['portal-de-noticias', 'churchflow', 'spacecontrol', 'fleetmanager', 'sistemas-personalizados']);
     assert.ok(produtos.every((p) => p.dados_demonstrativos && p.preco === null));
     const { n } = await h.db.one('SELECT count(*)::int n FROM clientes');
     assert.equal(n, 0, 'nenhum cliente fictício deve ser criado');
@@ -30,7 +30,7 @@ describe('inicialização do banco de dados', { skip }, () => {
     const { runSeeds } = await import('../../backend/src/database/seeder.js');
     await runSeeds({ log: () => {} });
     const { n } = await h.db.one('SELECT count(*)::int n FROM produtos');
-    assert.equal(n, 4);
+    assert.equal(n, 5);
   });
 
   test('valores monetários usam NUMERIC', async () => {

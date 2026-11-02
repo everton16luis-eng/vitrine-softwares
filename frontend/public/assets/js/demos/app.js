@@ -2,7 +2,8 @@
 const DEMOS = {
   churchflow: () => import('./churchflow.js'),
   spacecontrol: () => import('./spacecontrol.js'),
-  fleetmanager: () => import('./fleetmanager.js')
+  fleetmanager: () => import('./fleetmanager.js'),
+  'portal-de-noticias': () => import('./portal-de-noticias.js')
 };
 
 const root = document.getElementById('demo-app');

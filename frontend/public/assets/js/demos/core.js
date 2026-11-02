@@ -70,7 +70,7 @@ export function mountDemo(root, { name, views }) {
     el('div', { class: 'demo-brand' }, icon('grid-1x2'), el('span', {}, name), badge('DEMO', 'warn')),
     el('ul', {}, views.map((v) => el('li', {}, el('button', { type: 'button', dataset: { view: v.id }, onclick: () => show(v.id) }, icon(v.icon), el('span', {}, v.label))))));
   root.append(el('div', { class: 'demo-layout' }, nav, main));
-  const app = { refresh: () => show(current) };
+  const app = { refresh: () => show(current), go: (id) => show(id) };
   let current = views[0].id;
   function show(id) {
     current = id;

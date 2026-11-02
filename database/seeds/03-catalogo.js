@@ -1,6 +1,6 @@
 // Catálogo demonstrativo. Todos os produtos são marcados como dados_demonstrativos
 // e NENHUM preço é inventado. Situações comerciais iniciais conservadoras:
-// os três sistemas aparecem como "Em desenvolvimento" (com demonstração visual
+// os sistemas aparecem como "Em desenvolvimento" ou "Demonstração disponível" (com demonstração visual
 // de dados fictícios); o administrador altera conforme a realidade.
 // Inserção apenas se o slug ainda não existir — edições do painel são preservadas.
 
@@ -8,12 +8,37 @@ const CATEGORIES = [
   ['Gestão institucional', 'gestao-institucional', 'Organização de membros, voluntários, eventos e atividades.'],
   ['Gestão de locações', 'gestao-de-locacoes', 'Reservas, contratos e controle de espaços e utensílios.'],
   ['Gestão operacional', 'gestao-operacional', 'Controle de ativos, manutenção e custos operacionais.'],
+  ['Comunicação e mídia', 'comunicacao-e-midia', 'Portais de conteúdo, fluxos editoriais e publicidade.'],
   ['Desenvolvimento sob demanda', 'desenvolvimento-sob-demanda', 'Sistemas criados a partir das necessidades de cada cliente.']
 ];
 
 const f = (titulo, descricao, icone) => ({ titulo, descricao, icone });
 
 const PRODUCTS = [
+  {
+    slug: 'portal-de-noticias', nome: 'Portal de Notícias', categoria: 'comunicacao-e-midia', ordem: 5, destaque: true,
+    resumo: 'Portal regional de notícias com coleta automatizada de fontes autorizadas, sugestões editoriais por IA, revisão humana obrigatória, publicidade e redes sociais.',
+    descricao: 'O **Portal de Notícias** (nome provisório) reúne em um só sistema o site público e a redação: fontes autorizadas (RSS e páginas) são coletadas automaticamente, os itens duplicados são descartados e a IA pode sugerir título, resumo e categoria.\n\n**Nenhuma notícia é publicada automaticamente:** tudo passa pela fila de revisão da equipe, que aprova, agenda ou rejeita. O portal publicado tem SEO técnico, busca em português sem acento, crédito da fonte e do autor, gestão de anúncios e publicação no Instagram.',
+    problema: 'Redações pequenas que gastam horas copiando comunicados de prefeituras, órgãos e entidades, sem controle de duplicados, sem padronização editorial e sem uma forma organizada de vender e medir anúncios.',
+    publico: '- Portais e jornais regionais\n- Assessorias de comunicação\n- Veículos que agregam informações de órgãos públicos e entidades',
+    requisitos: '- Navegador atualizado\n- Hospedagem Node.js + PostgreSQL com HTTPS\n- Opcional: chave de IA (Claude ou Gemini), SMTP e conta profissional do Instagram',
+    status: 'demonstracao_disponivel', modelo: 'sob_orcamento', demo: 'interna',
+    funcionalidades: [
+      f('Coleta automatizada', 'Fontes RSS e páginas autorizadas, com agendamento, teste de conexão e histórico.', 'rss'),
+      f('Deduplicação', 'Itens repetidos são identificados por endereço, conteúdo e título.', 'files'),
+      f('Sugestões por IA', 'Título, resumo e categoria sugeridos, com limite mensal de custo.', 'stars'),
+      f('Revisão humana obrigatória', 'Fila de revisão com aprovação, agendamento, versões e retirada.', 'check2-square'),
+      f('Modelos de matéria', 'Clássico, destaque, nota, urgente, serviço, entrevista, fotorreportagem e especial.', 'layout-text-window'),
+      f('SEO técnico', 'Sitemap, feed RSS, Open Graph e dados estruturados de notícia.', 'search'),
+      f('Crédito de fonte e autor', 'Atribuição clara e link para a publicação original.', 'person-check'),
+      f('Publicidade', 'Anunciantes, campanhas, posições, métricas, contratos e preparação para AdSense.', 'megaphone'),
+      f('Redes sociais', 'Artes e legendas para Feed e Stories do Instagram, com aprovação.', 'instagram'),
+      f('Painel completo', 'Usuários, permissões, auditoria, relatórios, backups e saúde do sistema.', 'shield-lock')
+    ],
+    beneficios: [f('Menos trabalho manual', 'Comunicados chegam prontos para revisão.'), f('Controle editorial', 'Nada vai ao ar sem aprovação.'), f('Receita com anúncios', 'Campanhas medidas e relatórios para anunciantes.'), f('Mais alcance', 'SEO e redes sociais integrados.')],
+    faqs: [['A IA publica notícias sozinha?', 'Não. A IA apenas sugere título, resumo e categoria; toda publicação depende de aprovação humana.'], ['Os dados da demonstração são reais?', 'Não. Municípios, fontes, notícias e anunciantes da demonstração são fictícios.']],
+    imagens: [['portal-de-noticias-revisao.svg', 'Fila de revisão com sugestão da IA'], ['portal-de-noticias-fontes.svg', 'Fontes e histórico de coletas'], ['portal-de-noticias-publicidade.svg', 'Campanhas publicitárias e métricas']]
+  },
   {
     slug: 'churchflow', nome: 'ChurchFlow', categoria: 'gestao-institucional', ordem: 10, destaque: true,
     resumo: 'Plataforma para organizar membros, visitantes, voluntários, eventos, escalas de serviço e relatórios de igrejas e instituições.',
@@ -154,7 +179,7 @@ export async function seed(tx) {
   // Planos sem preço inventado: apenas modalidades "sob orçamento" e "personalizado".
   const plans = [
     ['Implantação sob orçamento', 'Licenciamento, implantação e treinamento com valores definidos conforme o porte e as necessidades da instituição.', 'sob_orcamento',
-      ['churchflow', 'spacecontrol', 'fleetmanager'], ['Configuração inicial', 'Importação de dados existentes', 'Treinamento da equipe']],
+      ['portal-de-noticias', 'churchflow', 'spacecontrol', 'fleetmanager'], ['Configuração inicial', 'Importação de dados existentes', 'Treinamento da equipe']],
     ['Projeto personalizado', 'Desenvolvimento sob medida, com escopo, prazos e investimento definidos em proposta.', 'personalizado',
       ['sistemas-personalizados'], ['Levantamento de requisitos', 'Desenvolvimento em etapas', 'Implantação e suporte conforme contrato']]
   ];

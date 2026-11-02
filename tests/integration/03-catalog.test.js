@@ -87,7 +87,7 @@ describe('produtos, publicação e catálogo público', { skip }, () => {
 
   test('filtros, pesquisa e paginação no catálogo público', async () => {
     const all = await h.anon().get('/api/publico/produtos');
-    assert.equal(all.body.total, 4);
+    assert.equal(all.body.total, 5);
     const busca = await h.anon().get('/api/publico/produtos?busca=abastecimento');
     assert.deepEqual(busca.body.items.map((p) => p.slug), ['fleetmanager'], 'busca em funcionalidades');
     const cat = await h.anon().get('/api/publico/produtos?categoria=gestao-de-locacoes');
@@ -98,7 +98,7 @@ describe('produtos, publicação e catálogo público', { skip }, () => {
     assert.equal(disp.body.total, 3);
     const p1 = await h.anon().get('/api/publico/produtos?limite=2&pagina=1');
     const p2 = await h.anon().get('/api/publico/produtos?limite=2&pagina=2');
-    assert.equal(p1.body.pages, 2);
+    assert.equal(p1.body.pages, 3);
     assert.equal(p1.body.items.length, 2);
     assert.notEqual(p1.body.items[0].id, p2.body.items[0].id);
     const sqlish = await h.anon().get(`/api/publico/produtos?busca=${encodeURIComponent("' OR 1=1 --")}`);
@@ -107,7 +107,7 @@ describe('produtos, publicação e catálogo público', { skip }, () => {
   });
 
   test('páginas públicas principais respondem e têm SEO básico', async () => {
-    for (const path of ['/', '/softwares', '/softwares/churchflow', '/softwares/churchflow/demonstracao', '/servicos', '/contato', '/orcamento', '/sobre', '/politica-de-privacidade', '/perguntas-frequentes', '/robots.txt']) {
+    for (const path of ['/', '/softwares', '/softwares/churchflow', '/softwares/churchflow/demonstracao', '/softwares/portal-de-noticias', '/softwares/portal-de-noticias/demonstracao', '/servicos', '/contato', '/orcamento', '/sobre', '/politica-de-privacidade', '/perguntas-frequentes', '/robots.txt']) {
       const r = await h.anon().get(path);
       assert.equal(r.status, 200, path);
     }
