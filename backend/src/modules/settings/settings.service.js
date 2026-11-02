@@ -26,6 +26,7 @@ export const SETTINGS_SCHEMA = {
   youtube: v.url({ nullable: true }),
   cor_primaria: v.string({ pattern: HEX, patternMessage: 'Use uma cor hexadecimal (#RRGGBB).' }),
   cor_destaque: v.string({ pattern: HEX, patternMessage: 'Use uma cor hexadecimal (#RRGGBB).' }),
+  cor_secundaria: v.string({ pattern: HEX, patternMessage: 'Use uma cor hexadecimal (#RRGGBB).' }),
   seo_titulo_padrao: v.string({ max: 70 }),
   seo_descricao_padrao: v.string({ max: 170 }),
   moeda_padrao: v.currency(),
@@ -40,7 +41,7 @@ export const SETTINGS_SCHEMA = {
 
 /** Chaves que podem ser lidas pelo site público. */
 const PUBLIC_KEYS = new Set(['nome_comercial', 'slogan', 'logo_url', 'favicon_url', 'email_contato', 'telefone', 'whatsapp',
-  'whatsapp_mensagem', 'endereco', 'instagram', 'linkedin', 'github', 'youtube', 'cor_primaria', 'cor_destaque',
+  'whatsapp_mensagem', 'endereco', 'instagram', 'linkedin', 'github', 'youtube', 'cor_primaria', 'cor_destaque', 'cor_secundaria',
   'seo_titulo_padrao', 'seo_descricao_padrao', 'moeda_padrao', 'aviso_site', 'aviso_site_ativo', 'razao_social']);
 
 export async function getSettings({ fresh = false } = {}) {

@@ -16,6 +16,7 @@ Plataforma web para **apresentar, divulgar, comercializar e administrar software
 6. [Testes](#testes)
 7. [Backup e restauração](#backup-e-restauração)
 8. [Uso do painel: cadastrar produtos](#como-cadastrar-novos-produtos)
+   - [Identidade visual provisória](#identidade-visual-provisória)
 9. [E-mails transacionais](#como-configurar-e-mails)
 10. [Pagamentos (integração futura)](#pagamentos-integração-futura)
 11. [Deploy](#deploy)
@@ -247,6 +248,25 @@ Demonstrações: escolha "Interna" apenas para os produtos que possuem módulo d
 
 ---
 
+## Identidade visual provisória
+
+O site público é uma vitrine de serviços de desenvolvimento com **identidade provisória**: nome neutro, espaço reservado para a logo e paleta azul (`#0EA5E9`), roxo (`#8B5CF6`), azul-marinho (`#0F172A`) e branco (`#F8FAFC`), com a fonte Montserrat hospedada no próprio site.
+
+Quando a marca definitiva estiver pronta:
+
+| O quê | Onde trocar |
+| --- | --- |
+| Nome da empresa e slogan | Painel → **Configurações** → Nome comercial / Slogan |
+| Logo | Envie em **Biblioteca de mídia** e informe a URL em **Configurações** → URL do logotipo (o espaço reservado some automaticamente) |
+| Cores | Painel → **Configurações** (cor base, destaque e secundária) ou os padrões em `frontend/public/assets/css/brand.css` |
+| Fonte | `frontend/public/assets/css/brand.css` (`@font-face` e `--brand-font`) |
+| Favicon e imagem de compartilhamento | `scripts/generate-images.js` (depois `npm run images`) ou **Configurações** → URL do favicon |
+| Textos da página inicial | Painel → **Conteúdo** (grupo "home") e **Páginas** → Sobre |
+
+Em bancos já existentes, rode `npm run db:seed` para aplicar os textos e a paleta novos. O seed só substitui valores que ainda estão iguais aos padrões antigos; o que foi editado no painel é preservado.
+
+---
+
 ## Como configurar e-mails
 
 Preencha no `.env` os dados do seu provedor SMTP (ex.: Amazon SES, Brevo, Mailgun, Resend, Zoho, Google Workspace):
@@ -327,7 +347,8 @@ As regras de negócio ficam nos serviços (`*.service.js`); as rotas apenas vali
 | Item | Situação |
 | --- | --- |
 | Primeiro administrador | Executar `npm run admin:create` |
-| Identidade e contatos | Nome comercial está como "Sua Marca Software" (exemplo). Preencha nome, logotipo, e-mail, WhatsApp, redes sociais e dados do fornecedor em **Configurações** |
+| Identidade e contatos | Nome comercial está como "Sua empresa de tecnologia" (provisório) e a logo é um espaço reservado. Preencha nome, logotipo, e-mail, telefone, WhatsApp, redes sociais e dados do fornecedor em **Configurações** (veja [Identidade visual provisória](#identidade-visual-provisória)) |
+| Textos institucionais | A seção "Sobre" da página inicial e a página `/sobre` têm texto provisório; substitua pela apresentação real em **Conteúdo** e **Páginas** |
 | Textos institucionais | "Sobre" e o texto de abertura estão em primeira pessoa como modelo; ajuste em **Conteúdo** |
 | Documentos jurídicos | Política de Privacidade, Termos de Uso e Política de Cookies são **modelos** marcados como "em revisão"; devem ser revisados por profissional habilitado |
 | Produtos | Nomes provisórios, sem preços; confirme status comercial real antes de divulgar. "Sistemas Personalizados" está como "Disponível para contratação" por representar a oferta de desenvolvimento sob medida — altere se não for o caso |

@@ -2,7 +2,7 @@ import { html } from '../utils/html.js';
 import { layout } from './layout.js';
 import { getPublicSettings } from '../modules/settings/settings.service.js';
 
-const FALLBACK_SETTINGS = { nome_comercial: 'Portfólio de Software', seo_descricao_padrao: '', cor_primaria: '#0e1525' };
+const FALLBACK_SETTINGS = { nome_comercial: 'Sua empresa de tecnologia', seo_descricao_padrao: '', cor_primaria: '#0F172A' };
 
 const MESSAGES = {
   404: { title: 'Página não encontrada', text: 'O endereço acessado não existe ou foi removido.', icon: 'signpost-split' },
@@ -21,7 +21,7 @@ export async function renderErrorPage(req, res, status, detail) {
     <p class="lead-muted">${status < 500 && detail ? detail : m.text}</p>
     <div class="d-flex justify-content-center flex-wrap gap-2 mt-4">
       <a class="btn btn-accent" href="/">Ir para o início</a>
-      <a class="btn btn-outline-ink" href="/softwares">Ver softwares</a>
+      <a class="btn btn-outline-ink" href="/servicos">Ver serviços</a>
       <a class="btn btn-link" href="/contato">Falar com a gente</a>
     </div>
   </div></section>`;

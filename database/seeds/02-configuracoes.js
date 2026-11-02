@@ -2,9 +2,9 @@
 // Nada aqui é sobrescrito em execuções posteriores (ON CONFLICT DO NOTHING): edições feitas no painel são preservadas.
 // Valores de contato NÃO são inventados: ficam vazios até o administrador configurar.
 
-const SETTINGS = {
-  nome_comercial: ['Sua Marca Software', true, 'Nome comercial exibido no site (EXEMPLO — altere no painel).'],
-  slogan: ['Sistemas sob medida', true, 'Frase curta exibida junto ao logotipo.'],
+export const SETTINGS = {
+  nome_comercial: ['Sua empresa de tecnologia', true, 'Nome comercial exibido no site (PROVISÓRIO — substitua pelo nome definitivo).'],
+  slogan: ['', true, 'Frase curta exibida junto ao logotipo.'],
   logo_url: [null, true, 'URL do logotipo (vazio = marca padrão).'],
   favicon_url: [null, true, 'URL do favicon.'],
   email_contato: [null, true, 'E-mail público de contato.'],
@@ -15,10 +15,11 @@ const SETTINGS = {
   razao_social: [null, true, 'Razão social (usada em documentos).'],
   documento_empresa: [null, false, 'CNPJ/CPF do fornecedor (usado em orçamentos).'],
   instagram: [null, true, ''], linkedin: [null, true, ''], github: [null, true, ''], youtube: [null, true, ''],
-  cor_primaria: ['#0e1525', true, 'Cor base (tons escuros).'],
-  cor_destaque: ['#2fd8a4', true, 'Cor de destaque.'],
-  seo_titulo_padrao: ['Softwares de gestão e desenvolvimento sob medida', true, 'Título padrão das páginas.'],
-  seo_descricao_padrao: ['Sistemas web para gestão institucional, locações e frotas, além de desenvolvimento de software sob medida, integrações e APIs.', true, 'Descrição padrão.'],
+  cor_primaria: ['#0F172A', true, 'Cor base (fundo escuro).'],
+  cor_destaque: ['#0EA5E9', true, 'Cor de destaque (botões e links).'],
+  cor_secundaria: ['#8B5CF6', true, 'Cor secundária (gradientes e detalhes).'],
+  seo_titulo_padrao: ['Desenvolvimento de software para empresas', true, 'Título padrão das páginas.'],
+  seo_descricao_padrao: ['Sistemas sob medida, plataformas web, sistemas de gestão, automações e integrações para empresas e instituições.', true, 'Descrição padrão.'],
   moeda_padrao: ['BRL', true, ''],
   aviso_site: ['Site em fase de implantação: conteúdos e produtos demonstrativos em revisão.', true, 'Aviso exibido no topo do site.'],
   aviso_site_ativo: [true, true, ''],
@@ -29,50 +30,52 @@ const SETTINGS = {
   validade_orcamento_dias: [15, false, 'Validade padrão dos orçamentos (dias).']
 };
 
-const CONTENT = [
-  ['home.hero.etiqueta', 'home', 'Etiqueta acima do título', 'texto', 'Softwares de gestão • Desenvolvimento sob medida'],
-  ['home.hero.titulo', 'home', 'Título principal', 'texto', 'Sistemas que organizam a operação e liberam tempo para o que importa'],
-  ['home.hero.subtitulo', 'home', 'Subtítulo', 'texto_longo', 'Desenvolvo softwares web para gestão de instituições, locação de espaços e frotas — e crio sistemas sob medida, com integrações e APIs, para processos que planilhas já não comportam.'],
-  ['home.hero.cta_primario', 'home', 'Botão principal', 'texto', 'Conhecer os softwares'],
-  ['home.hero.cta_secundario', 'home', 'Botão secundário', 'texto', 'Solicitar orçamento'],
-  ['home.hero.imagem', 'home', 'Imagem do destaque (vazio = ilustração padrão)', 'imagem', ''],
-  ['home.produtos.titulo', 'home', 'Título da seção de produtos', 'texto', 'Softwares em destaque'],
-  ['home.produtos.texto', 'home', 'Texto da seção de produtos', 'texto_longo', 'Soluções em diferentes estágios — da demonstração à contratação. Cada produto informa sua situação atual.'],
+export const CONTENT = [
+  ['home.hero.etiqueta', 'home', 'Etiqueta acima do título', 'texto', 'Desenvolvimento de software para empresas'],
+  ['home.hero.titulo', 'home', 'Título principal', 'texto', 'Transformamos ideias em soluções digitais'],
+  ['home.hero.subtitulo', 'home', 'Subtítulo', 'texto_longo', 'Desenvolvemos sistemas sob medida, plataformas web, sistemas de gestão, automações e integrações para empresas e instituições que precisam organizar processos e crescer com tecnologia.'],
+  ['home.hero.cta_primario', 'home', 'Botão principal (leva ao orçamento)', 'texto', 'Solicitar orçamento'],
+  ['home.hero.cta_secundario', 'home', 'Botão secundário (leva aos serviços)', 'texto', 'Conhecer os serviços'],
+  ['home.hero.imagem', 'home', 'Imagem do destaque (vazio = painel padrão)', 'imagem', ''],
+  ['home.produtos.titulo', 'home', 'Título da seção de produtos', 'texto', 'Projetos e soluções'],
+  ['home.produtos.texto', 'home', 'Texto da seção de produtos', 'texto_longo', 'Sistemas desenvolvidos pela equipe. Cada projeto informa sua situação atual; os marcados como demonstrativos usam dados fictícios.'],
   ['home.beneficios.titulo', 'home', 'Título dos benefícios', 'texto', 'O que você ganha com um sistema bem feito'],
   ['home.beneficios.itens', 'home', 'Benefícios (um por linha: Título | Descrição)', 'texto_longo',
     'Informação centralizada | Dados que hoje estão em planilhas, cadernos e mensagens passam a ficar em um só lugar.\nMenos retrabalho | Cadastros, cálculos e conferências repetitivas são automatizados.\nControle de acesso | Cada pessoa vê e altera apenas o que é da sua responsabilidade.\nRelatórios confiáveis | Indicadores calculados a partir dos dados reais da operação.\nAcesso de qualquer lugar | Sistemas web responsivos, utilizáveis no computador e no celular.\nEvolução contínua | O sistema acompanha o crescimento do seu negócio.'],
-  ['home.servicos.titulo', 'home', 'Título dos serviços', 'texto', 'Desenvolvimento sob medida para o seu processo'],
-  ['home.servicos.texto', 'home', 'Texto dos serviços', 'texto_longo', 'Do levantamento de requisitos à implantação, com código organizado, documentação e suporte.'],
-  ['home.etapas.titulo', 'home', 'Título das etapas', 'texto', 'Como funciona a contratação'],
+  ['home.servicos.titulo', 'home', 'Título dos serviços', 'texto', 'Soluções digitais para o seu negócio'],
+  ['home.servicos.texto', 'home', 'Texto dos serviços', 'texto_longo', 'Do levantamento de requisitos à implantação, desenvolvemos software alinhado aos processos da sua empresa, com código organizado, documentação e suporte.'],
+  ['home.etapas.titulo', 'home', 'Título das etapas', 'texto', 'Como trabalhamos'],
   ['home.etapas.itens', 'home', 'Etapas (uma por linha: Título | Descrição)', 'texto_longo',
-    'Conversa inicial | Entendimento do seu cenário, dos problemas e dos objetivos.\nProposta | Escopo, prazos e investimento descritos em um orçamento formal.\nImplantação | Configuração, migração de dados e ajustes necessários.\nTreinamento | Orientação para a equipe usar o sistema com segurança.\nAcompanhamento | Suporte e evolução conforme o combinado.'],
-  ['home.diferenciais.titulo', 'home', 'Título dos diferenciais', 'texto', 'Diferenciais técnicos'],
+    'Entendimento | Conversamos sobre o seu processo, os problemas atuais e os objetivos do projeto.\nPlanejamento e proposta | Escopo, etapas, prazos e investimento descritos em uma proposta formal.\nDesenvolvimento | Construção em entregas parciais, com validação a cada etapa.\nEntrega e implantação | Publicação, migração de dados quando necessária e orientação da equipe.\nEvolução | Acompanhamento do uso, correções e novas funcionalidades conforme o combinado.'],
+  ['home.diferenciais.titulo', 'home', 'Título dos compromissos técnicos (seção Sobre)', 'texto', 'Compromissos técnicos'],
   ['home.diferenciais.itens', 'home', 'Diferenciais (um por linha: Título | Descrição)', 'texto_longo',
     'Segurança desde o início | Senhas com hash forte, controle de permissões no servidor e proteção contra ataques comuns.\nBanco de dados relacional | PostgreSQL com integridade referencial e cálculos financeiros precisos.\nPrivacidade (LGPD) | Coleta mínima de dados, finalidade informada e atendimento a titulares.\nCódigo documentado | Estrutura modular, testes automatizados e documentação de instalação.'],
+  ['home.sobre.titulo', 'home', 'Título da seção Sobre', 'texto', 'Sobre a empresa'],
+  ['home.sobre.texto', 'home', 'Texto da seção Sobre (provisório — substitua pela apresentação real)', 'texto_longo', 'Desenvolvemos software para empresas e instituições que precisam organizar processos, integrar informações e ganhar eficiência. Cada projeto começa pela compreensão da necessidade e segue com transparência sobre escopo, prazos e investimento.'],
   ['home.contato.titulo', 'home', 'Título do contato', 'texto', 'Vamos conversar sobre o seu projeto?'],
-  ['home.contato.texto', 'home', 'Texto do contato', 'texto_longo', 'Envie uma mensagem contando o que você precisa. A primeira conversa é sem compromisso.'],
+  ['home.contato.texto', 'home', 'Texto do contato', 'texto_longo', 'Conte o que você precisa e solicite um orçamento. A primeira conversa é sem compromisso.'],
   ['home.cta.titulo', 'home', 'Título da chamada final', 'texto', 'Precisa de um sistema sob medida?'],
   ['home.cta.texto', 'home', 'Texto da chamada final', 'texto', 'Descreva sua necessidade e receba um orçamento detalhado, sem custo.'],
   ['servicos.titulo', 'servicos', 'Título da página de serviços', 'texto', 'Serviços de desenvolvimento'],
   ['servicos.texto', 'servicos', 'Introdução da página de serviços', 'texto_longo', 'Desenvolvimento de sistemas, integrações, APIs, automação de processos e consultoria — com escopo e orçamento definidos antes do início.']
 ];
 
-const PAGES = [
+export const PAGES = [
   ['sobre', 'Sobre', 'institucional', false,
-    `## Quem desenvolve os softwares
+    `## Quem somos
 
-Este é um espaço para você apresentar a sua trajetória, a forma como trabalha e os valores que orientam os seus projetos. **Edite este texto no painel administrativo** (Conteúdo › Páginas).
+Somos uma empresa de desenvolvimento de software para empresas e instituições. **Este texto é provisório:** substitua-o pela apresentação real da empresa no painel administrativo (Conteúdo › Páginas).
 
-## Como trabalho
+## Como trabalhamos
 
 - Levantamento de requisitos antes de qualquer linha de código.
 - Entregas em etapas, com validação a cada fase.
 - Código organizado, documentado e testado.
-- Transparência sobre prazos, custos e situação de cada produto.
+- Transparência sobre prazos, custos e situação de cada projeto.
 
 ## Compromissos
 
-Os produtos exibidos neste portfólio informam sua situação comercial real. Projetos marcados como demonstrativos utilizam dados fictícios.`],
+Os projetos exibidos neste site informam sua situação real. Projetos marcados como demonstrativos utilizam dados fictícios.`],
   ['politica-de-privacidade', 'Política de Privacidade', 'juridica', true,
     `> MODELO — revise com profissional habilitado antes da publicação definitiva.
 

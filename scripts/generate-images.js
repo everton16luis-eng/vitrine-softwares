@@ -161,15 +161,21 @@ function hero() {
 
 const placeholder = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" width="960" height="600"><rect width="960" height="600" fill="${INK}"/><g fill="none" stroke="#2fd8a4" stroke-width="6" opacity=".7"><rect x="390" y="230" width="180" height="130" rx="16"/><path d="M420 330l40-45 30 30 25-20 25 35"/></g><text x="480" y="410" fill="${MUTED}" font-family="Segoe UI, Arial" font-size="18" text-anchor="middle">Imagem não definida</text></svg>`;
 
-const favicon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect x="1" y="1" width="30" height="30" rx="9" fill="#2fd8a4"/><path d="M9 21.5 14.5 10h3L23 21.5h-3.2l-1.1-2.5h-5.4l-1.1 2.5Zm5.3-5h3.4L16 12.6Z" fill="#0e1525"/></svg>`;
+// Identidade PROVISÓRIA: sem logotipo, apenas a paleta (azul #0EA5E9, roxo #8B5CF6, azul-marinho #0F172A).
+// Substitua o favicon e a imagem Open Graph quando a marca definitiva estiver pronta.
+const favicon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><defs><linearGradient id="f" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0EA5E9"/><stop offset="1" stop-color="#8B5CF6"/></linearGradient></defs><rect x="1" y="1" width="30" height="30" rx="9" fill="#0F172A"/><rect x="7" y="7" width="18" height="18" rx="5" fill="url(#f)"/></svg>`;
 
-const og = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" font-family="Segoe UI, Arial, sans-serif">
-  <defs><radialGradient id="g" cx="85%" cy="0%" r="70%"><stop offset="0" stop-color="#2fd8a4" stop-opacity=".35"/><stop offset="1" stop-color="#0e1525" stop-opacity="0"/></radialGradient></defs>
-  <rect width="1200" height="630" fill="#0e1525"/><rect width="1200" height="630" fill="url(#g)"/>
-  <rect x="80" y="90" width="64" height="64" rx="18" fill="#2fd8a4"/><path d="M98 136 110 104h7l12 32h-7l-2.5-6h-12l-2.5 6Zm11.7-11.5h7.6L113.5 114Z" fill="#0e1525"/>
-  <text x="80" y="290" font-size="64" font-weight="700" fill="#fff">Softwares de gestão</text>
-  <text x="80" y="370" font-size="64" font-weight="700" fill="#fff">e desenvolvimento sob medida</text>
-  <text x="80" y="450" font-size="28" fill="#aab3c5">Portfólio de sistemas web • demonstrações • orçamentos</text>
+const og = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" font-family="Montserrat, Segoe UI, Arial, sans-serif">
+  <defs>
+    <radialGradient id="g1" cx="90%" cy="0%" r="75%"><stop offset="0" stop-color="#8B5CF6" stop-opacity=".45"/><stop offset="1" stop-color="#0F172A" stop-opacity="0"/></radialGradient>
+    <radialGradient id="g2" cx="5%" cy="5%" r="60%"><stop offset="0" stop-color="#0EA5E9" stop-opacity=".25"/><stop offset="1" stop-color="#0F172A" stop-opacity="0"/></radialGradient>
+    <linearGradient id="t" x1="0" x2="1"><stop offset="0" stop-color="#0EA5E9"/><stop offset="1" stop-color="#8B5CF6"/></linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="#0F172A"/><rect width="1200" height="630" fill="url(#g1)"/><rect width="1200" height="630" fill="url(#g2)"/>
+  <rect x="80" y="150" width="96" height="6" rx="3" fill="url(#t)"/>
+  <text x="80" y="270" font-size="68" font-weight="700" fill="#F8FAFC">Transformamos ideias</text>
+  <text x="80" y="355" font-size="68" font-weight="700" fill="url(#t)">em soluções digitais</text>
+  <text x="80" y="440" font-size="28" fill="#CBD5E1">Sistemas sob medida • plataformas web • gestão • automações • integrações</text>
 </svg>`;
 
 await mkdir(path.join(OUT, 'produtos'), { recursive: true });

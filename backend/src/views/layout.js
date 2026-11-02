@@ -3,10 +3,10 @@ import { env } from '../config/env.js';
 
 const NAV = [
   { href: '/', label: 'Início' },
-  { href: '/softwares', label: 'Softwares' },
   { href: '/servicos', label: 'Serviços' },
+  { href: '/#como-trabalhamos', label: 'Como trabalhamos' },
+  { href: '/softwares', label: 'Projetos' },
   { href: '/sobre', label: 'Sobre' },
-  { href: '/perguntas-frequentes', label: 'Dúvidas' },
   { href: '/contato', label: 'Contato' }
 ];
 
@@ -18,11 +18,15 @@ export function whatsappLink(s, text) {
   return `https://wa.me/${s.whatsapp}${msg ? `?text=${encodeURIComponent(msg)}` : ''}`;
 }
 
+/**
+ * Marca: logotipo configurado no painel (Configurações › URL do logotipo) ou, enquanto não houver,
+ * um espaço reservado neutro. O nome vem de "nome comercial" — nada de marca fixa no código.
+ */
 function brand(s) {
   return html`<a class="brand" href="/" aria-label="${s.nome_comercial} — página inicial">
     ${s.logo_url
-      ? html`<img src="${safeUrl(s.logo_url)}" alt="" height="34" class="brand-logo">`
-      : html`<span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32" width="32" height="32"><rect x="1" y="1" width="30" height="30" rx="9" class="bm-bg"/><path d="M9 21.5 14.5 10h3L23 21.5h-3.2l-1.1-2.5h-5.4l-1.1 2.5Zm5.3-5h3.4L16 12.6Z" class="bm-fg"/></svg></span>`}
+      ? html`<img src="${safeUrl(s.logo_url)}" alt="" height="36" class="brand-logo">`
+      : html`<span class="brand-logo-slot" aria-hidden="true" title="Espaço reservado para a logo"></span>`}
     <span class="brand-text">${s.nome_comercial}${s.slogan ? html`<small>${s.slogan}</small>` : ''}</span>
   </a>`;
 }
@@ -38,10 +42,10 @@ function header(s, current) {
         <div class="collapse navbar-collapse" id="nav-principal">
           <ul class="navbar-nav ms-auto align-items-lg-center">
             ${NAV.map((n) => {
-              const active = n.href === '/' ? current === '/' : current.startsWith(n.href);
+              const active = n.href === '/' ? current === '/' : !n.href.includes('#') && current.startsWith(n.href);
               return html`<li class="nav-item"><a class="nav-link${active ? ' active' : ''}" href="${n.href}"${active ? raw(' aria-current="page"') : ''}>${n.label}</a></li>`;
             })}
-            <li class="nav-item ms-lg-3 mt-2 mt-lg-0"><a class="btn btn-accent btn-sm px-3" href="/orcamento">Solicitar orçamento</a></li>
+            <li class="nav-item ms-lg-3 mt-2 mt-lg-0"><a class="btn btn-accent btn-nav" href="/orcamento">Solicitar orçamento</a></li>
           </ul>
         </div>
       </div>
@@ -59,12 +63,16 @@ function footer(s, pages = []) {
         <div class="col-lg-4">
           ${brand(s)}
           <p class="footer-text mt-3">${s.seo_descricao_padrao || ''}</p>
+          <a class="btn btn-accent btn-sm mt-1" href="/orcamento">Solicitar orçamento</a>
           ${socials.length ? html`<ul class="social list-unstyled d-flex gap-2 mt-3">${socials.map(([k, label]) => html`
             <li><a href="${safeUrl(s[k])}" target="_blank" rel="noopener noreferrer" aria-label="${label}"><i class="bi bi-${k}" aria-hidden="true"></i></a></li>`)}</ul>` : ''}
         </div>
         <div class="col-6 col-lg-2">
           <h2 class="footer-title">Navegação</h2>
-          <ul class="list-unstyled footer-links">${NAV.map((n) => html`<li><a href="${n.href}">${n.label}</a></li>`)}</ul>
+          <ul class="list-unstyled footer-links">
+            ${NAV.map((n) => html`<li><a href="${n.href}">${n.label}</a></li>`)}
+            <li><a href="/perguntas-frequentes">Perguntas frequentes</a></li>
+          </ul>
         </div>
         <div class="col-6 col-lg-3">
           <h2 class="footer-title">Políticas</h2>
@@ -81,8 +89,7 @@ function footer(s, pages = []) {
             ${s.telefone ? html`<li><i class="bi bi-telephone me-2" aria-hidden="true"></i><a href="tel:${s.telefone.replace(/[^\d+]/g, '')}">${s.telefone}</a></li>` : ''}
             ${wa ? html`<li><i class="bi bi-whatsapp me-2" aria-hidden="true"></i><a href="${wa}" target="_blank" rel="noopener noreferrer">WhatsApp</a></li>` : ''}
             ${s.endereco ? html`<li><i class="bi bi-geo-alt me-2" aria-hidden="true"></i>${s.endereco}</li>` : ''}
-            ${!s.email_contato && !s.telefone && !wa ? html`<li class="text-warning-emphasis small">Canais de contato ainda não configurados.</li>` : ''}
-            <li><a href="/contato" class="btn btn-outline-light btn-sm mt-2">Enviar mensagem</a></li>
+            <li><a href="/contato">${s.email_contato || s.telefone || wa ? 'Formulário de contato' : 'Enviar mensagem pelo formulário'}</a></li>
           </ul>
         </div>
       </div>
@@ -107,7 +114,7 @@ export function layout({ settings: s, title, description, path = '/', body, json
   const desc = description || s.seo_descricao_padrao || '';
   const canonical = absoluteUrl(path);
   const image = absoluteUrl(ogImage || '/assets/images/og-default.png');
-  return `<!doctype html>${html`<html lang="pt-BR">
+  return `<!doctype html>${html`<html lang="pt-BR" data-bs-theme="dark">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -123,10 +130,12 @@ export function layout({ settings: s, title, description, path = '/', body, json
   <meta property="og:url" content="${canonical}">
   <meta property="og:image" content="${image}">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="theme-color" content="${s.cor_primaria || '#0e1525'}">
+  <meta name="theme-color" content="${s.cor_primaria || '#0F172A'}">
   <link rel="icon" href="${safeUrl(s.favicon_url || '/assets/icons/favicon.svg')}" type="image/svg+xml">
   <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="/vendor/bootstrap-icons/font/bootstrap-icons.min.css">
+  <link rel="preload" href="/assets/fonts/montserrat/montserrat-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/css/brand.css">
   <link rel="stylesheet" href="/assets/css/site.css">
   <link rel="stylesheet" href="/theme.css">
   ${jsonLd ? html`<script type="application/ld+json">${jsonForScript(jsonLd)}</script>` : ''}

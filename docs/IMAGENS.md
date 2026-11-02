@@ -13,15 +13,17 @@
 | Arquivo | Descrição | Origem | Autor | Licença | Verificado em |
 | --- | --- | --- | --- | --- | --- |
 | `frontend/public/assets/images/hero-dashboard.svg` | Ilustração de painel genérico (dados ilustrativos) | Criada para o projeto (`scripts/generate-images.js`) | Projeto | Própria | 2026-10-26 |
-| `frontend/public/assets/images/og-default.svg` / `.png` | Imagem padrão para compartilhamento (Open Graph) | Criada para o projeto | Projeto | Própria | 2026-10-26 |
+| `frontend/public/assets/images/og-default.svg` / `.png` | Imagem padrão para compartilhamento (Open Graph), sem logotipo — identidade provisória | Criada para o projeto | Projeto | Própria | 2026-11-02 |
 | `frontend/public/assets/images/produtos/churchflow-*.svg` | Mockups de telas do ChurchFlow (dados fictícios) | Criada para o projeto | Projeto | Própria | 2026-10-26 |
 | `frontend/public/assets/images/produtos/spacecontrol-*.svg` | Mockups de telas do SpaceControl (dados fictícios) | Criada para o projeto | Projeto | Própria | 2026-10-26 |
 | `frontend/public/assets/images/produtos/fleetmanager-*.svg` | Mockups de telas do FleetManager (dados fictícios) | Criada para o projeto | Projeto | Própria | 2026-10-26 |
 | `frontend/public/assets/images/produtos/sistemas-personalizados-capa.svg` | Ilustração de etapas de projeto | Criada para o projeto | Projeto | Própria | 2026-10-26 |
 | `frontend/public/assets/images/produtos/placeholder.svg` | Imagem padrão quando não há capa | Criada para o projeto | Projeto | Própria | 2026-10-26 |
-| `frontend/public/assets/icons/favicon.svg` | Monograma da marca provisória | Criada para o projeto | Projeto | Própria | 2026-10-26 |
+| `frontend/public/assets/icons/favicon.svg` | Quadrado em gradiente da paleta provisória (sem logotipo) | Criada para o projeto | Projeto | Própria | 2026-11-02 |
 
 Ícones de interface: [Bootstrap Icons](https://icons.getbootstrap.com/) (licença MIT), servidos a partir de `node_modules`.
+
+Fonte: [Montserrat](https://github.com/JulietaUla/Montserrat) (SIL Open Font License 1.1), arquivo variável `montserrat-latin-wght-normal.woff2` obtido do pacote `@fontsource-variable/montserrat@5.1.1` e servido em `frontend/public/assets/fonts/montserrat/` junto com a licença (`OFL.txt`).
 
 ## Modelo para novas imagens de terceiros
 

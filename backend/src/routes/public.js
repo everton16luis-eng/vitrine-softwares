@@ -32,14 +32,11 @@ function formErrors(err) {
 
 // ------------------------------------------------------------- páginas
 publicRouter.get('/', async (req, res) => {
-  const [c, featured, categories, services, faqs, catalog] = await Promise.all([
-    getContentMap(), products.listFeatured(3), listActiveCategories(), listPublishedServices(), listPublicFaqs(), products.listPublic({ limite: 30 })
-  ]);
-  const demos = catalog.items.filter((p) => p.demo_disponivel && p.demo_tipo !== 'nenhuma').slice(0, 3);
+  const [c, featured, services] = await Promise.all([getContentMap(), products.listFeatured(3), listPublishedServices()]);
   const settings = await getPublicSettings();
   await render(req, res, {
     title: null,
-    body: pages.homePage({ s: settings, c, featured, categories: categories.filter((x) => x.total > 0), services, faqs, demos, token: issueFormToken() }),
+    body: pages.homePage({ s: settings, c, featured, services, token: issueFormToken() }),
     jsonLd: { '@context': 'https://schema.org', '@type': 'Organization', name: settings.nome_comercial, url: absoluteUrl('/'),
       ...(settings.email_contato ? { email: settings.email_contato } : {}),
       sameAs: ['instagram', 'linkedin', 'github', 'youtube'].map((k) => settings[k]).filter(Boolean) }
@@ -50,8 +47,8 @@ publicRouter.get('/softwares', async (req, res) => {
   const [result, categories] = await Promise.all([products.listPublic(req.query), listActiveCategories()]);
   const filtered = Object.values(result.filtros).some(Boolean) || result.page > 1;
   await render(req, res, {
-    title: 'Portfólio de softwares',
-    description: 'Conheça os sistemas de gestão e operação do portfólio, com funcionalidades, situação comercial e demonstrações.',
+    title: 'Projetos e soluções',
+    description: 'Conheça os sistemas desenvolvidos, com funcionalidades, situação atual e demonstrações.',
     body: pages.catalogPage({ result, categories }),
     noindex: filtered && result.total === 0
   });
@@ -103,7 +100,7 @@ publicRouter.get(['/contato', '/orcamento'], async (req, res) => {
   const opts = await contactOptions();
   await render(req, res, {
     title: tipo === 'orcamento' ? 'Solicitar orçamento' : 'Contato',
-    description: 'Fale conosco, solicite um orçamento ou uma apresentação dos softwares.',
+    description: 'Fale conosco e solicite um orçamento para o desenvolvimento do seu sistema.',
     body: pages.contactPage({ s: settings, token: issueFormToken(), tipo, ...opts, produtoSel: typeof req.query.produto === 'string' ? req.query.produto : null })
   });
 });
@@ -169,12 +166,18 @@ publicRouter.get('/sitemap.xml', async (req, res) => {
     .send(`<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${body}\n</urlset>\n`);
 });
 
-/** Folha de estilo com as cores configuradas no painel (sem estilos inline, compatível com a CSP). */
+/**
+ * Folha de estilo com as cores configuradas no painel (sem estilos inline, compatível com a CSP).
+ * Sobrescreve os padrões de /assets/css/brand.css; --ink e --accent atendem o painel e a área do cliente.
+ */
 publicRouter.get('/theme.css', async (req, res) => {
   const s = await getPublicSettings();
   const hex = (v, d) => (/^#[0-9a-f]{6}$/i.test(v || '') ? v : d);
+  const navy = hex(s.cor_primaria, '#0F172A');
+  const blue = hex(s.cor_destaque, '#0EA5E9');
+  const purple = hex(s.cor_secundaria, '#8B5CF6');
   res.type('text/css').set('Cache-Control', 'public, max-age=300')
-    .send(`:root{--ink:${hex(s.cor_primaria, '#0e1525')};--accent:${hex(s.cor_destaque, '#2fd8a4')};}\n`);
+    .send(`:root{--brand-navy:${navy};--brand-blue:${blue};--brand-purple:${purple};--ink:${navy};--accent:${blue};}\n`);
 });
 
 // ------------------------------------------------------------- páginas institucionais por slug (deve ficar por último)

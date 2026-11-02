@@ -10,6 +10,7 @@ const FIELDS = [
   { name: 'favicon_url', label: 'URL do favicon', col: 6 },
   { name: 'cor_primaria', label: 'Cor base (escura)', type: 'color', col: 3 },
   { name: 'cor_destaque', label: 'Cor de destaque', type: 'color', col: 3 },
+  { name: 'cor_secundaria', label: 'Cor secundária (gradientes)', type: 'color', col: 3 },
   { name: 'moeda_padrao', label: 'Moeda padrão', type: 'select', required: true, options: [['BRL', 'BRL'], ['USD', 'USD'], ['EUR', 'EUR']], col: 3 },
   { type: 'section', label: 'Contato e redes sociais', help: 'Não use dados fictícios em produção. Campos vazios não são exibidos no site.' },
   { name: 'email_contato', label: 'E-mail de contato', type: 'email', col: 6 },
