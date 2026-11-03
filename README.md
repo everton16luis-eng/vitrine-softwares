@@ -256,6 +256,23 @@ Recomendações: backups diários automatizados (Agendador de Tarefas do Windows
 
 Demonstrações: escolha "Interna" apenas para os produtos que possuem módulo de demonstração em `frontend/public/assets/js/demos/` (ChurchFlow, SpaceControl, FleetManager) ou "Link externo" para um ambiente online, informando a URL e eventuais avisos.
 
+## Clientes e parceiros na página inicial
+
+A seção **"Empresas que confiam em nossas soluções"** (logo abaixo do destaque da página inicial) é gerenciada em `/admin` → **Conteúdo** → **Clientes e parceiros** (permissões `parceiros.ver` / `parceiros.editar`).
+
+1. **Nova empresa** → informe o nome, a ordem de exibição, o site (opcional, vira link) e escolha a logomarca.
+2. Marque **Ativo** e **Empresa autorizou a divulgação da marca**. Só aparecem no site as empresas ativas, autorizadas e com logomarca; sem nenhuma, a seção fica oculta.
+3. A logomarca pode ser **PNG** (com ou sem transparência), **JPG**, **WebP** ou **SVG**, em qualquer proporção. O servidor:
+   - valida o arquivo pelo conteúdo (não pela extensão) e recusa SVG com scripts, eventos, entidades ou referências externas; o SVG é convertido em imagem e **nunca** é publicado;
+   - remove fundo liso (comum em JPG), recorta as bordas vazias e centraliza a marca numa área padrão de 480×240 px, sem cortes nem distorções, com tamanho visual equivalente entre marcas horizontais, quadradas e verticais;
+   - gera uma versão **monocromática clara** (exibição padrão, preservando letras vazadas e detalhes) e uma **colorida** (ao passar o mouse), ambas em WebP leve;
+   - guarda o **arquivo original** em `storage/private` (baixável pelo painel) para permitir reprocessar.
+4. Para substituir a logo, edite a empresa e escolha outro arquivo. O botão **Reprocessar** (por empresa ou **Reprocessar todas**) gera novamente as versões publicadas a partir do original.
+
+Com mais de 10 marcas a seção vira um carrossel contínuo (pausa ao passar o mouse; sem animação para quem prefere reduzir movimento). Título e texto da seção ficam em **Páginas e textos** → grupo *home*.
+
+> Bancos já existentes: rode `npm run db:migrate` e `npm run db:seed`. O perfil *Administrador* recebe as novas permissões automaticamente; para *Editor de conteúdo* criado antes desta versão, marque `parceiros.ver`/`parceiros.editar` em **Usuários** → cartão do perfil → **Editar permissões**.
+
 ---
 
 ## Identidade visual provisória

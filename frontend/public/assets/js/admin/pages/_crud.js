@@ -12,6 +12,7 @@ export function pageHeader(title, description, ...actions) {
  * @param {HTMLElement} container
  * @param {object} ctx  contexto do app (permissões, opções, seletor de imagens)
  * @param {object} cfg
+ *   cfg.afterSave(saved, values, previous) — opcional, roda depois de criar/editar (ex.: upload)
  */
 export async function crudPage(container, ctx, cfg) {
   const canEdit = ctx.can(cfg.editPerm);
@@ -50,6 +51,7 @@ export async function crudPage(container, ctx, cfg) {
   }
 
   async function openForm(row = null) {
+    let saved = row; // após criar, novas tentativas do mesmo formulário editam o registro criado
     let values = row ? { ...row } : { ...(cfg.defaults || {}) };
     if (row && cfg.loadOne) values = await get(`${cfg.endpoint}/${row.id}`).catch((err) => { toastError(err); return null; });
     if (!values) return;
@@ -60,7 +62,11 @@ export async function crudPage(container, ctx, cfg) {
       context: fctx,
       onSubmit: async (v) => {
         const payload = cfg.prepare ? cfg.prepare(v, row) : v;
-        if (row) await put(`${cfg.endpoint}/${row.id}`, payload); else await post(cfg.endpoint, payload);
+        const previous = saved;
+        saved = saved ? await put(`${cfg.endpoint}/${saved.id}`, payload) : await post(cfg.endpoint, payload);
+        if (cfg.afterSave) {
+          try { await cfg.afterSave(saved, v, previous); } catch (err) { table.refresh(); throw err; }
+        }
         toast(row ? 'Alterações salvas.' : `${cfg.singular[0].toUpperCase()}${cfg.singular.slice(1)} cadastrado(a).`);
         if (cfg.invalidatesOptions) ctx._opcoes = null;
         table.refresh();

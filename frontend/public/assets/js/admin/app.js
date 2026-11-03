@@ -13,6 +13,7 @@ const ROUTES = {
   planos: () => import('./pages/plans.js'),
   midia: () => import('./pages/media.js'),
   conteudo: () => import('./pages/content.js'),
+  parceiros: () => import('./pages/partners.js'),
   leads: () => import('./pages/leads.js'),
   clientes: () => import('./pages/customers.js'),
   orcamentos: () => import('./pages/quotes.js'),
@@ -53,6 +54,7 @@ const MENU = [
   ] },
   { group: 'Conteúdo', items: [
     { route: 'conteudo', label: 'Páginas e textos', icon: 'layout-text-window', perm: 'conteudo.ver' },
+    { route: 'parceiros', label: 'Clientes e parceiros', icon: 'buildings', perm: 'parceiros.ver' },
     { route: 'midia', label: 'Biblioteca de mídia', icon: 'images', perm: 'midia.ver' }
   ] },
   { group: 'Gestão', items: [

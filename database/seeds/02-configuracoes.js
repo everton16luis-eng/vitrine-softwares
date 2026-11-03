@@ -39,6 +39,8 @@ export const CONTENT = [
   ['home.hero.imagem', 'home', 'Imagem do destaque (vazio = painel padrão)', 'imagem', ''],
   ['home.produtos.titulo', 'home', 'Título da seção de produtos', 'texto', 'Projetos e soluções'],
   ['home.produtos.texto', 'home', 'Texto da seção de produtos', 'texto_longo', 'Sistemas desenvolvidos pela equipe. Cada projeto informa sua situação atual; os marcados como demonstrativos usam dados fictícios.'],
+  ['home.clientes.titulo', 'home', 'Título da seção de clientes e parceiros', 'texto', 'Empresas que confiam em nossas soluções'],
+  ['home.clientes.texto', 'home', 'Texto da seção de clientes e parceiros (opcional)', 'texto_longo', ''],
   ['home.beneficios.titulo', 'home', 'Título dos benefícios', 'texto', 'O que você ganha com um sistema bem feito'],
   ['home.beneficios.itens', 'home', 'Benefícios (um por linha: Título | Descrição)', 'texto_longo',
     'Informação centralizada | Dados que hoje estão em planilhas, cadernos e mensagens passam a ficar em um só lugar.\nMenos retrabalho | Cadastros, cálculos e conferências repetitivas são automatizados.\nControle de acesso | Cada pessoa vê e altera apenas o que é da sua responsabilidade.\nRelatórios confiáveis | Indicadores calculados a partir dos dados reais da operação.\nAcesso de qualquer lugar | Sistemas web responsivos, utilizáveis no computador e no celular.\nEvolução contínua | O sistema acompanha o crescimento do seu negócio.'],

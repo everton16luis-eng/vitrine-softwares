@@ -319,3 +319,50 @@ a.eyebrow:hover { color: var(--text); }
   .hero-title { font-size: 2.1rem; }
   .hero .btn-lg { width: 100%; }
 }
+
+/* ---------------------------------------------------------------------
+   Clientes e parceiros — logomarcas já padronizadas no servidor (480×240,
+   versão monocromática clara + versão colorida). Todos os espaços têm o
+   mesmo tamanho, então nenhuma marca domina as demais.
+   --------------------------------------------------------------------- */
+.partners-section { padding: 4.25rem 0 4.75rem; background: var(--bg-alt); border-bottom: 1px solid var(--line); }
+.partners-section .section-heading { margin-bottom: 2.25rem; }
+.partners-grid, .partners-track { list-style: none; margin: 0; padding: 0; }
+.partners-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; }
+.partners-grid .partner-tile { width: calc((100% - 1rem) / 2); max-width: 200px; }
+@media (min-width: 576px) { .partners-grid .partner-tile { width: calc((100% - 2rem) / 3); } }
+@media (min-width: 992px) { .partners-grid .partner-tile { width: calc((100% - 5rem) / 6); } }
+.partner-inner { display: block; position: relative; aspect-ratio: 2 / 1; border-radius: var(--radius-sm); background: var(--card); border: 1px solid var(--line); overflow: hidden; transition: background-color .3s ease, border-color .3s ease; }
+.partner-logo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; transition: opacity .3s ease; }
+.partner-logo-mono { opacity: .8; }
+.partner-logo-cor { opacity: 0; }
+.partner-inner:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+@media (hover: hover) {
+  .partner-logo-mono { opacity: .62; }
+  .partner-inner:hover { border-color: var(--line-strong); }
+}
+.partner-inner:focus-visible .partner-logo-mono { opacity: 0; }
+.partner-inner:focus-visible .partner-logo-cor { opacity: 1; }
+.partner-plate-claro .partner-inner:focus-visible { background: var(--brand-white); }
+.partner-plate-escuro .partner-inner:focus-visible { background: var(--card-hover); }
+@media (hover: hover) {
+  .partner-inner:hover .partner-logo-mono { opacity: 0; }
+  .partner-inner:hover .partner-logo-cor { opacity: 1; }
+  .partner-plate-claro .partner-inner:hover { background: var(--brand-white); }
+  .partner-plate-escuro .partner-inner:hover { background: var(--card-hover); }
+}
+
+/* Carrossel (muitas marcas): a lista é repetida uma vez (cópia oculta para leitores de tela)
+   e desliza metade da largura, o que dá a volta sem saltos. */
+.partners-marquee { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); }
+.partners-track { display: flex; width: max-content; animation: partners-scroll var(--marquee-duration, 40s) linear infinite; }
+.partners-track .partner-tile { width: 180px; margin-right: 1rem; flex: 0 0 auto; }
+.partners-marquee:hover .partners-track, .partners-marquee:focus-within .partners-track { animation-play-state: paused; }
+@keyframes partners-scroll { to { transform: translateX(-50%); } }
+@media (max-width: 575.98px) { .partners-track .partner-tile { width: 150px; margin-right: .75rem; } }
+@media (prefers-reduced-motion: reduce) {
+  .partners-marquee { -webkit-mask-image: none; mask-image: none; }
+  .partners-track { width: auto; flex-wrap: wrap; justify-content: center; gap: 1rem; padding: 0 16px; }
+  .partners-track .partner-tile { margin-right: 0; }
+  .partners-track .partner-tile[aria-hidden="true"] { display: none; }
+}

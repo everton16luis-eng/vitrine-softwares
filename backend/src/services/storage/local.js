@@ -8,7 +8,7 @@ export const STORAGE_ROOT = path.resolve(here, '../../../../storage');
 export const PUBLIC_DIR = path.join(STORAGE_ROOT, 'uploads');
 export const PRIVATE_DIR = path.join(STORAGE_ROOT, 'private');
 
-const KEY_RE = /^\d{4}\/\d{2}\/[a-f0-9]{32}\.(jpg|png|webp|pdf|zip)$/;
+const KEY_RE = /^\d{4}\/\d{2}\/[a-f0-9]{32}\.(jpg|png|webp|pdf|zip|svg)$/;
 
 /** Resolve a chave dentro da pasta base, impedindo path traversal. */
 function resolveKey(key, privado) {

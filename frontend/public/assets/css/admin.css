@@ -168,3 +168,15 @@ a.kpi:hover { border-color: #b9c3d3; box-shadow: 0 8px 24px -14px rgba(14,21,37,
 .deploy-progress { height: .55rem; min-width: 90px; }
 .deploy-progress-wide { max-width: 380px; }
 .deploy-group-title { font-size: .75rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-weight: 700; margin: 0 0 .3rem; }
+
+/* Clientes e parceiros: miniaturas das logomarcas sobre fundo semelhante ao do site */
+.partner-thumb { display: inline-flex; align-items: center; justify-content: center; gap: .25rem; border-radius: 8px; background: #0F172A; overflow: hidden; color: #94A3B8; font-size: .75rem; }
+.partner-thumb img { width: 100%; height: 100%; object-fit: contain; }
+.partner-thumb-sm { width: 96px; height: 48px; }
+.partner-thumb-lg { width: 200px; height: 100px; }
+.partner-thumb-light { background: #F8FAFC; }
+.partner-thumb-dark { background: #1E293B; }
+.partner-thumb-empty { border: 1px dashed #475569; }
+.partner-preview-pair { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: .25rem; }
+.partner-preview-pair figure { margin: 0; }
+.partner-preview-pair figcaption { font-size: .75rem; color: var(--bs-secondary-color); margin-top: .25rem; }

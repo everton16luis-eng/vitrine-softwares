@@ -130,7 +130,8 @@ export function infoModal({ title, body, size = '' }) {
 /**
  * Campos: { name, label, type, required, options, help, col, min, max, rows, placeholder, readonly }
  * Tipos: text, email, url, textarea, number, money, date, select, checkbox, lines (array de strings),
- *        checklist (array de valores), image (id de arquivo via seletor de mídia), section (título).
+ *        checklist (array de valores), image (id de arquivo via seletor de mídia), section (título),
+ *        file (File selecionado ou null; aceita "accept" e "preview", um nó exibido acima do campo).
  */
 export function buildForm(fields, values = {}, context = {}) {
   const node = el('form', { class: 'admin-form', novalidate: true });
@@ -186,6 +187,9 @@ export function buildForm(fields, values = {}, context = {}) {
         input.hiddenInput = hidden;
         break;
       }
+      case 'file':
+        input = el('input', { ...common, type: 'file', class: 'form-control', accept: f.accept || null });
+        break;
       case 'money':
         input = el('input', { ...common, class: 'form-control', inputmode: 'decimal', placeholder: f.placeholder || '0,00', value: v ? String(v).replace('.', ',') : '' });
         break;
@@ -197,7 +201,7 @@ export function buildForm(fields, values = {}, context = {}) {
     const help = f.help && f.type !== 'section' ? el('div', { class: 'form-text' }, f.help) : null;
     const wrap = f.type === 'checkbox'
       ? el('div', { class: `col-${f.col || 12}` }, el('div', { class: 'form-check form-switch' }, input, label, err), help)
-      : el('div', { class: `col-12 col-md-${f.col || 12}` }, label, input, help, err);
+      : el('div', { class: `col-12 col-md-${f.col || 12}` }, label, f.type === 'file' ? f.preview || null : null, input, help, err);
     row.append(wrap);
     inputs.set(f.name, { f, input, err });
   }
@@ -210,6 +214,7 @@ export function buildForm(fields, values = {}, context = {}) {
       else if (f.type === 'lines') out[name] = input.value.split('\n').map((s) => s.trim()).filter(Boolean);
       else if (f.type === 'checklist') out[name] = [...input.querySelectorAll('input:checked')].map((c) => (f.numeric ? Number(c.value) : c.value));
       else if (f.type === 'image') out[name] = input.hiddenInput.value ? Number(input.hiddenInput.value) : null;
+      else if (f.type === 'file') out[name] = input.files?.[0] || null;
       else if (f.type === 'money') out[name] = input.value.trim() ? parseMoneyInput(input.value) : null;
       else if (f.type === 'number') out[name] = input.value === '' ? null : Number(input.value);
       else if (f.type === 'select' && f.numeric) out[name] = input.value ? Number(input.value) : null;
@@ -237,6 +242,7 @@ export function buildForm(fields, values = {}, context = {}) {
     const errs = {};
     for (const [name, { f, input }] of inputs) {
       if (f.required && f.type !== 'checkbox' && f.type !== 'checklist' && f.type !== 'image' && !input.value?.trim()) errs[name] = 'Campo obrigatório.';
+      else if (f.type === 'file' && f.maxBytes && input.files?.[0]?.size > f.maxBytes) errs[name] = 'Arquivo acima do tamanho máximo permitido.';
       else if (f.type === 'email' && input.value && !input.checkValidity()) errs[name] = 'E-mail inválido.';
       else if (f.type === 'money' && input.value && !/^\d+(\.\d{1,2})?$/.test(parseMoneyInput(input.value))) errs[name] = 'Valor inválido (ex.: 1.500,00).';
     }

@@ -8,6 +8,34 @@ import { whatsappLink, absoluteUrl } from './layout.js';
 const icon = (name) => html`<i class="bi bi-${name}" aria-hidden="true"></i>`;
 
 // ------------------------------------------------------------------ início
+/** Acima deste número de marcas a seção vira um carrossel contínuo. */
+export const PARTNERS_CAROUSEL_MIN = 11;
+
+const partnerTile = (p, hidden = false) => {
+  const logos = html`<img class="partner-logo partner-logo-mono" src="${safeUrl(p.mono_url)}" alt="${hidden ? '' : p.nome}" width="480" height="240" loading="lazy" decoding="async">
+      <img class="partner-logo partner-logo-cor" src="${safeUrl(p.cor_url)}" alt="" width="480" height="240" loading="lazy" decoding="async">`;
+  const href = p.site_url ? safeUrl(p.site_url) : '';
+  return html`<li class="partner-tile partner-plate-${p.fundo_colorida}"${hidden ? raw(' aria-hidden="true"') : ''}>${href
+    ? html`<a class="partner-inner" href="${href}" target="_blank" rel="noopener noreferrer nofollow"${hidden ? raw(' tabindex="-1"') : ''}${hidden ? '' : html` title="${p.nome}"`}>${logos}</a>`
+    : html`<span class="partner-inner"${hidden ? '' : html` title="${p.nome}"`}>${logos}</span>`}</li>`;
+};
+
+/** Seção "Empresas que confiam em nossas soluções" (oculta quando não há marcas autorizadas). */
+function partnersSection(c, partners) {
+  if (!partners?.length) return '';
+  const carousel = partners.length >= PARTNERS_CAROUSEL_MIN;
+  return html`<section class="section partners-section" id="clientes" aria-labelledby="clientes-title">
+    <div class="container">
+      ${sectionHeading({ eyebrow: 'Clientes e parceiros', title: c['home.clientes.titulo'] || 'Empresas que confiam em nossas soluções', text: c['home.clientes.texto'], id: 'clientes-title', center: true })}
+    </div>
+    ${carousel
+      ? html`<div class="partners-marquee" data-partners-marquee data-count="${partners.length}">
+          <ul class="partners-track" role="list">${partners.map((p) => partnerTile(p))}${partners.map((p) => partnerTile(p, true))}</ul>
+        </div>`
+      : html`<div class="container"><ul class="partners-grid partners-count-${Math.min(partners.length, 6)}" role="list">${partners.map((p) => partnerTile(p))}</ul></div>`}
+  </section>`;
+}
+
 /** Painel ilustrativo do destaque (sem imagens externas). Substituído por home.hero.imagem quando configurada. */
 const heroPanel = () => html`<div class="hero-panel" aria-hidden="true">
   <div class="hero-panel-bar"><span></span><span></span><span></span><em>projeto.js</em></div>
@@ -19,7 +47,7 @@ const heroPanel = () => html`<div class="hero-panel" aria-hidden="true">
 entregar(sistema).then(evoluir);</code></pre>
 </div>`;
 
-export function homePage({ s, c, featured, services, token }) {
+export function homePage({ s, c, featured, services, partners = [], token }) {
   const etapas = parseLines(c['home.etapas.itens']);
   const compromissos = parseLines(c['home.diferenciais.itens']);
   const wa = whatsappLink(s);
@@ -45,6 +73,8 @@ export function homePage({ s, c, featured, services, token }) {
       </div>
     </div>
   </section>
+
+  ${partnersSection(c, partners)}
 
   <section class="section" id="servicos" aria-labelledby="servicos-title">
     <div class="container">

@@ -22,6 +22,7 @@ import { db } from '../database/pool.js';
 import { audit } from '../services/audit.js';
 import { notFound } from '../utils/errors.js';
 import { renderQuoteDocument } from '../views/quote-document.js';
+import { partnersRouter } from '../modules/partners/partners.routes.js';
 import { deploymentsRouter } from '../modules/deployments/deployments.routes.js';
 import { listRecipesForSelect } from '../modules/deployments/recipes.service.js';
 
@@ -77,6 +78,7 @@ const cv = requirePermission('conteudo.ver');
 const ce = requirePermission('conteudo.editar');
 adminApi.get('/conteudos', cv, async (req, res) => res.json(await content.listContentBlocks()));
 adminApi.put('/conteudos', ce, async (req, res) => res.json(await content.updateContentBlocks(req.body?.itens, req)));
+adminApi.use('/parceiros', partnersRouter);
 adminApi.use('/paginas', crudRouter(content.pagesService, { view: 'conteudo.ver', edit: 'conteudo.editar' }));
 adminApi.use('/faqs', crudRouter(content.faqsService, { view: 'conteudo.ver', edit: 'conteudo.editar' }));
 

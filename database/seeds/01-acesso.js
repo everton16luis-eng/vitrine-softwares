@@ -16,6 +16,8 @@ export const PERMISSIONS = [
   ['midia.editar', 'Enviar e gerenciar arquivos', 'conteudo'],
   ['conteudo.ver', 'Consultar conteúdo do site', 'conteudo'],
   ['conteudo.editar', 'Editar páginas, textos e perguntas', 'conteudo'],
+  ['parceiros.ver', 'Consultar clientes e parceiros exibidos no site', 'conteudo'],
+  ['parceiros.editar', 'Cadastrar clientes e parceiros e enviar logomarcas', 'conteudo'],
   ['leads.ver', 'Consultar contatos e leads', 'comercial'],
   ['leads.editar', 'Atender e atualizar leads', 'comercial'],
   ['leads.exportar', 'Exportar leads', 'comercial'],
@@ -60,7 +62,7 @@ const ROLES = [
   {
     codigo: 'editor_conteudo', nome: 'Editor de conteúdo', descricao: 'Páginas, imagens, categorias, serviços e conteúdo do site.',
     perms: ['dashboard.ver', 'produtos.ver', 'categorias.ver', 'categorias.editar', 'servicos.ver', 'servicos.editar', 'midia.ver', 'midia.editar',
-      'conteudo.ver', 'conteudo.editar']
+      'conteudo.ver', 'conteudo.editar', 'parceiros.ver', 'parceiros.editar']
   },
   {
     codigo: 'consulta', nome: 'Consulta', descricao: 'Somente leitura das áreas expressamente autorizadas pelo administrador.',

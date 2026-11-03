@@ -47,7 +47,16 @@ export function toast(message, tone = 'success') {
   setTimeout(() => el.remove(), 5000);
 }
 
+// Carrossel de clientes e parceiros: velocidade constante, qualquer que seja o número de marcas.
+function partnersMarquee() {
+  document.querySelectorAll('[data-partners-marquee]').forEach((box) => {
+    const n = Number(box.dataset.count) || 10;
+    box.style.setProperty('--marquee-duration', `${Math.round(Math.max(20, n * 3.2))}s`);
+  });
+}
+
 cookieNotice();
 planButtons();
+partnersMarquee();
 mobileMenu();
 enhanceForms();

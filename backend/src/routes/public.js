@@ -15,6 +15,7 @@ import { clientIp } from '../utils/common.js';
 import { markdownToText } from '../utils/markdown.js';
 import { escapeHtml } from '../utils/html.js';
 import { handleWebhook } from '../modules/payments/gateways.js';
+import { listPublicPartners } from '../modules/partners/partners.service.js';
 
 export const publicRouter = Router();
 export const publicApi = Router();
@@ -32,11 +33,11 @@ function formErrors(err) {
 
 // ------------------------------------------------------------- páginas
 publicRouter.get('/', async (req, res) => {
-  const [c, featured, services] = await Promise.all([getContentMap(), products.listFeatured(3), listPublishedServices()]);
+  const [c, featured, services, partners] = await Promise.all([getContentMap(), products.listFeatured(3), listPublishedServices(), listPublicPartners()]);
   const settings = await getPublicSettings();
   await render(req, res, {
     title: null,
-    body: pages.homePage({ s: settings, c, featured, services, token: issueFormToken() }),
+    body: pages.homePage({ s: settings, c, featured, services, partners, token: issueFormToken() }),
     jsonLd: { '@context': 'https://schema.org', '@type': 'Organization', name: settings.nome_comercial, url: absoluteUrl('/'),
       ...(settings.email_contato ? { email: settings.email_contato } : {}),
       sameAs: ['instagram', 'linkedin', 'github', 'youtube'].map((k) => settings[k]).filter(Boolean) }
