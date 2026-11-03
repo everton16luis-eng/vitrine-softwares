@@ -24,7 +24,7 @@ Plataforma web para **apresentar, divulgar, comercializar e administrar software
 13. [Pendências e integrações que exigem configuração](#pendências-e-integrações-que-exigem-configuração)
 
 Documentação complementar em [`docs/`](docs/):
-[API](docs/API.md) · [Banco de dados](docs/BANCO-DE-DADOS.md) · [Segurança e LGPD](docs/SEGURANCA-E-LGPD.md) · [Pagamentos](docs/PAGAMENTOS.md) · [Imagens e licenças](docs/IMAGENS.md) · [Deploy](docs/DEPLOY.md) · [Central de Implantação](docs/IMPLANTACOES.md)
+[API](docs/API.md) · [Banco de dados](docs/BANCO-DE-DADOS.md) · [Segurança e LGPD](docs/SEGURANCA-E-LGPD.md) · [Pagamentos](docs/PAGAMENTOS.md) · [Imagens e licenças](docs/IMAGENS.md) · [Deploy](docs/DEPLOY.md) · [Deploy em VPS compartilhada](docs/DEPLOY-VPS.md) · [Central de Implantação](docs/IMPLANTACOES.md)
 
 ---
 
@@ -306,7 +306,7 @@ A arquitetura para Mercado Pago e Stripe já existe (`backend/src/modules/paymen
 
 ## Deploy
 
-Resumo (detalhes e exemplos em [docs/DEPLOY.md](docs/DEPLOY.md)):
+Resumo (detalhes e exemplos em [docs/DEPLOY.md](docs/DEPLOY.md); passo a passo completo para uma VPS Linux que já hospeda outros sites em [docs/DEPLOY-VPS.md](docs/DEPLOY-VPS.md)):
 
 1. Servidor com Node.js 22+ e PostgreSQL gerenciado ou próprio.
 2. Variáveis de ambiente de produção (`NODE_ENV=production`, `APP_URL`, `APP_SECRET`, `DATABASE_URL`, `TRUST_PROXY`, SMTP).

@@ -21,6 +21,8 @@ export const env = Object.freeze({
   isProduction,
   isTest,
   port: int(process.env.PORT, 3000),
+  // Interface de rede: vazio = todas (padrão); 127.0.0.1 = só a própria máquina (atrás de Nginx)
+  host: (process.env.HOST || '').trim() || undefined,
   appUrl,
   databaseUrl: isTest ? process.env.DATABASE_URL_TEST : process.env.DATABASE_URL,
   databaseSsl: bool(process.env.DATABASE_SSL),

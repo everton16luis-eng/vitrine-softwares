@@ -6,6 +6,7 @@
 | --- | --- | --- |
 | `NODE_ENV` | `production` | Ativa cookies `Secure`, HSTS e validação do `APP_SECRET` |
 | `PORT` | `3000` | Porta interna |
+| `HOST` | `127.0.0.1` | Interface de rede. Com proxy reverso no mesmo servidor, use `127.0.0.1` para não expor a porta interna. Vazio = todas (necessário em plataformas como Render/Railway) |
 | `APP_URL` | `https://www.seudominio.com.br` | Usada em canonical, sitemap, Open Graph e links de e-mail |
 | `DATABASE_URL` | `postgres://vitrine:***@host:5432/vitrine` | Usuário dedicado, sem superusuário |
 | `DATABASE_SSL` | `true` | Para bancos gerenciados que exigem SSL |
@@ -15,6 +16,8 @@
 | `UPLOAD_MAX_MB` | `5` | Limite de upload |
 
 ## Passo a passo (servidor Linux com Nginx e PM2)
+
+> Tutorial completo para uma VPS que já tem outros sites (usuário, banco, porta e Nginx isolados, HTTPS, backups e atualização): [DEPLOY-VPS.md](DEPLOY-VPS.md).
 
 ```bash
 git clone <repositorio> /srv/vitrine && cd /srv/vitrine

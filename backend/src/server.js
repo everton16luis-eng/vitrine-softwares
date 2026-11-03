@@ -15,8 +15,8 @@ try {
 }
 
 const app = createApp();
-const server = app.listen(env.port, () => {
-  console.log(`[servidor] ${env.appUrl} (${env.nodeEnv})`);
+const server = app.listen(env.port, env.host, () => {
+  console.log(`[servidor] ${env.appUrl} (${env.nodeEnv}) · escutando em ${env.host || 'todas as interfaces'}:${env.port}`);
   console.log(`[servidor] painel administrativo: ${env.appUrl}/admin`);
   if (!isEmailConfigured()) console.warn('[servidor] E-mail NÃO configurado: mensagens serão registradas como "não enviadas".');
 });
