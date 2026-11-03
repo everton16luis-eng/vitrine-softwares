@@ -24,7 +24,7 @@ Plataforma web para **apresentar, divulgar, comercializar e administrar software
 13. [Pendências e integrações que exigem configuração](#pendências-e-integrações-que-exigem-configuração)
 
 Documentação complementar em [`docs/`](docs/):
-[API](docs/API.md) · [Banco de dados](docs/BANCO-DE-DADOS.md) · [Segurança e LGPD](docs/SEGURANCA-E-LGPD.md) · [Pagamentos](docs/PAGAMENTOS.md) · [Imagens e licenças](docs/IMAGENS.md) · [Deploy](docs/DEPLOY.md)
+[API](docs/API.md) · [Banco de dados](docs/BANCO-DE-DADOS.md) · [Segurança e LGPD](docs/SEGURANCA-E-LGPD.md) · [Pagamentos](docs/PAGAMENTOS.md) · [Imagens e licenças](docs/IMAGENS.md) · [Deploy](docs/DEPLOY.md) · [Central de Implantação](docs/IMPLANTACOES.md)
 
 ---
 
@@ -143,6 +143,16 @@ npm run admin:create
 - O comando recusa a execução se já existir um administrador ativo — os demais usuários devem ser criados no painel (**Usuários e perfis**), recebendo um link de uso único para definir a própria senha.
 - Para automação (ex.: deploy), é possível definir `ADMIN_NAME`, `ADMIN_EMAIL` e `ADMIN_PASSWORD` no ambiente apenas durante a execução e removê-los depois.
 - Política de senha: mínimo de 10 caracteres, com letras e números.
+
+### Esqueci a senha / conta bloqueada
+
+Sem SMTP configurado, o link de "esqueci minha senha" não chega por e-mail. Redefina pelo terminal do servidor (a senha não aparece na tela):
+
+```powershell
+npm run admin:reset-password
+```
+
+O comando pede o e-mail e a nova senha, desbloqueia a conta (após 5 tentativas erradas o acesso fica bloqueado por 15 minutos), encerra as sessões abertas e registra a ação na auditoria.
 
 ---
 
@@ -304,6 +314,16 @@ Resumo (detalhes e exemplos em [docs/DEPLOY.md](docs/DEPLOY.md)):
 4. Proxy reverso com HTTPS (Nginx, Caddy, IIS ou o do provedor).
 5. Disco persistente para `storage/` (ou um driver de armazenamento externo).
 6. Backups automáticos do banco e de `storage/`.
+
+### Central de Implantação
+
+O painel inclui a **Central de Implantação** (menu *Implantação*), que instala, configura, testa e entrega os sistemas contratados em ambiente isolado por cliente (usuário Linux, diretório, banco, porta, serviço e site Nginx próprios). Em produção ela depende de um agente separado e de um auxiliar root com lista fechada de operações:
+
+```bash
+sudo bash deploy/implantacao/preparar-servidor.sh
+```
+
+Em desenvolvimento, `npm run agente` roda o agente em modo simulado (nada é alterado no servidor). Guia completo em [docs/IMPLANTACOES.md](docs/IMPLANTACOES.md).
 
 ---
 

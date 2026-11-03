@@ -19,6 +19,9 @@ const ROUTES = {
   pedidos: () => import('./pages/orders.js'),
   contratos: () => import('./pages/contracts.js'),
   suporte: () => import('./pages/support.js'),
+  implantacoes: () => import('./pages/deployments.js'),
+  receitas: () => import('./pages/recipes.js'),
+  dominios: () => import('./pages/domains.js'),
   lgpd: () => import('./pages/privacy.js'),
   relatorios: () => import('./pages/reports.js'),
   auditoria: () => import('./pages/audit.js'),
@@ -42,6 +45,11 @@ const MENU = [
     { route: 'pedidos', label: 'Pedidos e pagamentos', icon: 'receipt', perm: 'pedidos.ver' },
     { route: 'contratos', label: 'Contratos e licenças', icon: 'file-earmark-lock', perm: 'contratos.ver' },
     { route: 'suporte', label: 'Chamados', icon: 'life-preserver', perm: 'suporte.ver' }
+  ] },
+  { group: 'Implantação', items: [
+    { route: 'implantacoes', label: 'Implantações', icon: 'rocket-takeoff', perm: 'implantacoes.ver' },
+    { route: 'receitas', label: 'Receitas por software', icon: 'diagram-3', perm: 'implantacoes.ver' },
+    { route: 'dominios', label: 'Domínios e SSL', icon: 'globe2', perm: 'implantacoes.ver' }
   ] },
   { group: 'Conteúdo', items: [
     { route: 'conteudo', label: 'Páginas e textos', icon: 'layout-text-window', perm: 'conteudo.ver' },

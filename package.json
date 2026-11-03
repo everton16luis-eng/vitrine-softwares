@@ -16,6 +16,8 @@
     "db:seed": "node backend/src/database/cli/seed.js",
     "db:setup": "npm run db:create && npm run db:migrate && npm run db:seed",
     "admin:create": "node backend/src/database/cli/create-admin.js",
+    "admin:reset-password": "node backend/src/database/cli/reset-password.js",
+    "agente": "node backend/src/agent/agent.js",
     "test": "node --test --test-concurrency=1 \"tests/**/*.test.js\"",
     "test:unit": "node --test \"tests/unit/*.test.js\"",
     "test:integration": "node --test --test-concurrency=1 \"tests/integration/*.test.js\"",

@@ -1,0 +1,26 @@
+# Modelo instalado por preparar-servidor.sh (os marcadores @...@ são substituídos).
+[Unit]
+Description=Central de Implantação - agente de execução
+After=network-online.target postgresql.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=@AGENT_USER@
+Group=@AGENT_USER@
+WorkingDirectory=@PROJECT_DIR@
+Environment=NODE_ENV=production
+Environment=IMPLANTACAO_EXECUTOR=linux
+Environment=IMPLANTACAO_NODE=@NODE_BIN@
+Environment=IMPLANTACAO_HELPER=@LIB_DIR@/helper.mjs
+ExecStart=@NODE_BIN@ backend/src/agent/agent.js
+Restart=on-failure
+RestartSec=10
+# Encerramento gracioso: o agente termina o passo atual antes de sair.
+KillSignal=SIGTERM
+TimeoutStopSec=15min
+# O agente precisa de "sudo" para chamar o auxiliar; por isso NoNewPrivileges não é usado.
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

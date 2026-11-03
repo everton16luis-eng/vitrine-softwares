@@ -22,6 +22,8 @@ import { db } from '../database/pool.js';
 import { audit } from '../services/audit.js';
 import { notFound } from '../utils/errors.js';
 import { renderQuoteDocument } from '../views/quote-document.js';
+import { deploymentsRouter } from '../modules/deployments/deployments.routes.js';
+import { listRecipesForSelect } from '../modules/deployments/recipes.service.js';
 
 export const adminApi = Router();
 adminApi.use(requireStaff);
@@ -51,7 +53,12 @@ adminApi.get('/opcoes', async (req, res) => {
   const has = (perm) => admin || p.has(perm);
   if (has('produtos.ver') || has('orcamentos.ver') || has('pedidos.ver')) out.produtos = await productOptions();
   if (has('clientes.ver') || has('orcamentos.ver') || has('pedidos.ver') || has('contratos.ver')) out.clientes = await customers.listCustomersForSelect();
-  if (has('leads.ver')) out.equipe = await users.listStaffForSelect();
+  if (has('leads.ver') || has('implantacoes.ver')) out.equipe = await users.listStaffForSelect();
+  if (has('implantacoes.ver')) {
+    out.receitas = await listRecipesForSelect(db);
+    if (!out.clientes) out.clientes = await customers.listCustomersForSelect();
+    if (!out.produtos) out.produtos = await productOptions();
+  }
   if (has('categorias.ver') || has('produtos.ver')) out.categorias = await db.many('SELECT id, nome, ativa FROM categorias ORDER BY ordem, nome');
   if (has('servicos.ver') || has('orcamentos.ver')) out.servicos = await db.many("SELECT id, nome FROM servicos WHERE status <> 'arquivado' ORDER BY ordem");
   if (has('planos.ver') || has('produtos.ver')) out.planos = (await listPlans({ limite: 100 })).items.map((pl) => ({ id: pl.id, nome: pl.nome, preco: pl.preco, ativo: pl.ativo }));
@@ -152,6 +159,9 @@ adminApi.post('/contratos/:id/arquivo', requirePermission('contratos.editar'), m
   res.json(await contractsService.get(id));
 });
 adminApi.use('/licencas', crudRouter(licensesService, { view: 'contratos.ver', edit: 'contratos.editar', remove: null }));
+
+// ------------------------------------------------------------- central de implantação
+adminApi.use(deploymentsRouter);
 
 // ------------------------------------------------------------- suporte e LGPD
 adminApi.get('/chamados', requirePermission('suporte.ver'), async (req, res) => res.json(await support.listTickets(req.query)));

@@ -74,7 +74,7 @@ export async function crudPage(container, ctx, cfg) {
 
   container.append(
     pageHeader(cfg.title, cfg.description, canEdit ? el('button', { class: 'btn btn-primary', type: 'button', onclick: () => openForm() }, icon('plus-lg'), ` ${cfg.newLabel || 'Novo'}`) : null),
-    cfg.extraTop || null,
+    ...(cfg.extraTop ? [cfg.extraTop] : []),
     el('div', { class: 'card' }, el('div', { class: 'card-body' },
       el('div', { class: 'toolbar' }, cfg.searchable === false ? null : search, filterNodes),
       table.node)));

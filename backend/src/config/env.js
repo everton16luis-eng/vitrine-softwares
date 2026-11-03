@@ -39,6 +39,14 @@ export const env = Object.freeze({
     pass: process.env.SMTP_PASS || '',
     from: process.env.MAIL_FROM || ''
   },
+  implantacao: {
+    // simulado: percorre todo o fluxo sem tocar no servidor (padrão fora de produção); linux: executa de verdade
+    executor: process.env.IMPLANTACAO_EXECUTOR || (isProduction ? 'linux' : 'simulado'),
+    chave: process.env.IMPLANTACAO_CHAVE || '',
+    ips: (process.env.IMPLANTACAO_IPS || '').split(',').map((s) => s.trim()).filter(Boolean),
+    emailSsl: process.env.IMPLANTACAO_EMAIL_SSL || '',
+    helper: process.env.IMPLANTACAO_HELPER || '/usr/local/lib/vitrine-implantacao/helper.mjs'
+  },
   payments: {
     provider: process.env.PAYMENT_PROVIDER || '',
     mercadopagoAccessToken: process.env.MERCADOPAGO_ACCESS_TOKEN || '',

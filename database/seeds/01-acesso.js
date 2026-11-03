@@ -40,7 +40,12 @@ export const PERMISSIONS = [
   ['configuracoes.editar', 'Alterar configurações', 'sistema'],
   ['usuarios.ver', 'Consultar usuários e perfis', 'sistema'],
   ['usuarios.editar', 'Gerenciar usuários e permissões', 'sistema'],
-  ['auditoria.ver', 'Consultar auditoria', 'sistema']
+  ['auditoria.ver', 'Consultar auditoria', 'sistema'],
+  ['implantacoes.ver', 'Consultar implantações, domínios e logs', 'implantacao'],
+  ['implantacoes.editar', 'Criar implantações e registrar informações do cliente', 'implantacao'],
+  ['implantacoes.executar', 'Iniciar, retomar e testar instalações no servidor', 'implantacao'],
+  ['implantacoes.receitas', 'Configurar receitas de implantação dos softwares', 'implantacao'],
+  ['implantacoes.segredos', 'Definir credenciais sigilosas das instalações', 'implantacao']
 ];
 
 const ROLES = [

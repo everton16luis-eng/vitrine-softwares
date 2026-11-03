@@ -16,6 +16,8 @@ th { background: #f5f7fa; font-size: 12px; text-transform: uppercase; letter-spa
 tfoot td { border: 0; }
 tfoot .total td { font-weight: 700; font-size: 16px; border-top: 2px solid #0e1525; }
 .missing { color: #b42318; font-style: italic; }
+.pre-line { white-space: pre-line; }
+.doc-note { font-size: 12px; color: #6b7280; }
 .doc-footer { margin-top: 2.5rem; font-size: 12px; color: #6b7280; border-top: 1px solid #e2e7ef; padding-top: .8rem; }
 @media print {
   body { background: #fff; }
