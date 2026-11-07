@@ -112,7 +112,7 @@ async function editor(c, ctx, idParam, opcoes) {
           values: { metodo: o.forma_pagamento && o.forma_pagamento !== 'gateway' ? o.forma_pagamento : 'pix', valor: o.saldo },
           onSubmit: async (v) => { o = await post(`/api/admin/pedidos/${o.id}/pagamentos`, v); toast('Pagamento registrado.'); draw(); }
         }) }, icon('plus-lg'), ' Registrar pagamento') : null),
-      o.pagamentos.length ? el('div', { class: 'table-responsive' }, el('table', { class: 'table table-sm align-middle mb-0' },
+      o.pagamentos.length ? el('div', { class: 'table-responsive', tabindex: '0', role: 'region', 'aria-label': 'Pagamentos' }, el('table', { class: 'table table-sm align-middle mb-0' },
         el('thead', {}, el('tr', {}, ['Data', 'Valor', 'Método', 'Origem', 'Situação', 'Referência', ''].map((h) => el('th', {}, h)))),
         el('tbody', {}, o.pagamentos.map((p) => el('tr', {},
           el('td', {}, datetime(p.criado_em)), el('td', {}, money(p.valor, o.moeda)), el('td', {}, st.metodos[p.metodo]), el('td', {}, p.provedor === 'manual' ? 'Manual' : p.provedor),

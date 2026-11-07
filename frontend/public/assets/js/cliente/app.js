@@ -36,13 +36,13 @@ function renderLogin() {
       await boot();
     } catch (err) { error.textContent = err.message; error.classList.remove('d-none'); senha.value = ''; } finally { btn.disabled = false; }
   } },
-  el('div', { class: 'login-brand' }, el('span', { class: 'brand-mark' }, icon('person')), el('div', {}, el('h1', { class: 'h4 mb-0' }, 'Área do cliente'), el('p', { class: 'small text-body-secondary mb-0' }, 'Pedidos, orçamentos, contratos e licenças'))),
+  el('div', { class: 'login-brand' }, el('span', { class: 'brand-logo-slot', 'aria-hidden': 'true' }), el('div', {}, el('h1', { class: 'h4 mb-0' }, 'Área do cliente'), el('p', { class: 'small text-body-secondary mb-0' }, 'Pedidos, orçamentos, contratos e licenças'))),
   error,
   el('div', { class: 'mb-3' }, el('label', { class: 'form-label', for: 'c-email' }, 'E-mail'), email),
   el('div', { class: 'mb-3' }, el('label', { class: 'form-label', for: 'c-senha' }, 'Senha'), senha),
   btn,
   el('p', { class: 'small text-body-secondary mt-3 mb-1' }, 'O acesso é habilitado pela nossa equipe para clientes com contrato ou pedido.'),
-  el('div', { class: 'd-flex justify-content-between small' },
+  el('div', { class: 'login-foot' },
     el('button', { class: 'btn btn-link btn-sm p-0', type: 'button', onclick: () => formModal({ title: 'Recuperar senha', size: '', submitLabel: 'Enviar link', fields: [{ name: 'email', label: 'E-mail', type: 'email', required: true }], values: { email: email.value },
       onSubmit: async (v) => { const r = await post('/api/auth/esqueci-senha', v); toast(r.mensagem, 'info'); } }) }, 'Esqueci minha senha'),
     el('a', { href: '/' }, 'Voltar ao site')))));
@@ -51,21 +51,22 @@ function renderLogin() {
 
 function renderShell() {
   root.textContent = '';
-  main = el('main', { class: 'container py-4', id: 'cliente-main', tabindex: '-1' });
+  main = el('main', { class: 'container client-main', id: 'cliente-main', tabindex: '-1' });
   root.append(el('header', { class: 'client-header' }, el('div', { class: 'container' },
-    el('div', { class: 'd-flex justify-content-between align-items-center py-3' },
-      el('a', { href: '/', class: 'fw-bold' }, icon('arrow-left'), ' Site'),
-      el('div', { class: 'd-flex align-items-center gap-3' }, el('span', { class: 'small' }, user.nome),
-        el('button', { class: 'btn btn-sm btn-outline-light', type: 'button', onclick: async () => { await post('/api/auth/logout').catch(() => {}); user = null; renderLogin(); } }, 'Sair'))),
-    el('nav', { class: 'client-nav', 'aria-label': 'Menu da área do cliente' }, NAV.map(([r, l, i]) => el('a', { href: `#/${r}`, dataset: { route: r } }, icon(i), ` ${l}`))))), main);
+    el('div', { class: 'client-top' },
+      el('a', { href: '#/', class: 'brand-mark' }, el('span', { class: 'brand-logo-slot', 'aria-hidden': 'true' }), el('span', {}, 'Área do cliente')),
+      el('div', { class: 'client-user' }, el('span', {}, user.nome),
+        el('a', { class: 'btn btn-sm btn-outline-ink', href: '/' }, 'Ir ao site'),
+        el('button', { class: 'btn btn-sm btn-outline-ink', type: 'button', onclick: async () => { await post('/api/auth/logout').catch(() => {}); user = null; renderLogin(); } }, 'Sair'))),
+    el('nav', { class: 'client-nav', 'aria-label': 'Menu da área do cliente' }, NAV.map(([r, l, i]) => el('a', { href: `#/${r}`, dataset: { route: r } }, icon(i), el('span', {}, l)))))), main);
 }
 
-const statusBadge = (map, value, good) => badge(map[value] || value, value === good ? 'success' : 'light border');
+const statusBadge = (map, value, good) => badge(map[value] || value, value === good ? 'success' : ['cancelado', 'recusado', 'expirado', 'revogada', 'suspensa', 'expirada', 'suspenso'].includes(value) ? 'danger' : ['aguardando_pagamento', 'aguardando_resposta', 'enviado', 'pendente', 'parcial', 'aberto'].includes(value) ? 'warning' : 'secondary');
 
 const VIEWS = {
   async ''(c) {
     const r = await get('/api/cliente/resumo');
-    const card = (label, value, href, ic) => el('div', { class: 'col-sm-6 col-lg-3' }, el('a', { class: 'kpi', href }, el('span', { class: 'kpi-icon' }, icon(ic)), el('div', {}, el('span', { class: 'kpi-label' }, label), el('strong', { class: 'kpi-value' }, value))));
+    const card = (label, value, href, ic) => el('div', { class: 'col-6 col-lg-3' }, el('a', { class: 'kpi', href }, el('span', { class: 'kpi-icon' }, icon(ic)), el('div', {}, el('strong', { class: 'kpi-value' }, value), el('span', { class: 'kpi-label' }, label))));
     c.append(el('h1', { class: 'h3 mb-3' }, `Olá, ${user.nome.split(' ')[0]}`),
       el('div', { class: 'row g-3' }, card('Pedidos', r.pedidos, '#/pedidos', 'receipt'), card('Orçamentos aguardando resposta', r.orcamentos_aguardando, '#/orcamentos', 'file-earmark-text'),
         card('Licenças ativas', r.licencas_ativas, '#/contratos', 'patch-check'), card('Chamados abertos', r.chamados_abertos, '#/suporte', 'life-preserver')));
@@ -75,7 +76,7 @@ const VIEWS = {
       const o = await get(`/api/cliente/pedidos/${Number(id)}`);
       c.append(el('a', { href: '#/pedidos', class: 'back-link' }, icon('arrow-left'), ' Pedidos'), el('h1', { class: 'h3' }, `Pedido ${o.numero}`),
         el('p', {}, statusBadge(ORDER, o.status, 'concluido'), ' ', statusBadge(PAY, o.status_pagamento, 'pago'), ` · ${date(o.data_pedido)}${o.data_vencimento ? ` · vencimento ${date(o.data_vencimento)}` : ''}`),
-        el('div', { class: 'card mb-3' }, el('div', { class: 'card-body table-responsive' }, el('table', { class: 'table' },
+        el('div', { class: 'card mb-3' }, el('div', { class: 'card-body table-responsive', tabindex: '0', role: 'region', 'aria-label': 'Itens do pedido' }, el('table', { class: 'table' },
           el('thead', {}, el('tr', {}, ['Item', 'Qtd.', 'Valor unit.', 'Desconto', 'Total'].map((h) => el('th', {}, h)))),
           el('tbody', {}, o.itens.map((i) => el('tr', {}, el('td', {}, i.descricao), el('td', {}, i.quantidade), el('td', {}, money(i.preco_unitario, o.moeda)), el('td', {}, money(i.desconto, o.moeda)), el('td', {}, money(i.total, o.moeda))))),
           el('tfoot', {}, el('tr', {}, el('td', { colspan: 4, class: 'text-end' }, 'Desconto'), el('td', {}, money(o.desconto, o.moeda))), el('tr', {}, el('th', { colspan: 4, class: 'text-end' }, 'Total'), el('th', {}, money(o.total, o.moeda))))))),
@@ -104,7 +105,7 @@ const VIEWS = {
           } }, icon('check2'), ' Aceitar') : null,
           awaiting ? el('button', { class: 'btn btn-outline-danger', type: 'button', onclick: () => formModal({ title: 'Recusar orçamento', size: '', submitLabel: 'Recusar', fields: [{ name: 'motivo', label: 'Motivo (opcional)', type: 'textarea', rows: 3 }],
             onSubmit: async (v) => { await post(`/api/cliente/orcamentos/${q.id}/resposta`, { resposta: 'recusar', ...v }); toast('Resposta registrada.'); route(); } }) }, 'Recusar') : null),
-        el('div', { class: 'card' }, el('div', { class: 'card-body table-responsive' }, el('table', { class: 'table mb-0' },
+        el('div', { class: 'card' }, el('div', { class: 'card-body table-responsive', tabindex: '0', role: 'region', 'aria-label': 'Itens do orçamento' }, el('table', { class: 'table mb-0' },
           el('thead', {}, el('tr', {}, ['Item', 'Qtd.', 'Valor unit.', 'Total'].map((h) => el('th', {}, h)))),
           el('tbody', {}, q.itens.map((i) => el('tr', {}, el('td', {}, i.descricao), el('td', {}, i.quantidade), el('td', {}, money(i.preco_unitario, q.moeda)), el('td', {}, money(i.total, q.moeda)))))))),
         q.condicoes_comerciais ? el('div', { class: 'card mt-3' }, el('div', { class: 'card-body' }, el('h2', { class: 'h6' }, 'Condições'), el('p', { class: 'pre-wrap mb-0' }, q.condicoes_comerciais))) : null);
@@ -125,7 +126,7 @@ const VIEWS = {
         el('span', {}, statusBadge(CONTRACT, k.status, 'vigente'), k.possui_arquivo ? el('button', { class: 'btn btn-sm btn-link', type: 'button', onclick: () => download(`/api/cliente/contratos/${k.id}/arquivo`, `${k.numero}.pdf`).catch(toastError) }, icon('download'), ' Documento') : null))))
         : emptyState('Nenhum contrato'),
       el('h2', { class: 'h5' }, 'Licenças'),
-      licencas.length ? el('div', { class: 'table-responsive' }, el('table', { class: 'table' },
+      licencas.length ? el('div', { class: 'table-responsive', tabindex: '0', role: 'region', 'aria-label': 'Licenças' }, el('table', { class: 'table' },
         el('thead', {}, el('tr', {}, ['Identificador', 'Produto', 'Tipo', 'Validade', 'Situação', 'Limites'].map((h) => el('th', {}, h)))),
         el('tbody', {}, licencas.map((l) => el('tr', {}, el('td', {}, l.identificador), el('td', {}, l.produto_nome), el('td', {}, LIC_TYPE[l.tipo]),
           el('td', {}, `${date(l.data_inicio)} → ${l.data_fim ? date(l.data_fim) : 'sem término'}`), el('td', {}, statusBadge(LIC, l.status, 'ativa')), el('td', {}, l.limites || '—'))))))

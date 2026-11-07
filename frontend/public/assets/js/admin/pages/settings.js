@@ -76,7 +76,7 @@ export async function render(c, ctx) {
       onSubmit: async (v) => { if (!canEdit) return; await put(`/api/admin/modelos-email/${m.chave}`, v); toast('Modelo atualizado.'); }
     }) }, el('span', {}, m.nome), m.ativo ? badge('Ativo', 'success') : badge('Inativo', 'secondary')))),
     el('h3', { class: 'h6' }, 'Últimos envios'),
-    emails.registro.length ? el('div', { class: 'table-responsive' }, el('table', { class: 'table table-sm small' },
+    emails.registro.length ? el('div', { class: 'table-responsive', tabindex: '0', role: 'region', 'aria-label': 'Registro de e-mails' }, el('table', { class: 'table table-sm small' },
       el('thead', {}, el('tr', {}, ['Data', 'Modelo', 'Destinatário', 'Situação'].map((h) => el('th', {}, h)))),
       el('tbody', {}, emails.registro.map((r) => el('tr', {}, el('td', {}, datetime(r.criado_em)), el('td', {}, r.modelo || '—'), el('td', {}, r.destinatario),
         el('td', {}, badge({ enviado: 'Enviado', nao_configurado: 'Não enviado (sem provedor)', falhou: 'Falhou' }[r.status], r.status === 'enviado' ? 'success' : r.status === 'falhou' ? 'danger' : 'warning')))))))

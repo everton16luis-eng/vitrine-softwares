@@ -1,6 +1,7 @@
 // Site público renderizado no servidor (SEO) + API pública de formulários.
 import { Router } from 'express';
 import { layout, absoluteUrl } from '../views/layout.js';
+import { themeCss } from '../views/theme.js';
 import * as pages from '../views/pages.js';
 import { getPublicSettings, getSettings } from '../modules/settings/settings.service.js';
 import { getContentMap, getPublishedPage, listPublicFaqs, listPublishedPages } from '../modules/content/content.service.js';
@@ -169,16 +170,12 @@ publicRouter.get('/sitemap.xml', async (req, res) => {
 
 /**
  * Folha de estilo com as cores configuradas no painel (sem estilos inline, compatível com a CSP).
- * Sobrescreve os padrões de /assets/css/brand.css; --ink e --accent atendem o painel e a área do cliente.
+ * Sobrescreve os padrões de /assets/css/brand.css no site, no painel e na área do cliente.
+ * Os tons de texto são calculados para manter contraste AA com qualquer cor escolhida.
  */
 publicRouter.get('/theme.css', async (req, res) => {
   const s = await getPublicSettings();
-  const hex = (v, d) => (/^#[0-9a-f]{6}$/i.test(v || '') ? v : d);
-  const navy = hex(s.cor_primaria, '#0F172A');
-  const blue = hex(s.cor_destaque, '#0EA5E9');
-  const purple = hex(s.cor_secundaria, '#8B5CF6');
-  res.type('text/css').set('Cache-Control', 'public, max-age=300')
-    .send(`:root{--brand-navy:${navy};--brand-blue:${blue};--brand-purple:${purple};--ink:${navy};--accent:${blue};}\n`);
+  res.type('text/css').set('Cache-Control', 'public, max-age=300').send(themeCss(s));
 });
 
 // ------------------------------------------------------------- páginas institucionais por slug (deve ficar por último)

@@ -59,7 +59,7 @@ export function itemsEditor({ items = [], discount = '0', currency = 'BRL', read
   if (!items.length && !readonly) addRow();
 
   const node = el('div', { class: 'items-editor' },
-    el('div', { class: 'table-responsive' }, el('table', { class: 'table table-sm align-middle' },
+    el('div', { class: 'table-responsive', tabindex: '0', role: 'region', 'aria-label': 'Itens' }, el('table', { class: 'table table-sm align-middle' },
       el('thead', {}, el('tr', {}, ['Vínculo', 'Descrição', 'Qtd.', 'Valor unit.', 'Desconto', 'Total', ''].map((h) => el('th', { scope: 'col' }, h)))), tbody)),
     readonly ? null : el('button', { class: 'btn btn-sm btn-outline-primary', type: 'button', onclick: () => addRow() }, icon('plus-lg'), ' Adicionar item'),
     el('div', { class: 'totals' },

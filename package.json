@@ -21,6 +21,9 @@
     "test": "node --test --test-concurrency=1 \"tests/**/*.test.js\"",
     "test:unit": "node --test \"tests/unit/*.test.js\"",
     "test:integration": "node --test --test-concurrency=1 \"tests/integration/*.test.js\"",
+    "test:e2e:preparar": "node tests/e2e/prepare-db.js",
+    "test:e2e": "node tests/e2e/capturar.mjs",
+    "test:e2e:interacoes": "node tests/e2e/interacoes.mjs",
     "images": "node scripts/generate-images.js"
   },
   "dependencies": {
@@ -41,6 +44,8 @@
     "sharp": "^0.33.5"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.10.2",
+    "playwright": "^1.55.0",
     "supertest": "^7.0.0"
   }
 }

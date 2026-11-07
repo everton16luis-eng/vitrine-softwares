@@ -1,0 +1,1128 @@
+{
+  "base": "http://localhost:3001",
+  "label": "depois",
+  "geradoEm": "2026-11-07T20:35:12.704Z",
+  "telas": [
+    {
+      "area": "site",
+      "tela": "inicio",
+      "viewport": "desktop",
+      "arquivo": "site-inicio-desktop.png",
+      "url": "http://localhost:3001/",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "site",
+      "tela": "projetos",
+      "viewport": "desktop",
+      "arquivo": "site-projetos-desktop.png",
+      "url": "http://localhost:3001/softwares",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "site",
+      "tela": "projetos-filtro-vazio",
+      "viewport": "desktop",
+      "arquivo": "site-projetos-filtro-vazio-desktop.png",
+      "url": "http://localhost:3001/softwares?busca=zzzz-nada",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "site",
+      "tela": "projeto",
+      "viewport": "desktop",
+      "arquivo": "site-projeto-desktop.png",
+      "url": "http://localhost:3001/softwares/portal-de-noticias",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "site",
+      "tela": "projeto-personalizado",
+      "viewport": "desktop",
+      "arquivo": "site-projeto-personalizado-desktop.png",
+      "url": "http://localhost:3001/softwares/sistemas-personalizados",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "site",
+      "tela": "demonstracao",
+      "viewport": "desktop",
+      "arquivo": "site-demonstracao-desktop.png",
+      "url": "http://localhost:3001/softwares/portal-de-noticias/demonstracao",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "site",
+      "tela": "servicos",
+      "viewport": "desktop",
+      "arquivo": "site-servicos-desktop.png",
+      "url": "http://localhost:3001/servicos",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "site",
+      "tela": "servico",
+      "viewport": "desktop",
+      "arquivo": "site-servico-desktop.png",
+      "url": "http://localhost:3001/servicos/desenvolvimento-de-sistemas-personalizados",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "site",
+      "tela": "contato",
+      "viewport": "desktop",
+      "arquivo": "site-contato-desktop.png",
+      "url": "http://localhost:3001/contato",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "site",
+      "tela": "orcamento",
+      "viewport": "desktop",
+      "arquivo": "site-orcamento-desktop.png",
+      "url": "http://localhost:3001/orcamento",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "site",
+      "tela": "personalizado",
+      "viewport": "desktop",
+      "arquivo": "site-personalizado-desktop.png",
+      "url": "http://localhost:3001/contato?tipo=personalizado",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "site",
+      "tela": "faq",
+      "viewport": "desktop",
+      "arquivo": "site-faq-desktop.png",
+      "url": "http://localhost:3001/perguntas-frequentes",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "site",
+      "tela": "lgpd",
+      "viewport": "desktop",
+      "arquivo": "site-lgpd-desktop.png",
+      "url": "http://localhost:3001/privacidade/solicitacao",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "site",
+      "tela": "privacidade",
+      "viewport": "desktop",
+      "arquivo": "site-privacidade-desktop.png",
+      "url": "http://localhost:3001/politica-de-privacidade",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "site",
+      "tela": "sobre",
+      "viewport": "desktop",
+      "arquivo": "site-sobre-desktop.png",
+      "url": "http://localhost:3001/sobre",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "site",
+      "tela": "redefinir-senha",
+      "viewport": "desktop",
+      "arquivo": "site-redefinir-senha-desktop.png",
+      "url": "http://localhost:3001/redefinir-senha",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "site",
+      "tela": "erro-404",
+      "viewport": "desktop",
+      "arquivo": "site-erro-404-desktop.png",
+      "url": "http://localhost:3001/pagina-que-nao-existe",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "admin",
+      "tela": "login",
+      "viewport": "desktop",
+      "arquivo": "admin-login-desktop.png",
+      "url": "http://localhost:3001/admin",
+      "console": [
+        "error: Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+      ],
+      "requisicoes": [
+        "401 GET http://localhost:3001/api/auth/me"
+      ],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "admin",
+      "tela": "painel",
+      "viewport": "desktop",
+      "arquivo": "admin-painel-desktop.png",
+      "url": "http://localhost:3001/admin#/",
+      "console": [
+        "error: Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+      ],
+      "requisicoes": [
+        "401 GET http://localhost:3001/api/auth/me"
+      ],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "admin",
+      "tela": "produtos",
+      "viewport": "desktop",
+      "arquivo": "admin-produtos-desktop.png",
+      "url": "http://localhost:3001/admin#/produtos",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "admin",
+      "tela": "categorias",
+      "viewport": "desktop",
+      "arquivo": "admin-categorias-desktop.png",
+      "url": "http://localhost:3001/admin#/categorias",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "admin",
+      "tela": "servicos",
+      "viewport": "desktop",
+      "arquivo": "admin-servicos-desktop.png",
+      "url": "http://localhost:3001/admin#/servicos",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "admin",
+      "tela": "planos",
+      "viewport": "desktop",
+      "arquivo": "admin-planos-desktop.png",
+      "url": "http://localhost:3001/admin#/planos",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "admin",
+      "tela": "leads",
+      "viewport": "desktop",
+      "arquivo": "admin-leads-desktop.png",
+      "url": "http://localhost:3001/admin#/leads",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "admin",
+      "tela": "clientes",
+      "viewport": "desktop",
+      "arquivo": "admin-clientes-desktop.png",
+      "url": "http://localhost:3001/admin#/clientes",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "admin",
+      "tela": "orcamentos",
+      "viewport": "desktop",
+      "arquivo": "admin-orcamentos-desktop.png",
+      "url": "http://localhost:3001/admin#/orcamentos",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "admin",
+      "tela": "pedidos",
+      "viewport": "desktop",
+      "arquivo": "admin-pedidos-desktop.png",
+      "url": "http://localhost:3001/admin#/pedidos",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "admin",
+      "tela": "contratos",
+      "viewport": "desktop",
+      "arquivo": "admin-contratos-desktop.png",
+      "url": "http://localhost:3001/admin#/contratos",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "admin",
+      "tela": "suporte",
+      "viewport": "desktop",
+      "arquivo": "admin-suporte-desktop.png",
+      "url": "http://localhost:3001/admin#/suporte",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "admin",
+      "tela": "implantacoes",
+      "viewport": "desktop",
+      "arquivo": "admin-implantacoes-desktop.png",
+      "url": "http://localhost:3001/admin#/implantacoes",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "admin",
+      "tela": "receitas",
+      "viewport": "desktop",
+      "arquivo": "admin-receitas-desktop.png",
+      "url": "http://localhost:3001/admin#/receitas",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "admin",
+      "tela": "dominios",
+      "viewport": "desktop",
+      "arquivo": "admin-dominios-desktop.png",
+      "url": "http://localhost:3001/admin#/dominios",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "admin",
+      "tela": "conteudo",
+      "viewport": "desktop",
+      "arquivo": "admin-conteudo-desktop.png",
+      "url": "http://localhost:3001/admin#/conteudo",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "admin",
+      "tela": "parceiros",
+      "viewport": "desktop",
+      "arquivo": "admin-parceiros-desktop.png",
+      "url": "http://localhost:3001/admin#/parceiros",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "admin",
+      "tela": "midia",
+      "viewport": "desktop",
+      "arquivo": "admin-midia-desktop.png",
+      "url": "http://localhost:3001/admin#/midia",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "admin",
+      "tela": "relatorios",
+      "viewport": "desktop",
+      "arquivo": "admin-relatorios-desktop.png",
+      "url": "http://localhost:3001/admin#/relatorios",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "admin",
+      "tela": "lgpd",
+      "viewport": "desktop",
+      "arquivo": "admin-lgpd-desktop.png",
+      "url": "http://localhost:3001/admin#/lgpd",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "admin",
+      "tela": "auditoria",
+      "viewport": "desktop",
+      "arquivo": "admin-auditoria-desktop.png",
+      "url": "http://localhost:3001/admin#/auditoria",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "admin",
+      "tela": "usuarios",
+      "viewport": "desktop",
+      "arquivo": "admin-usuarios-desktop.png",
+      "url": "http://localhost:3001/admin#/usuarios",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "admin",
+      "tela": "configuracoes",
+      "viewport": "desktop",
+      "arquivo": "admin-configuracoes-desktop.png",
+      "url": "http://localhost:3001/admin#/configuracoes",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "admin",
+      "tela": "perfil",
+      "viewport": "desktop",
+      "arquivo": "admin-perfil-desktop.png",
+      "url": "http://localhost:3001/admin#/perfil",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "cliente",
+      "tela": "login",
+      "viewport": "desktop",
+      "arquivo": "cliente-login-desktop.png",
+      "url": "http://localhost:3001/cliente",
+      "console": [
+        "error: Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+      ],
+      "requisicoes": [
+        "401 GET http://localhost:3001/api/auth/me"
+      ],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "cliente",
+      "tela": "inicio",
+      "viewport": "desktop",
+      "arquivo": "cliente-inicio-desktop.png",
+      "url": "http://localhost:3001/cliente#/",
+      "console": [
+        "error: Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+      ],
+      "requisicoes": [
+        "401 GET http://localhost:3001/api/auth/me"
+      ],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "cliente",
+      "tela": "pedidos",
+      "viewport": "desktop",
+      "arquivo": "cliente-pedidos-desktop.png",
+      "url": "http://localhost:3001/cliente#/pedidos",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "cliente",
+      "tela": "orcamentos",
+      "viewport": "desktop",
+      "arquivo": "cliente-orcamentos-desktop.png",
+      "url": "http://localhost:3001/cliente#/orcamentos",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "cliente",
+      "tela": "contratos",
+      "viewport": "desktop",
+      "arquivo": "cliente-contratos-desktop.png",
+      "url": "http://localhost:3001/cliente#/contratos",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "cliente",
+      "tela": "arquivos",
+      "viewport": "desktop",
+      "arquivo": "cliente-arquivos-desktop.png",
+      "url": "http://localhost:3001/cliente#/arquivos",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "cliente",
+      "tela": "suporte",
+      "viewport": "desktop",
+      "arquivo": "cliente-suporte-desktop.png",
+      "url": "http://localhost:3001/cliente#/suporte",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "cliente",
+      "tela": "dados",
+      "viewport": "desktop",
+      "arquivo": "cliente-dados-desktop.png",
+      "url": "http://localhost:3001/cliente#/dados",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "site",
+      "tela": "inicio",
+      "viewport": "celular",
+      "arquivo": "site-inicio-celular.png",
+      "url": "http://localhost:3001/",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "site",
+      "tela": "projetos",
+      "viewport": "celular",
+      "arquivo": "site-projetos-celular.png",
+      "url": "http://localhost:3001/softwares",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "site",
+      "tela": "projetos-filtro-vazio",
+      "viewport": "celular",
+      "arquivo": "site-projetos-filtro-vazio-celular.png",
+      "url": "http://localhost:3001/softwares?busca=zzzz-nada",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "site",
+      "tela": "projeto",
+      "viewport": "celular",
+      "arquivo": "site-projeto-celular.png",
+      "url": "http://localhost:3001/softwares/portal-de-noticias",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "site",
+      "tela": "projeto-personalizado",
+      "viewport": "celular",
+      "arquivo": "site-projeto-personalizado-celular.png",
+      "url": "http://localhost:3001/softwares/sistemas-personalizados",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "site",
+      "tela": "demonstracao",
+      "viewport": "celular",
+      "arquivo": "site-demonstracao-celular.png",
+      "url": "http://localhost:3001/softwares/portal-de-noticias/demonstracao",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "site",
+      "tela": "servicos",
+      "viewport": "celular",
+      "arquivo": "site-servicos-celular.png",
+      "url": "http://localhost:3001/servicos",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "site",
+      "tela": "servico",
+      "viewport": "celular",
+      "arquivo": "site-servico-celular.png",
+      "url": "http://localhost:3001/servicos/desenvolvimento-de-sistemas-personalizados",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "site",
+      "tela": "contato",
+      "viewport": "celular",
+      "arquivo": "site-contato-celular.png",
+      "url": "http://localhost:3001/contato",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "site",
+      "tela": "orcamento",
+      "viewport": "celular",
+      "arquivo": "site-orcamento-celular.png",
+      "url": "http://localhost:3001/orcamento",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "site",
+      "tela": "personalizado",
+      "viewport": "celular",
+      "arquivo": "site-personalizado-celular.png",
+      "url": "http://localhost:3001/contato?tipo=personalizado",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "site",
+      "tela": "faq",
+      "viewport": "celular",
+      "arquivo": "site-faq-celular.png",
+      "url": "http://localhost:3001/perguntas-frequentes",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "site",
+      "tela": "lgpd",
+      "viewport": "celular",
+      "arquivo": "site-lgpd-celular.png",
+      "url": "http://localhost:3001/privacidade/solicitacao",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "site",
+      "tela": "privacidade",
+      "viewport": "celular",
+      "arquivo": "site-privacidade-celular.png",
+      "url": "http://localhost:3001/politica-de-privacidade",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "site",
+      "tela": "sobre",
+      "viewport": "celular",
+      "arquivo": "site-sobre-celular.png",
+      "url": "http://localhost:3001/sobre",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "site",
+      "tela": "redefinir-senha",
+      "viewport": "celular",
+      "arquivo": "site-redefinir-senha-celular.png",
+      "url": "http://localhost:3001/redefinir-senha",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "site",
+      "tela": "erro-404",
+      "viewport": "celular",
+      "arquivo": "site-erro-404-celular.png",
+      "url": "http://localhost:3001/pagina-que-nao-existe",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "admin",
+      "tela": "login",
+      "viewport": "celular",
+      "arquivo": "admin-login-celular.png",
+      "url": "http://localhost:3001/admin",
+      "console": [
+        "error: Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+      ],
+      "requisicoes": [
+        "401 GET http://localhost:3001/api/auth/me"
+      ],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "admin",
+      "tela": "painel",
+      "viewport": "celular",
+      "arquivo": "admin-painel-celular.png",
+      "url": "http://localhost:3001/admin#/",
+      "console": [
+        "error: Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+      ],
+      "requisicoes": [
+        "401 GET http://localhost:3001/api/auth/me"
+      ],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "admin",
+      "tela": "produtos",
+      "viewport": "celular",
+      "arquivo": "admin-produtos-celular.png",
+      "url": "http://localhost:3001/admin#/produtos",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "admin",
+      "tela": "categorias",
+      "viewport": "celular",
+      "arquivo": "admin-categorias-celular.png",
+      "url": "http://localhost:3001/admin#/categorias",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "admin",
+      "tela": "servicos",
+      "viewport": "celular",
+      "arquivo": "admin-servicos-celular.png",
+      "url": "http://localhost:3001/admin#/servicos",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "admin",
+      "tela": "planos",
+      "viewport": "celular",
+      "arquivo": "admin-planos-celular.png",
+      "url": "http://localhost:3001/admin#/planos",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "admin",
+      "tela": "leads",
+      "viewport": "celular",
+      "arquivo": "admin-leads-celular.png",
+      "url": "http://localhost:3001/admin#/leads",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "admin",
+      "tela": "clientes",
+      "viewport": "celular",
+      "arquivo": "admin-clientes-celular.png",
+      "url": "http://localhost:3001/admin#/clientes",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "admin",
+      "tela": "orcamentos",
+      "viewport": "celular",
+      "arquivo": "admin-orcamentos-celular.png",
+      "url": "http://localhost:3001/admin#/orcamentos",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "admin",
+      "tela": "pedidos",
+      "viewport": "celular",
+      "arquivo": "admin-pedidos-celular.png",
+      "url": "http://localhost:3001/admin#/pedidos",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "admin",
+      "tela": "contratos",
+      "viewport": "celular",
+      "arquivo": "admin-contratos-celular.png",
+      "url": "http://localhost:3001/admin#/contratos",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "admin",
+      "tela": "suporte",
+      "viewport": "celular",
+      "arquivo": "admin-suporte-celular.png",
+      "url": "http://localhost:3001/admin#/suporte",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "admin",
+      "tela": "implantacoes",
+      "viewport": "celular",
+      "arquivo": "admin-implantacoes-celular.png",
+      "url": "http://localhost:3001/admin#/implantacoes",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "admin",
+      "tela": "receitas",
+      "viewport": "celular",
+      "arquivo": "admin-receitas-celular.png",
+      "url": "http://localhost:3001/admin#/receitas",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "admin",
+      "tela": "dominios",
+      "viewport": "celular",
+      "arquivo": "admin-dominios-celular.png",
+      "url": "http://localhost:3001/admin#/dominios",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "admin",
+      "tela": "conteudo",
+      "viewport": "celular",
+      "arquivo": "admin-conteudo-celular.png",
+      "url": "http://localhost:3001/admin#/conteudo",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "admin",
+      "tela": "parceiros",
+      "viewport": "celular",
+      "arquivo": "admin-parceiros-celular.png",
+      "url": "http://localhost:3001/admin#/parceiros",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "admin",
+      "tela": "midia",
+      "viewport": "celular",
+      "arquivo": "admin-midia-celular.png",
+      "url": "http://localhost:3001/admin#/midia",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "admin",
+      "tela": "relatorios",
+      "viewport": "celular",
+      "arquivo": "admin-relatorios-celular.png",
+      "url": "http://localhost:3001/admin#/relatorios",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "admin",
+      "tela": "lgpd",
+      "viewport": "celular",
+      "arquivo": "admin-lgpd-celular.png",
+      "url": "http://localhost:3001/admin#/lgpd",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "admin",
+      "tela": "auditoria",
+      "viewport": "celular",
+      "arquivo": "admin-auditoria-celular.png",
+      "url": "http://localhost:3001/admin#/auditoria",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "admin",
+      "tela": "usuarios",
+      "viewport": "celular",
+      "arquivo": "admin-usuarios-celular.png",
+      "url": "http://localhost:3001/admin#/usuarios",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "admin",
+      "tela": "configuracoes",
+      "viewport": "celular",
+      "arquivo": "admin-configuracoes-celular.png",
+      "url": "http://localhost:3001/admin#/configuracoes",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "admin",
+      "tela": "perfil",
+      "viewport": "celular",
+      "arquivo": "admin-perfil-celular.png",
+      "url": "http://localhost:3001/admin#/perfil",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "admin",
+      "tela": "menu-aberto",
+      "viewport": "celular",
+      "arquivo": "admin-menu-aberto-celular.png",
+      "url": "http://localhost:3001/admin#/",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "cliente",
+      "tela": "login",
+      "viewport": "celular",
+      "arquivo": "cliente-login-celular.png",
+      "url": "http://localhost:3001/cliente",
+      "console": [
+        "error: Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+      ],
+      "requisicoes": [
+        "401 GET http://localhost:3001/api/auth/me"
+      ],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "cliente",
+      "tela": "inicio",
+      "viewport": "celular",
+      "arquivo": "cliente-inicio-celular.png",
+      "url": "http://localhost:3001/cliente#/",
+      "console": [
+        "error: Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+      ],
+      "requisicoes": [
+        "401 GET http://localhost:3001/api/auth/me"
+      ],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "cliente",
+      "tela": "pedidos",
+      "viewport": "celular",
+      "arquivo": "cliente-pedidos-celular.png",
+      "url": "http://localhost:3001/cliente#/pedidos",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "cliente",
+      "tela": "orcamentos",
+      "viewport": "celular",
+      "arquivo": "cliente-orcamentos-celular.png",
+      "url": "http://localhost:3001/cliente#/orcamentos",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "cliente",
+      "tela": "contratos",
+      "viewport": "celular",
+      "arquivo": "cliente-contratos-celular.png",
+      "url": "http://localhost:3001/cliente#/contratos",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "cliente",
+      "tela": "arquivos",
+      "viewport": "celular",
+      "arquivo": "cliente-arquivos-celular.png",
+      "url": "http://localhost:3001/cliente#/arquivos",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "cliente",
+      "tela": "suporte",
+      "viewport": "celular",
+      "arquivo": "cliente-suporte-celular.png",
+      "url": "http://localhost:3001/cliente#/suporte",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "area": "cliente",
+      "tela": "dados",
+      "viewport": "celular",
+      "arquivo": "cliente-dados-celular.png",
+      "url": "http://localhost:3001/cliente#/dados",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    }
+  ]
+}

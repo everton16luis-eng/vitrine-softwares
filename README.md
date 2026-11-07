@@ -275,9 +275,11 @@ Com mais de 10 marcas a seção vira um carrossel contínuo (pausa ao passar o m
 
 ---
 
-## Identidade visual provisória
+## Identidade visual ("prancha técnica")
 
-O site público é uma vitrine de serviços de desenvolvimento com **identidade provisória**: nome neutro, espaço reservado para a logo e paleta azul (`#0EA5E9`), roxo (`#8B5CF6`), azul-marinho (`#0F172A`) e branco (`#F8FAFC`), com a fonte Montserrat hospedada no próprio site.
+Site, painel e área do cliente compartilham um único sistema de design inspirado em prancha de desenho técnico: papel claro (`#F3F5F7`), tinta nanquim (`#12233D`), vermelhão (`#C8401E`) só para a ação principal, azul heliográfico (`#1D5F8A`) para links e cotas, filetes de 1 px e a fonte Archivo (variável, hospedada no próprio site). O nome e a logo continuam provisórios (espaço reservado). Detalhes, tokens e componentes: [DESIGN.md](DESIGN.md); capturas antes/depois e relatório: [docs/ui/RELATORIO.md](docs/ui/RELATORIO.md).
+
+Camadas de CSS, na ordem de carregamento: Bootstrap → `brand.css` (marca) → `system.css` (tokens e componentes compartilhados) → `site.css` ou `admin.css` → `/theme.css` (cores do painel, com tons de texto AA calculados no servidor por `backend/src/views/theme.js`).
 
 Quando a marca definitiva estiver pronta:
 

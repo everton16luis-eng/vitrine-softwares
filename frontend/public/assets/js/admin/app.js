@@ -104,12 +104,12 @@ function renderLogin() {
       senha.focus();
     } finally { btn.disabled = false; }
   } },
-  el('div', { class: 'login-brand' }, el('span', { class: 'brand-mark' }, 'A'), el('div', {}, el('h1', { class: 'h4 mb-0' }, 'Painel administrativo'), el('p', { class: 'text-body-secondary mb-0 small' }, 'Acesso restrito à equipe'))),
+  el('div', { class: 'login-brand' }, el('span', { class: 'brand-logo-slot', 'aria-hidden': 'true' }), el('div', {}, el('h1', { class: 'h4 mb-0' }, 'Painel administrativo'), el('p', { class: 'text-body-secondary mb-0 small' }, 'Acesso restrito à equipe'))),
   error,
   el('div', { class: 'mb-3' }, el('label', { class: 'form-label', for: 'login-email' }, 'E-mail'), email),
   el('div', { class: 'mb-3' }, el('label', { class: 'form-label', for: 'login-senha' }, 'Senha'), senha),
   btn,
-  el('div', { class: 'd-flex justify-content-between mt-3 small' },
+  el('div', { class: 'login-foot' },
     el('button', { type: 'button', class: 'btn btn-link btn-sm p-0', onclick: () => forgot(email.value) }, 'Esqueci minha senha'),
     el('a', { href: '/' }, 'Voltar ao site')));
   root.append(el('main', { class: 'login-wrap', id: 'admin-main' }, form));
@@ -133,10 +133,10 @@ async function renderShell() {
   root.textContent = '';
   const groups = MENU.map((g) => ({ ...g, items: g.items.filter((i) => ctx.can(i.perm)) })).filter((g) => g.items.length);
   navNode = el('nav', { class: 'admin-sidebar', id: 'admin-sidebar', 'aria-label': 'Menu administrativo' },
-    el('a', { class: 'admin-brand', href: '#/' }, el('span', { class: 'brand-mark' }, 'A'), el('span', {}, 'Administração')),
+    el('a', { class: 'admin-brand', href: '#/' }, el('span', { class: 'brand-logo-slot', 'aria-hidden': 'true' }), el('span', {}, 'Administração')),
     groups.map((g) => el('div', { class: 'nav-group' }, el('p', { class: 'nav-group-title' }, g.group),
       el('ul', {}, g.items.map((i) => el('li', {}, el('a', { href: `#/${i.route}`, dataset: { route: i.route } }, icon(i.icon), el('span', {}, i.label))))))),
-    el('div', { class: 'sidebar-footer' }, el('a', { href: '/', target: '_blank', rel: 'noopener' }, icon('box-arrow-up-right'), ' Ver site')));
+    el('div', { class: 'sidebar-footer' }, el('a', { href: '/', target: '_blank', rel: 'noopener' }, icon('box-arrow-up-right'), el('span', {}, 'Ver site'), el('span', { class: 'visually-hidden' }, ' (abre em nova aba)'))));
 
   const bell = el('button', { class: 'btn btn-icon position-relative', type: 'button', 'aria-label': 'Notificações', onclick: showNotifications }, icon('bell'), el('span', { class: 'notif-count d-none' }));
   const header = el('header', { class: 'admin-header' },
@@ -144,7 +144,7 @@ async function renderShell() {
     el('div', { class: 'flex-grow-1' }),
     bell,
     el('div', { class: 'dropdown' },
-      el('button', { class: 'btn btn-user dropdown-toggle', type: 'button', 'data-bs-toggle': 'dropdown', 'aria-expanded': 'false' }, icon('person-circle'), el('span', { class: 'd-none d-sm-inline' }, ` ${ctx.user.nome}`)),
+      el('button', { class: 'btn btn-user dropdown-toggle', type: 'button', 'data-bs-toggle': 'dropdown', 'aria-expanded': 'false', 'aria-label': `Conta de ${ctx.user.nome}` }, icon('person-circle'), el('span', { class: 'd-none d-sm-inline' }, ctx.user.nome)),
       el('ul', { class: 'dropdown-menu dropdown-menu-end' },
         el('li', {}, el('span', { class: 'dropdown-item-text small text-body-secondary' }, ctx.user.perfis.join(', '))),
         el('li', {}, el('a', { class: 'dropdown-item', href: '#/perfil' }, icon('key'), ' Minha senha')),

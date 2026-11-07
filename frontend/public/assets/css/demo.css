@@ -7,12 +7,13 @@
 .demo-nav button:hover { background: rgba(255,255,255,.05); color: #fff; }
 .demo-nav button[aria-current="page"] { background: color-mix(in srgb, var(--accent) 18%, transparent); color: #fff; }
 .demo-nav button[aria-current="page"] i { color: var(--accent); }
-.demo-main { padding: 1.4rem clamp(1rem, 3vw, 2rem); background: #0b111d; outline: none; }
+.demo-main { min-width: 0; padding: 1.4rem clamp(1rem, 3vw, 2rem); background: #0b111d; outline: none; }
 .demo-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.2rem; }
 .demo-header h2 { color: #fff; font-size: 1.35rem; margin: 0; }
 .demo-note { font-size: .75rem; color: #ffd166; border: 1px solid rgba(255,209,102,.35); padding: .15rem .55rem; border-radius: 999px; }
-.demo-body { display: grid; gap: 1.1rem; }
-.demo-kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: .8rem; }
+.demo-body { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.1rem; }
+.demo-kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(150px, 100%), 1fr)); gap: .8rem; }
+.demo-kpi, .demo-kpi > * { min-width: 0; overflow-wrap: anywhere; }
 .demo-kpi { background: #121a2b; border: 1px solid rgba(255,255,255,.07); border-radius: 12px; padding: 1rem; display: flex; flex-direction: column; gap: .3rem; }
 .demo-kpi span { font-size: .78rem; color: #8d97ab; text-transform: uppercase; letter-spacing: .05em; }
 .demo-kpi strong { font-size: 1.55rem; color: #fff; }

@@ -1,5 +1,5 @@
 import { get, post, put, del } from '../../shared/api.js';
-import { el, icon, badge, money, dataTable, buildForm, formModal, confirmDialog, toast, toastError, debounce, withBusy, datetime } from '../../shared/ui.js';
+import { el, icon, badge, money, dataTable, buildForm, formModal, confirmDialog, toast, toastError, debounce, withBusy, datetime, tabSet } from '../../shared/ui.js';
 import { pageHeader, entries } from './_crud.js';
 
 const STATUS_TONE = { em_planejamento: 'secondary', em_desenvolvimento: 'info', demonstracao_disponivel: 'primary', disponivel: 'success', em_manutencao: 'warning', arquivado: 'dark' };
@@ -125,18 +125,14 @@ async function editor(c, ctx, idParam, meta) {
 
   function drawBody() {
     body.textContent = '';
-    const tabs = el('ul', { class: 'nav nav-tabs mb-3', role: 'tablist' });
-    const panel = el('div');
     const sections = [['dados', 'Dados gerais']];
     if (!isNew) sections.push(['funcionalidades', `Funcionalidades (${product.funcionalidades.length})`], ['beneficios', `Benefícios (${product.beneficios.length})`], ['galeria', `Galeria (${product.imagens.length})`], ['faqs', `Perguntas (${product.faqs.length})`], ['planos', 'Planos']);
-    const show = (k) => {
-      tabs.querySelectorAll('button').forEach((b) => { b.classList.toggle('active', b.dataset.tab === k); b.setAttribute('aria-selected', String(b.dataset.tab === k)); });
+    const t = tabSet(sections, (k, panel) => {
       panel.textContent = '';
       ({ dados: dadosTab, funcionalidades: () => childTab('funcionalidades', 'funcionalidade'), beneficios: () => childTab('funcionalidades', 'beneficio'), galeria: galeriaTab, faqs: () => childTab('faqs'), planos: planosTab })[k](panel);
-    };
-    sections.forEach(([k, l]) => tabs.append(el('li', { class: 'nav-item', role: 'presentation' }, el('button', { class: 'nav-link', role: 'tab', type: 'button', dataset: { tab: k }, onclick: () => show(k) }, l))));
-    body.append(tabs, panel);
-    show('dados');
+    }, 'Seções do produto');
+    body.append(t.list, t.panel);
+    t.show('dados');
   }
 
   function dadosTab(panel) {

@@ -1,37 +1,39 @@
 /* =====================================================================
-   IDENTIDADE VISUAL PROVISÓRIA
-   Este é o único arquivo a editar quando a marca definitiva estiver pronta:
-   cores, tipografia e o espaço reservado da logo.
-   - As cores também podem ser trocadas no painel (Configurações › Identidade);
-     os valores do painel são aplicados por /theme.css e têm prioridade.
-   - O nome da marca e a logo são definidos no painel (nome comercial e URL do logotipo).
+   IDENTIDADE VISUAL — "prancha técnica"
+   O único arquivo a editar quando a marca definitiva chegar: as três cores
+   padrão, a fonte e o espaço reservado da logo.
+   - As cores podem ser trocadas no painel (Configurações › Identidade). O
+     servidor publica os valores do painel em /theme.css, carregado depois
+     deste arquivo, e já entrega os tons de texto com contraste AA.
+   - O nome da marca e a logo vêm do painel (nome comercial e URL do logotipo).
    ===================================================================== */
 
-/* Montserrat (SIL Open Font License 1.1 — ver /assets/fonts/montserrat/OFL.txt).
-   Fonte variável hospedada no próprio site: sem requisições a terceiros. */
+/* Archivo (SIL Open Font License 1.1 — ver /assets/fonts/archivo/OFL.txt).
+   Fonte variável com eixos de peso e largura, hospedada no próprio site. */
 @font-face {
-  font-family: "Montserrat";
+  font-family: "Archivo";
   font-style: normal;
   font-display: swap;
   font-weight: 100 900;
-  src: url("/assets/fonts/montserrat/montserrat-latin-wght-normal.woff2") format("woff2-variations"),
-       url("/assets/fonts/montserrat/montserrat-latin-wght-normal.woff2") format("woff2");
+  font-stretch: 62% 125%;
+  src: url("/assets/fonts/archivo/archivo-latin-standard-normal.woff2") format("woff2-variations"),
+       url("/assets/fonts/archivo/archivo-latin-standard-normal.woff2") format("woff2");
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
 :root {
-  /* Paleta */
-  --brand-blue: #0EA5E9;    /* tecnologia — destaque principal */
-  --brand-purple: #8B5CF6;  /* inovação — gradientes e detalhes */
-  --brand-navy: #0F172A;    /* confiança — fundo */
-  --brand-white: #F8FAFC;   /* clareza — texto */
+  /* Paleta (padrões; o painel sobrescreve por /theme.css) */
+  --brand-ink: #12233D;          /* tinta nanquim: texto, títulos, filetes */
+  --brand-accent: #C8401E;       /* vermelhão do lápis de revisão: ação principal */
+  --brand-on-accent: #FFFFFF;    /* texto sobre o destaque */
+  --brand-accent-text: #C8401E;  /* destaque usado como texto sobre o papel */
+  --brand-line: #1D5F8A;         /* azul heliográfico: links e linhas de cota */
+  --brand-line-text: #1D5F8A;
 
   /* Tipografia */
-  --brand-font: "Montserrat", "Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
-  --brand-weight-title: 700;
-  --brand-weight-subtitle: 600;
-  --brand-weight-text: 400;
+  --brand-font: "Archivo", "Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
+  --brand-stretch-display: 78%;  /* títulos condensados, como letreiro técnico */
 
-  /* Espaço reservado da logo (usado enquanto não houver logotipo configurado) */
-  --brand-logo-size: 36px;
+  /* Espaço reservado da logo (enquanto não houver logotipo configurado) */
+  --brand-logo-size: 34px;
 }

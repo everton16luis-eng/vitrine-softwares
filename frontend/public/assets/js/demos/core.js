@@ -36,7 +36,7 @@ export function kpis(items) {
 
 export function table(columns, rows, { empty = 'Nenhum registro.' } = {}) {
   if (!rows.length) return el('p', { class: 'demo-empty' }, empty);
-  return el('div', { class: 'table-responsive' }, el('table', { class: 'demo-table' },
+  return el('div', { class: 'table-responsive', tabindex: '0', role: 'region', 'aria-label': 'Tabela' }, el('table', { class: 'demo-table' },
     el('thead', {}, el('tr', {}, columns.map((c) => el('th', { scope: 'col', class: c.num ? 'num' : '' }, c.label)))),
     el('tbody', {}, rows.map((r) => el('tr', {}, columns.map((c) => el('td', { class: c.num ? 'num' : '' }, c.render ? c.render(r) : r[c.key])))))));
 }

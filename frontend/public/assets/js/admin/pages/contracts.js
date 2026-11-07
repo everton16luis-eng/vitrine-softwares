@@ -1,16 +1,15 @@
 import { api } from '../../shared/api.js';
-import { el, icon, badge, date, money, toast, toastError } from '../../shared/ui.js';
+import { el, icon, badge, date, money, toast, toastError, tabSet } from '../../shared/ui.js';
 import { crudPage, entries } from './_crud.js';
 
 export async function render(c, ctx) {
   const opcoes = await ctx.opcoes();
   const st = opcoes.status;
   const clientes = () => (opcoes.clientes || []).map((x) => [x.id, `${x.nome}${x.empresa ? ` (${x.empresa})` : ''}`]);
-  const tabs = el('ul', { class: 'nav nav-tabs mb-3', role: 'tablist' });
-  const area = el('div');
-  c.append(tabs, area);
+  const t = tabSet([['contratos', 'Contratos'], ['licencas', 'Licenças']], (k) => show(k), 'Contratos e licenças');
+  const area = t.panel;
+  c.append(t.list, area);
   const show = async (which) => {
-    tabs.querySelectorAll('button').forEach((b) => b.classList.toggle('active', b.dataset.tab === which));
     area.textContent = '';
     if (which === 'contratos') {
       await crudPage(area, ctx, {
@@ -63,10 +62,7 @@ export async function render(c, ctx) {
       });
     }
   };
-  for (const [k, l] of [['contratos', 'Contratos'], ['licencas', 'Licenças']]) {
-    tabs.append(el('li', { class: 'nav-item' }, el('button', { class: 'nav-link', type: 'button', dataset: { tab: k }, onclick: () => show(k) }, l)));
-  }
-  await show('contratos');
+  await t.show('contratos');
 }
 
 function uploadButton(row, refresh) {

@@ -56,14 +56,18 @@ export const centsToStr = (c) => `${Math.trunc(c / 100)}.${String(Math.abs(c % 1
 // ---------------------------------------------------------------- feedback
 export function toast(message, tone = 'success') {
   const region = document.querySelector('[data-toasts]');
-  const n = el('div', { class: `alert alert-${tone} shadow mb-0 d-flex gap-2 align-items-start`, role: tone === 'danger' ? 'alert' : 'status' },
+  const n = el('div', { class: `alert alert-${tone} mb-0`, role: tone === 'danger' ? 'alert' : 'status' },
     icon(tone === 'success' ? 'check-circle' : tone === 'danger' ? 'exclamation-octagon' : 'info-circle'), el('span', {}, message));
   region.append(n);
   setTimeout(() => n.remove(), tone === 'danger' ? 8000 : 4500);
 }
 export const toastError = (err) => toast(err?.message || 'Erro inesperado.', 'danger');
 
-export const badge = (text, tone = 'secondary') => el('span', { class: `badge rounded-pill text-bg-${tone}` }, text);
+const CHIP_TONE = { success: 'success', danger: 'danger', warning: 'progress', info: 'info', primary: 'info', accent: 'accent' };
+/** Situação como "chip" do sistema (tons: success, danger, warning, info, primary, accent; o resto vira neutro). */
+export const badge = (text, tone = 'secondary') => el('span', { class: `chip chip-${CHIP_TONE[String(tone).split(' ')[0]] || 'neutral'}` }, text);
+/** Envolve uma tabela larga numa região rolável acessível pelo teclado. */
+export const scrollRegion = (table, label = 'Tabela') => el('div', { class: 'table-responsive', tabindex: '0', role: 'region', 'aria-label': label }, table);
 export const loading = (text = 'Carregando…') => el('div', { class: 'state-loading', role: 'status' }, el('span', { class: 'spinner-border spinner-border-sm', 'aria-hidden': 'true' }), ` ${text}`);
 export const emptyState = (title, text, action) => el('div', { class: 'state-empty' }, icon('inbox'), el('h3', {}, title), text ? el('p', {}, text) : null, action || null);
 export const errorState = (err, retry) => el('div', { class: 'state-error', role: 'alert' }, icon('exclamation-triangle'),
@@ -254,6 +258,40 @@ export function buildForm(fields, values = {}, context = {}) {
   return { node, values: getValues, showErrors, validate, inputs };
 }
 
+// ---------------------------------------------------------------- abas
+let tabSeq = 0;
+/**
+ * Abas acessíveis (padrão WAI-ARIA): setas, Home e End movem entre as abas.
+ * sections: [[chave, rótulo]]; onShow(chave, painel) desenha o conteúdo.
+ */
+export function tabSet(sections, onShow, label) {
+  const id = `tabs-${++tabSeq}`;
+  const list = el('ul', { class: 'nav nav-tabs mb-3', role: 'tablist', 'aria-label': label });
+  const panel = el('div', { role: 'tabpanel', id: `${id}-panel` });
+  const buttons = sections.map(([k, l]) => el('button', { class: 'nav-link', role: 'tab', type: 'button', id: `${id}-${k}`, 'aria-controls': panel.id, 'aria-selected': 'false', tabindex: '-1', dataset: { tab: k }, onclick: () => show(k) }, l));
+  list.append(...buttons.map((b) => el('li', { class: 'nav-item', role: 'presentation' }, b)));
+  list.addEventListener('keydown', (e) => {
+    const i = buttons.indexOf(document.activeElement);
+    const next = { ArrowRight: i + 1, ArrowLeft: i - 1, Home: 0, End: buttons.length - 1 }[e.key];
+    if (i < 0 || next === undefined) return;
+    e.preventDefault();
+    const b = buttons[(next + buttons.length) % buttons.length];
+    b.focus();
+    show(b.dataset.tab);
+  });
+  function show(k) {
+    for (const b of buttons) {
+      const on = b.dataset.tab === k;
+      b.classList.toggle('active', on);
+      b.setAttribute('aria-selected', String(on));
+      b.tabIndex = on ? 0 : -1;
+      if (on) panel.setAttribute('aria-labelledby', b.id);
+    }
+    return onShow(k, panel);
+  }
+  return { list, panel, show };
+}
+
 // ---------------------------------------------------------------- tabelas
 /**
  * Tabela com paginação no servidor.
@@ -283,7 +321,7 @@ export function dataTable({ columns, load, onRowClick, empty = 'Nenhum registro 
           }
           return tr;
         })));
-      wrap.append(el('div', { class: 'table-responsive' }, tbl));
+      wrap.append(scrollRegion(tbl, caption || 'Registros'));
       if (data.pages > 1) {
         wrap.append(el('nav', { class: 'd-flex justify-content-between align-items-center mt-3', 'aria-label': 'Paginação' },
           el('span', { class: 'text-body-secondary small' }, `${data.total} registros · página ${data.page} de ${data.pages}`),

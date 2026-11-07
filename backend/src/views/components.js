@@ -3,11 +3,22 @@ import { formatMoney } from '../utils/money.js';
 import { STATUS_COMERCIAL, MODELOS_CONTRATACAO, CONTRATAVEL } from '../modules/products/products.constants.js';
 
 const STATUS_TONE = {
-  em_planejamento: 'neutral', em_desenvolvimento: 'info', demonstracao_disponivel: 'accent',
-  disponivel: 'success', em_manutencao: 'warning', arquivado: 'neutral'
+  em_planejamento: 'neutral', em_desenvolvimento: 'progress', demonstracao_disponivel: 'info',
+  disponivel: 'success', em_manutencao: 'progress', arquivado: 'neutral'
 };
 
-export const statusBadge = (status) => html`<span class="status-badge tone-${STATUS_TONE[status] || 'neutral'}">${STATUS_COMERCIAL[status] || status}</span>`;
+export const statusBadge = (status) => html`<span class="chip chip-${STATUS_TONE[status] || 'neutral'}">${STATUS_COMERCIAL[status] || status}</span>`;
+
+/** Sequência de revisões de um produto: do planejamento à contratação, com a etapa atual marcada. */
+const TRACK = ['em_planejamento', 'em_desenvolvimento', 'demonstracao_disponivel', 'disponivel'];
+const TRACK_LABEL = { em_planejamento: 'Planejamento', em_desenvolvimento: 'Desenvolvimento', demonstracao_disponivel: 'Demonstração', disponivel: 'Contratação' };
+export function statusTrack(status) {
+  const at = TRACK.indexOf(status);
+  if (at < 0) return html`<p class="status-track-note">${statusBadge(status)}</p>`;
+  return html`<ol class="status-track" aria-label="Situação do projeto">
+    ${TRACK.map((st, i) => html`<li class="${i < at ? 'is-done' : i === at ? 'is-current' : ''}"${i === at ? raw(' aria-current="step"') : ''}><span>${TRACK_LABEL[st]}</span></li>`)}
+  </ol>`;
+}
 
 /** Linhas "Título | Descrição" (conteúdo editável) -> [{ titulo, descricao }]. */
 export function parseLines(text = '') {
@@ -31,22 +42,19 @@ export function productCard(p, { headingLevel = 3 } = {}) {
       <img src="${safeUrl(p.capa_url)}" alt="" loading="lazy" decoding="async" width="640" height="400">
     </a>
     <div class="product-card-body">
-      <div class="d-flex flex-wrap gap-2 align-items-center mb-2">
-        <span class="eyebrow">${p.categoria_nome}</span>
-        ${statusBadge(p.status_comercial)}
-      </div>
       ${raw(`<${H} class="product-card-title">`)}<a href="/softwares/${p.slug}">${p.nome}</a>${raw(`</${H}>`)}
       <p class="product-card-text">${p.resumo}</p>
-      ${p.destaques?.length ? html`<ul class="check-list small">${p.destaques.map((d) => html`<li>${d}</li>`)}</ul>` : ''}
-      <dl class="product-meta">
+      <dl class="carimbo">
+        <div><dt>Categoria</dt><dd>${p.categoria_nome}</dd></div>
+        <div><dt>Situação</dt><dd>${statusBadge(p.status_comercial)}</dd></div>
         <div><dt>Contratação</dt><dd>${MODELOS_CONTRATACAO[p.modelo_contratacao]}</dd></div>
         <div><dt>Investimento</dt><dd>${priceLabel(p)}</dd></div>
+        ${p.dados_demonstrativos ? html`<div class="carimbo-wide"><dt>Dados</dt><dd>Telas com dados fictícios, para demonstração</dd></div>` : ''}
       </dl>
-      ${p.dados_demonstrativos ? html`<p class="demo-flag"><i class="bi bi-info-circle" aria-hidden="true"></i> Projeto demonstrativo do portfólio</p>` : ''}
       <div class="product-card-actions">
-        <a class="btn btn-primary-ink btn-sm" href="/softwares/${p.slug}">Conhecer</a>
-        <a class="btn btn-outline-ink btn-sm" href="/orcamento?produto=${p.slug}">${canHire ? 'Contratar' : 'Solicitar orçamento'}</a>
-        ${demo ? html`<a class="btn btn-link btn-sm" href="${p.demo_tipo === 'interna' ? `/softwares/${p.slug}/demonstracao` : safeUrl(p.demo_url)}"${p.demo_tipo === 'externa' ? raw(' target="_blank" rel="noopener noreferrer"') : ''}>Ver demonstração</a>` : ''}
+        <a class="btn btn-primary btn-sm" href="/softwares/${p.slug}">Ver o projeto</a>
+        <a class="btn btn-outline-ink btn-sm" href="/orcamento?produto=${p.slug}">${canHire ? 'Contratar' : 'Pedir orçamento'}</a>
+        ${demo ? html`<a class="btn btn-link btn-sm" href="${p.demo_tipo === 'interna' ? `/softwares/${p.slug}/demonstracao` : safeUrl(p.demo_url)}"${p.demo_tipo === 'externa' ? raw(' target="_blank" rel="noopener noreferrer"') : ''}>Abrir demonstração</a>` : ''}
       </div>
     </div>
   </article>`;
@@ -131,7 +139,7 @@ export function contactForm({ tipo = 'contato', token, produto = null, servico =
     <div class="row">
       <div class="col-md-6">${field({ name: 'nome', label: 'Nome', required: true, value: val('nome'), error: err('nome'), autocomplete: 'name', max: 160, min: 2 })}</div>
       <div class="col-md-6">${field({ name: 'email', label: 'E-mail', type: 'email', required: true, value: val('email'), error: err('email'), autocomplete: 'email', max: 254 })}</div>
-      <div class="col-md-6">${field({ name: 'telefone', label: 'Telefone ou WhatsApp', type: 'tel', value: val('telefone'), error: err('telefone'), autocomplete: 'tel', max: 30, placeholder: '(00) 00000-0000' })}</div>
+      <div class="col-md-6">${field({ name: 'telefone', label: 'Telefone ou WhatsApp', type: 'tel', value: val('telefone'), error: err('telefone'), autocomplete: 'tel', max: 30, placeholder: '(DDD) 00000-0000' })}</div>
       <div class="col-md-6">${field({ name: 'empresa', label: 'Empresa', value: val('empresa'), error: err('empresa'), autocomplete: 'organization', max: 160 })}</div>
       ${!produto && !compact && (produtos.length || servicos.length) ? html`<div class="col-md-6">${select({ name: 'produto', label: 'Produto de interesse', options: produtos.map((p) => [p.slug, p.nome]), value: val('produto'), error: err('produto') })}</div>
         <div class="col-md-6">${select({ name: 'servico', label: 'Serviço de interesse', options: servicos.map((s) => [s.slug, s.nome]), value: val('servico'), error: err('servico') })}</div>` : ''}
@@ -139,7 +147,7 @@ export function contactForm({ tipo = 'contato', token, produto = null, servico =
       ${tipo === 'personalizado' ? requirementsFields(values.requisitos || {}, errors) : ''}
       <div class="col-12">${field({ name: 'mensagem', label: tipo === 'personalizado' ? 'Descreva o sistema que você precisa' : 'Mensagem', type: 'textarea', required: true, value: val('mensagem'), error: err('mensagem'), min: 10, max: 5000 })}</div>
     </div>
-    <p class="form-purpose"><i class="bi bi-shield-lock" aria-hidden="true"></i> ${PURPOSE[tipo]} Não compartilhamos seus dados com terceiros para fins comerciais.</p>
+    <p class="form-purpose"><i class="bi bi-shield-lock" aria-hidden="true"></i><span>${PURPOSE[tipo]} Não compartilhamos seus dados com terceiros para fins comerciais.</span></p>
     <div class="form-check mb-2">
       <input class="form-check-input${err('consentimento') ? ' is-invalid' : ''}" type="checkbox" id="${idPrefix}consentimento" name="consentimento" value="true" required aria-describedby="${idPrefix}consentimento-err">
       <label class="form-check-label" for="${idPrefix}consentimento">Li a <a href="/politica-de-privacidade" target="_blank">Política de Privacidade</a> e estou ciente do uso dos meus dados para esta finalidade. <span class="req" aria-hidden="true">*</span></label>
@@ -149,7 +157,7 @@ export function contactForm({ tipo = 'contato', token, produto = null, servico =
       <input class="form-check-input" type="checkbox" id="${idPrefix}aceita_comunicacoes" name="aceita_comunicacoes" value="true">
       <label class="form-check-label" for="${idPrefix}aceita_comunicacoes">Aceito receber comunicações sobre novidades e lançamentos (opcional).</label>
     </div>
-    <button class="btn btn-accent btn-lg" type="submit" data-submit>
+    <button class="btn btn-accent btn-lg form-submit" type="submit" data-submit>
       <span class="spinner-border spinner-border-sm me-2 d-none" aria-hidden="true" data-spinner></span>${submitLabel || 'Enviar'}
     </button>
     <div class="form-success d-none" role="status" tabindex="-1" data-form-success></div>
@@ -182,8 +190,8 @@ function requirementsFields(r, errors) {
   </fieldset>`;
 }
 
-export const sectionHeading = ({ eyebrow, title, text, id, center = false }) => html`<header class="section-heading${center ? ' text-center mx-auto' : ''}">
-  ${eyebrow ? html`<p class="eyebrow">${eyebrow}</p>` : ''}
+/** Título de seção: o título fala sozinho (o antigo rótulo acima dele foi removido; o parâmetro é ignorado). */
+export const sectionHeading = ({ title, text, id, center = false }) => html`<header class="section-heading${center ? ' is-center' : ''}">
   <h2${id ? html` id="${id}"` : ''}>${title}</h2>
   ${text ? html`<p class="lead-muted">${text}</p>` : ''}
 </header>`;

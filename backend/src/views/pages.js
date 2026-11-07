@@ -2,7 +2,7 @@ import { html, raw, safeUrl } from '../utils/html.js';
 import { renderMarkdown } from '../utils/markdown.js';
 import { formatMoney } from '../utils/money.js';
 import { STATUS_COMERCIAL, MODELOS_CONTRATACAO, CONTRATAVEL } from '../modules/products/products.constants.js';
-import { productCard, pager, breadcrumbs, contactForm, sectionHeading, faqList, parseLines, statusBadge, priceLabel } from './components.js';
+import { productCard, pager, breadcrumbs, contactForm, sectionHeading, faqList, parseLines, statusBadge, statusTrack, priceLabel } from './components.js';
 import { whatsappLink, absoluteUrl } from './layout.js';
 
 const icon = (name) => html`<i class="bi bi-${name}" aria-hidden="true"></i>`;
@@ -36,40 +36,73 @@ function partnersSection(c, partners) {
   </section>`;
 }
 
-/** Painel ilustrativo do destaque (sem imagens externas). Substituído por home.hero.imagem quando configurada. */
-const heroPanel = () => html`<div class="hero-panel" aria-hidden="true">
-  <div class="hero-panel-bar"><span></span><span></span><span></span><em>projeto.js</em></div>
-  <pre class="hero-code"><code><span class="c">// da ideia à solução</span>
-<span class="k">const</span> necessidade = <span class="k">await</span> entender(<span class="s">'seu processo'</span>);
-<span class="k">const</span> plano = planejar(necessidade, { escopo, prazos });
-<span class="k">const</span> sistema = desenvolver(plano);
+/**
+ * Folha de desenho do destaque: a tela real do projeto em destaque (ou a imagem configurada em
+ * home.hero.imagem), emoldurada, com o carimbo de dados verdadeiros embaixo.
+ */
+function heroDrawing(s, c, p) {
+  const img = c['home.hero.imagem'];
+  if (!img && !p) return '';
+  return html`<figure class="hero-drawing" data-enter>
+    <div class="drawing-frame">
+      ${img
+        ? html`<img src="${safeUrl(img)}" alt="${c['home.hero.imagem.alt'] || ''}" width="960" height="600" fetchpriority="high">`
+        : html`<a href="/softwares/${p.slug}" tabindex="-1" aria-hidden="true"><img src="${safeUrl(p.capa_url)}" alt="" width="960" height="600" fetchpriority="high"></a>`}
+    </div>
+    <dl class="carimbo hero-stamp">
+      ${p && !img ? html`
+        <div class="carimbo-wide"><dt>Projeto em destaque</dt><dd><a href="/softwares/${p.slug}">${p.nome}</a></dd></div>
+        <div><dt>Situação</dt><dd>${statusBadge(p.status_comercial)}</dd></div>
+        <div><dt>Contratação</dt><dd>${MODELOS_CONTRATACAO[p.modelo_contratacao]}</dd></div>
+        ${p.dados_demonstrativos ? html`<div class="carimbo-wide"><dt>Dados</dt><dd>Telas com dados fictícios, para demonstração</dd></div>` : ''}`
+      : html`
+        <div class="carimbo-wide"><dt>Empresa</dt><dd>${s.nome_comercial}</dd></div>
+        ${c['home.hero.etiqueta'] ? html`<div class="carimbo-wide"><dt>Especialidade</dt><dd>${c['home.hero.etiqueta']}</dd></div>` : ''}`}
+    </dl>
+  </figure>`;
+}
 
-entregar(sistema).then(evoluir);</code></pre>
-</div>`;
+/** Primeiro passo do pedido: escolhe o tipo e continua no formulário completo. Funciona sem JavaScript (GET). */
+function heroStart(c) {
+  const opts = [
+    ['personalizado', 'Um sistema sob medida', 'Descrever o processo que precisa virar sistema'],
+    ['orcamento', 'Um dos sistemas prontos', 'Orçamento de um projeto do portfólio'],
+    ['apresentacao', 'Uma apresentação', 'Conversa para ver um sistema funcionando']
+  ];
+  return html`<form class="hero-start" method="get" action="/contato" data-enter>
+    <fieldset>
+      <legend>O que você precisa?</legend>
+      <div class="choice-row">
+        ${opts.map(([v, l, d], i) => html`<label class="choice">
+          <input type="radio" name="tipo" value="${v}"${i === 0 ? raw(' checked') : ''}>
+          <span class="choice-label">${l}</span>
+          <span class="choice-hint">${d}</span>
+        </label>`)}
+      </div>
+    </fieldset>
+    <div class="hero-actions">
+      <button class="btn btn-accent btn-lg" type="submit">${c['home.hero.cta_primario'] || 'Continuar o pedido'}</button>
+      <a class="btn btn-link" href="#servicos">${c['home.hero.cta_secundario'] || 'Conhecer os serviços'}</a>
+    </div>
+  </form>`;
+}
 
 export function homePage({ s, c, featured, services, partners = [], token }) {
   const etapas = parseLines(c['home.etapas.itens']);
   const compromissos = parseLines(c['home.diferenciais.itens']);
   const wa = whatsappLink(s);
+  const drawing = heroDrawing(s, c, featured[0]);
   return html`
   <section class="hero" aria-labelledby="hero-title">
-    <div class="container position-relative">
-      <div class="row align-items-center g-5">
-        <div class="col-lg-6">
-          ${c['home.hero.etiqueta'] ? html`<p class="hero-tag">${c['home.hero.etiqueta']}</p>` : ''}
-          <h1 id="hero-title" class="hero-title">${c['home.hero.titulo'] || 'Transformamos ideias em soluções digitais'}</h1>
-          <p class="hero-lead">${c['home.hero.subtitulo']}</p>
-          <div class="d-flex flex-wrap gap-3 mt-4">
-            <a class="btn btn-accent btn-lg" href="/orcamento">${c['home.hero.cta_primario'] || 'Solicitar orçamento'} ${icon('arrow-right')}</a>
-            <a class="btn btn-outline-ink btn-lg" href="#servicos">${c['home.hero.cta_secundario'] || 'Conhecer os serviços'}</a>
-          </div>
-          ${wa ? html`<p class="mt-3 mb-0"><a class="link-soft" href="${wa}" target="_blank" rel="noopener noreferrer">${icon('whatsapp')} Prefere conversar pelo WhatsApp?</a></p>` : ''}
+    <div class="container">
+      <div class="hero-sheet${drawing ? '' : ' is-single'}">
+        <div class="hero-copy">
+          <h1 id="hero-title" class="hero-title" data-enter>${c['home.hero.titulo'] || 'Transformamos ideias em soluções digitais'}</h1>
+          ${c['home.hero.subtitulo'] ? html`<p class="hero-lead" data-enter>${c['home.hero.subtitulo']}</p>` : ''}
+          ${heroStart(c)}
+          ${wa ? html`<p class="hero-alt"><a href="${wa}" target="_blank" rel="noopener noreferrer">${icon('whatsapp')} Prefere conversar pelo WhatsApp?</a></p>` : ''}
         </div>
-        <div class="col-lg-6${c['home.hero.imagem'] ? '' : ' d-none d-lg-block'}">
-          ${c['home.hero.imagem']
-            ? html`<figure class="hero-visual"><img src="${safeUrl(c['home.hero.imagem'])}" alt="${c['home.hero.imagem.alt'] || ''}" width="720" height="520" fetchpriority="high"></figure>`
-            : heroPanel()}
-        </div>
+        ${drawing}
       </div>
     </div>
   </section>
@@ -78,57 +111,62 @@ export function homePage({ s, c, featured, services, partners = [], token }) {
 
   <section class="section" id="servicos" aria-labelledby="servicos-title">
     <div class="container">
-      ${sectionHeading({ eyebrow: 'Serviços', title: c['home.servicos.titulo'] || 'Soluções digitais para o seu negócio', text: c['home.servicos.texto'], id: 'servicos-title' })}
-      ${services.length
-        ? html`<div class="row g-4">${services.slice(0, 6).map((sv) => html`<div class="col-md-6 col-lg-4"><a class="service-tile" href="/servicos/${sv.slug}">
-            <span class="service-icon">${icon(sv.icone || 'gear')}</span>
-            <strong>${sv.nome}</strong>
-            <span class="service-tile-text">${sv.resumo}</span>
-            <span class="service-tile-more">Saiba mais ${icon('arrow-right')}</span>
-          </a></div>`)}</div>
-          ${services.length > 6 ? html`<div class="text-center mt-4"><a class="btn btn-outline-ink" href="/servicos">Ver todos os serviços</a></div>` : ''}`
-        : html`<div class="empty-inline">${icon('tools')}<p>Os serviços serão apresentados aqui em breve. Enquanto isso, <a href="/contato">fale com a gente</a>.</p></div>`}
+      <div class="split">
+        <div class="split-aside">
+          ${sectionHeading({ title: c['home.servicos.titulo'] || 'Soluções digitais para o seu negócio', text: c['home.servicos.texto'], id: 'servicos-title' })}
+          ${services.length ? html`<a class="btn btn-outline-ink" href="/servicos">Ver todos os serviços</a>` : ''}
+        </div>
+        ${services.length
+          ? html`<ul class="index-list" role="list">${services.slice(0, 6).map((sv) => html`<li><a class="index-row" href="/servicos/${sv.slug}">
+              <span class="index-icon">${icon(sv.icone || 'gear')}</span>
+              <span class="index-text"><strong>${sv.nome}</strong><span>${sv.resumo}</span></span>
+              <span class="index-go" aria-hidden="true">${icon('arrow-up-right')}</span>
+            </a></li>`)}</ul>`
+          : html`<div class="empty-inline">${icon('tools')}<p>Os serviços aparecem aqui assim que forem publicados no painel. Enquanto isso, <a href="/contato">fale com a gente</a>.</p></div>`}
+      </div>
     </div>
   </section>
 
-  ${etapas.length ? html`<section class="section section-alt" id="como-trabalhamos" aria-labelledby="etapas-title">
+  ${etapas.length ? html`<section class="section section-ruled" id="como-trabalhamos" aria-labelledby="etapas-title">
     <div class="container">
-      ${sectionHeading({ eyebrow: 'Processo', title: c['home.etapas.titulo'] || 'Como trabalhamos', id: 'etapas-title' })}
-      <ol class="steps">${etapas.map((e, i) => html`<li><span class="step-n">${String(i + 1).padStart(2, '0')}</span><h3>${e.titulo}</h3><p>${e.descricao}</p></li>`)}</ol>
+      ${sectionHeading({ title: c['home.etapas.titulo'] || 'Como trabalhamos', id: 'etapas-title' })}
+      <ol class="steps">${etapas.map((e, i) => html`<li><span class="step-n" aria-hidden="true">${String(i + 1).padStart(2, '0')}</span><h3>${e.titulo}</h3><p>${e.descricao}</p></li>`)}</ol>
     </div>
   </section>` : ''}
 
   <section class="section" id="projetos" aria-labelledby="projetos-title">
     <div class="container">
-      ${sectionHeading({ eyebrow: 'Portfólio', title: c['home.produtos.titulo'] || 'Projetos e soluções', text: c['home.produtos.texto'], id: 'projetos-title' })}
+      <div class="section-head-row">
+        ${sectionHeading({ title: c['home.produtos.titulo'] || 'Projetos e soluções', text: c['home.produtos.texto'], id: 'projetos-title' })}
+        ${featured.length ? html`<a class="btn btn-outline-ink" href="/softwares">Ver todos os projetos</a>` : ''}
+      </div>
       ${featured.length
-        ? html`<div class="row g-4">${featured.map((p) => html`<div class="col-md-6 col-lg-4">${productCard(p)}</div>`)}</div>
-          <div class="text-center mt-4"><a class="btn btn-outline-ink" href="/softwares">Ver todos os projetos ${icon('arrow-right')}</a></div>`
-        : html`<div class="empty-inline">${icon('folder2-open')}<p>Os projetos desenvolvidos serão apresentados aqui em breve.</p></div>`}
+        ? html`<div class="card-grid">${featured.map((p) => productCard(p))}</div>`
+        : html`<div class="empty-inline">${icon('folder2-open')}<p>Os projetos aparecem aqui assim que forem publicados no painel.</p></div>`}
     </div>
   </section>
 
-  <section class="section section-alt" id="sobre" aria-labelledby="sobre-title">
+  <section class="section section-sheet" id="sobre" aria-labelledby="sobre-title">
     <div class="container">
-      <div class="row g-5 align-items-start">
-        <div class="col-lg-5">
-          ${sectionHeading({ eyebrow: 'Sobre', title: c['home.sobre.titulo'] || 'Sobre a empresa', id: 'sobre-title' })}
+      <div class="split">
+        <div class="split-aside">
+          ${sectionHeading({ title: c['home.sobre.titulo'] || 'Sobre a empresa', id: 'sobre-title' })}
           ${c['home.sobre.texto'] ? html`<p class="lead-muted">${c['home.sobre.texto']}</p>` : ''}
-          <a class="btn btn-outline-ink mt-2" href="/sobre">Conheça a empresa</a>
+          <a class="btn btn-outline-ink" href="/sobre">Conheça a empresa</a>
         </div>
-        ${compromissos.length ? html`<div class="col-lg-7">
+        ${compromissos.length ? html`<div>
           <h3 class="subheading">${c['home.diferenciais.titulo'] || 'Compromissos técnicos'}</h3>
-          <div class="row g-3">${compromissos.map((d) => html`<div class="col-sm-6"><div class="tech-point"><h4>${d.titulo}</h4><p>${d.descricao}</p></div></div>`)}</div>
+          <dl class="spec-sheet">${compromissos.map((d) => html`<div><dt>${d.titulo}</dt><dd>${d.descricao}</dd></div>`)}</dl>
         </div>` : ''}
       </div>
     </div>
   </section>
 
-  <section class="section section-contact" id="contato" aria-labelledby="contato-title">
+  <section class="section" id="contato" aria-labelledby="contato-title">
     <div class="container">
-      <div class="row g-5 align-items-start">
-        <div class="col-lg-5">
-          ${sectionHeading({ eyebrow: 'Contato', title: c['home.contato.titulo'] || 'Vamos conversar sobre o seu projeto?', text: c['home.contato.texto'], id: 'contato-title' })}
+      <div class="split">
+        <div class="split-aside">
+          ${sectionHeading({ title: c['home.contato.titulo'] || 'Vamos conversar sobre o seu projeto?', text: c['home.contato.texto'], id: 'contato-title' })}
           <ul class="list-unstyled contact-points">
             ${s.email_contato ? html`<li>${icon('envelope')} <a href="mailto:${s.email_contato}">${s.email_contato}</a></li>` : ''}
             ${s.telefone ? html`<li>${icon('telephone')} <a href="tel:${s.telefone.replace(/[^\d+]/g, '')}">${s.telefone}</a></li>` : ''}
@@ -136,7 +174,7 @@ export function homePage({ s, c, featured, services, partners = [], token }) {
             <li>${icon('file-earmark-text')} <a href="/orcamento">Formulário completo de orçamento</a></li>
           </ul>
         </div>
-        <div class="col-lg-7"><div class="form-card">${contactForm({ tipo: 'orcamento', token, compact: true, submitLabel: 'Solicitar orçamento', idPrefix: 'home-' })}</div></div>
+        <div class="form-card">${contactForm({ tipo: 'orcamento', token, compact: true, submitLabel: 'Pedir orçamento', idPrefix: 'home-' })}</div>
       </div>
     </div>
   </section>`;
@@ -151,7 +189,7 @@ export function catalogPage({ result, categories }) {
   return html`<section class="page-hero"><div class="container">
       ${breadcrumbs([{ href: '/', label: 'Início' }, { label: 'Projetos' }])}
       <h1>Projetos e soluções</h1>
-      <p class="lead-muted">Sistemas desenvolvidos pela equipe. Cada página informa a situação atual do projeto; os marcados como demonstrativos usam dados fictícios.</p>
+      <p class="lead-muted">Sistemas desenvolvidos pela equipe. Cada projeto mostra a sua situação atual; os demonstrativos usam dados fictícios.</p>
     </div></section>
     <section class="section pt-4"><div class="container">
       <form class="filters" method="get" action="/softwares" role="search" aria-label="Filtrar softwares">
@@ -164,15 +202,15 @@ export function catalogPage({ result, categories }) {
             <select class="form-select" id="modelo" name="modelo"><option value="">Todas</option>${Object.entries(MODELOS_CONTRATACAO).map(([k, l]) => html`<option value="${k}"${k === f.modelo ? raw(' selected') : ''}>${l}</option>`)}</select></div>
           <div class="col-sm-4 col-lg-2"><label class="form-label" for="disponibilidade">Disponibilidade</label>
             <select class="form-select" id="disponibilidade" name="disponibilidade"><option value="">Todas</option>${statusOptions.map(([k, l]) => html`<option value="${k}"${k === f.disponibilidade ? raw(' selected') : ''}>${l}</option>`)}</select></div>
-          <div class="col-lg-2 d-flex gap-2"><button class="btn btn-primary-ink flex-fill" type="submit">${icon('funnel')} Filtrar</button>
+          <div class="col-lg-2 d-flex gap-2"><button class="btn btn-primary flex-fill" type="submit">${icon('funnel')} Filtrar</button>
             ${anyFilter ? html`<a class="btn btn-outline-ink" href="/softwares" aria-label="Limpar filtros">${icon('x-lg')}</a>` : ''}</div>
         </div>
       </form>
-      <p class="result-count" role="status">${result.total} ${result.total === 1 ? 'software encontrado' : 'softwares encontrados'}</p>
+      <p class="result-count" role="status">${result.total} ${result.total === 1 ? 'projeto encontrado' : 'projetos encontrados'}</p>
       ${result.items.length
-        ? html`<div class="row g-4">${result.items.map((p) => html`<div class="col-md-6 col-lg-4">${productCard(p, { headingLevel: 2 })}</div>`)}</div>`
-        : html`<div class="empty-state">${icon('search')}<h2>Nenhum software encontrado</h2><p>Tente outros termos ou remova os filtros. Se não encontrou o que precisa, podemos desenvolver uma solução sob medida.</p>
-            <a class="btn btn-accent" href="/softwares/sistemas-personalizados">Solicitar desenvolvimento personalizado</a></div>`}
+        ? html`<div class="card-grid">${result.items.map((p) => productCard(p, { headingLevel: 2 }))}</div>`
+        : html`<div class="empty-state">${icon('search')}<h2>Nenhum projeto encontrado</h2><p>Tente outros termos ou limpe os filtros. Se o que você precisa não está aqui, ele pode ser desenvolvido sob medida.</p>
+            <a class="btn btn-accent" href="/contato?tipo=personalizado">Descrever um sistema sob medida</a></div>`}
       ${pager(result, '/softwares', params)}
     </div></section>`;
 }
@@ -199,19 +237,27 @@ export function productPage({ p, s, token }) {
       ${breadcrumbs([{ href: '/', label: 'Início' }, { href: '/softwares', label: 'Projetos' }, { label: p.nome }])}
       <div class="row g-5 align-items-center">
         <div class="col-lg-6">
-          <div class="d-flex flex-wrap gap-2 mb-3"><a class="eyebrow" href="/softwares?categoria=${p.categoria_slug}">${p.categoria_nome}</a> ${statusBadge(p.status_comercial)}</div>
           <h1>${p.nome}</h1>
           <p class="lead">${p.resumo}</p>
-          ${notReady ? html`<div class="notice notice-info" role="note">${icon('cone-striped')} Este software está <strong>${STATUS_COMERCIAL[p.status_comercial].toLowerCase()}</strong> e ainda não está disponível para contratação. Você pode registrar interesse ou solicitar uma conversa.</div>` : ''}
-          ${p.dados_demonstrativos ? html`<div class="notice notice-muted" role="note">${icon('info-circle')} Projeto demonstrativo do portfólio: as telas e dados exibidos são fictícios. Nome, escopo e condições comerciais podem mudar.</div>` : ''}
+          ${statusTrack(p.status_comercial)}
+          ${notReady ? html`<div class="notice notice-info" role="note">${icon('cone-striped')}<span>Este software está <strong>${STATUS_COMERCIAL[p.status_comercial].toLowerCase()}</strong> e ainda não está disponível para contratação. Você pode registrar interesse ou pedir uma conversa.</span></div>` : ''}
+          ${p.dados_demonstrativos ? html`<div class="notice notice-muted" role="note">${icon('info-circle')}<span>Projeto demonstrativo do portfólio: as telas e os dados exibidos são fictícios. Nome, escopo e condições comerciais podem mudar.</span></div>` : ''}
           <div class="d-flex flex-wrap gap-2 mt-4">
-            <a class="btn btn-accent btn-lg" href="#solicitar">${canHire ? 'Contratar' : isCustom ? 'Descrever minha necessidade' : 'Solicitar orçamento'}</a>
+            <a class="btn btn-accent btn-lg" href="#solicitar">${canHire ? 'Contratar' : isCustom ? 'Descrever minha necessidade' : 'Pedir orçamento'}</a>
             ${demoHref && p.demo_disponivel ? html`<a class="btn btn-outline-ink btn-lg" href="${demoHref}"${p.demo_tipo === 'externa' ? raw(' target="_blank" rel="noopener noreferrer"') : ''}>${icon('play-circle')} Ver demonstração</a>` : ''}
-            ${!isCustom ? html`<a class="btn btn-link btn-lg" href="#apresentacao">Solicitar apresentação</a>` : ''}
+            ${!isCustom ? html`<a class="btn btn-link btn-lg" href="#apresentacao">Pedir apresentação</a>` : ''}
             ${wa ? html`<a class="btn btn-link btn-lg" href="${wa}" target="_blank" rel="noopener noreferrer">${icon('whatsapp')} WhatsApp</a>` : ''}
           </div>
         </div>
-        <div class="col-lg-6"><figure class="product-cover"><img src="${safeUrl(p.capa_url)}" alt="${p.imagem_alt || `Tela ilustrativa do ${p.nome}`}" width="960" height="600" fetchpriority="high"></figure></div>
+        <div class="col-lg-6"><figure class="product-cover">
+          <div class="drawing-frame"><img src="${safeUrl(p.capa_url)}" alt="${p.imagem_alt || `Tela ilustrativa do ${p.nome}`}" width="960" height="600" fetchpriority="high"></div>
+          <dl class="carimbo">
+            <div><dt>Categoria</dt><dd><a href="/softwares?categoria=${p.categoria_slug}">${p.categoria_nome}</a></dd></div>
+            <div><dt>Situação</dt><dd>${statusBadge(p.status_comercial)}</dd></div>
+            <div><dt>Contratação</dt><dd>${MODELOS_CONTRATACAO[p.modelo_contratacao]}</dd></div>
+            <div><dt>Investimento</dt><dd>${priceLabel(p)}</dd></div>
+          </dl>
+        </figure></div>
       </div>
     </div></section>
 
@@ -248,9 +294,9 @@ export function productPage({ p, s, token }) {
         </button>${img.legenda ? html`<figcaption>${img.legenda}</figcaption>` : ''}</figure>`)}</div>
     </div></section>` : ''}
 
-    ${p.beneficios.length ? html`<section class="section section-ink" aria-labelledby="ben-title"><div class="container">
+    ${p.beneficios.length ? html`<section class="section section-sheet" aria-labelledby="ben-title"><div class="container">
       ${sectionHeading({ eyebrow: 'Resultados esperados', title: 'Recursos e benefícios', id: 'ben-title' })}
-      <div class="row g-4">${p.beneficios.map((b) => html`<div class="col-md-6 col-lg-3"><div class="tech-point"><h3>${b.titulo}</h3>${b.descricao ? html`<p>${b.descricao}</p>` : ''}</div></div>`)}</div>
+      <dl class="spec-sheet spec-sheet-wide">${p.beneficios.map((b) => html`<div><dt>${b.titulo}</dt><dd>${b.descricao || ''}</dd></div>`)}</dl>
     </div></section>` : ''}
 
     <section class="section" id="contratacao" aria-labelledby="ct-title"><div class="container">
@@ -274,7 +320,7 @@ export function productPage({ p, s, token }) {
             ${pl.descricao ? html`<p class="small text-body-secondary">${pl.descricao}</p>` : ''}
             ${pl.funcionalidades.length ? html`<ul class="check-list">${pl.funcionalidades.map((f) => html`<li>${f}</li>`)}</ul>` : ''}
             ${pl.limites ? html`<p class="small"><strong>Limites:</strong> ${pl.limites}</p>` : ''}
-            <a class="btn btn-outline-ink btn-sm" href="#solicitar" data-select-plan="${pl.nome}">${canHire ? 'Contratar este plano' : 'Solicitar orçamento'}</a>
+            <a class="btn btn-outline-ink btn-sm" href="#solicitar" data-select-plan="${pl.nome}">${canHire ? 'Contratar este plano' : 'Pedir orçamento deste plano'}</a>
           </article></div>`)}</div>`
           : html`<div class="empty-inline">${icon('chat-square-text')}<p>Os planos e valores deste software são definidos conforme o escopo de cada cliente. Solicite um orçamento sem compromisso.</p></div>`}
         </div>
@@ -285,7 +331,7 @@ export function productPage({ p, s, token }) {
       <div class="demo-callout">
         <div><h2 id="demo-title">Demonstração</h2>
           ${p.demo_disponivel ? html`<p>${p.demo_tipo === 'interna' ? 'Explore uma demonstração interativa com dados fictícios, executada no seu navegador.' : 'Acesse o ambiente de demonstração online.'}</p>` : html`<p>A demonstração está temporariamente indisponível.</p>`}
-          ${p.demo_aviso ? html`<p class="small">${icon('exclamation-circle')} ${p.demo_aviso}</p>` : ''}</div>
+          ${p.demo_aviso ? html`<p class="small mb-0">${icon('exclamation-circle')} ${p.demo_aviso}</p>` : ''}</div>
         ${p.demo_disponivel && demoHref ? html`<a class="btn btn-accent btn-lg" href="${demoHref}"${p.demo_tipo === 'externa' ? raw(' target="_blank" rel="noopener noreferrer"') : ''}>Abrir demonstração</a>` : ''}
       </div></div></section>` : ''}
 
@@ -297,14 +343,14 @@ export function productPage({ p, s, token }) {
     <section class="section section-alt" id="solicitar" aria-labelledby="sol-title"><div class="container">
       <div class="row g-5">
         <div class="col-lg-${isCustom ? '12' : '7'}"><div class="form-card">
-          <h2 id="sol-title">${isCustom ? 'Levantamento inicial de requisitos' : canHire ? `Contratar ${p.nome}` : `Solicitar orçamento do ${p.nome}`}</h2>
+          <h2 id="sol-title">${isCustom ? 'Levantamento inicial de requisitos' : canHire ? `Contratar ${p.nome}` : `Pedir orçamento do ${p.nome}`}</h2>
           <p class="text-body-secondary">${isCustom ? 'Conte o que você precisa. Analisamos e retornamos com perguntas e uma proposta.' : 'Não é necessário pagamento para solicitar orçamento. Retornamos com a proposta pelo e-mail informado.'}</p>
-          ${contactForm({ tipo: isCustom ? 'personalizado' : 'orcamento', token, produto: p, submitLabel: isCustom ? 'Enviar levantamento' : 'Solicitar orçamento', idPrefix: 'orc-' })}
+          ${contactForm({ tipo: isCustom ? 'personalizado' : 'orcamento', token, produto: p, submitLabel: isCustom ? 'Enviar levantamento' : 'Pedir orçamento', idPrefix: 'orc-' })}
         </div></div>
         ${!isCustom ? html`<div class="col-lg-5" id="apresentacao"><div class="form-card">
-          <h2 class="h4">Solicitar apresentação</h2>
+          <h2 class="h4">Pedir apresentação</h2>
           <p class="text-body-secondary small">Agende uma conversa para ver o sistema e tirar dúvidas.</p>
-          ${contactForm({ tipo: 'apresentacao', token, produto: p, compact: true, submitLabel: 'Solicitar apresentação', idPrefix: 'apr-' })}
+          ${contactForm({ tipo: 'apresentacao', token, produto: p, compact: true, submitLabel: 'Pedir apresentação', idPrefix: 'apr-' })}
         </div></div>` : ''}
       </div>
     </div></section>`;
@@ -336,7 +382,7 @@ export function demoPage({ p }) {
     <div class="container-fluid px-0">
       <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 px-3 py-2 demo-topbar">
         <a href="/softwares/${p.slug}" class="link-light text-decoration-none">${icon('arrow-left')} Voltar para ${p.nome}</a>
-        <a href="/softwares/${p.slug}#solicitar" class="btn btn-accent btn-sm">Solicitar orçamento</a>
+        <a href="/softwares/${p.slug}#solicitar" class="btn btn-accent btn-sm">Pedir orçamento</a>
       </div>
       <div id="demo-app" class="demo-app" data-demo="${p.slug}" aria-live="polite"><p class="p-4">Carregando demonstração…</p></div>
       <noscript><p class="p-4">A demonstração interativa requer JavaScript habilitado.</p></noscript>
@@ -352,18 +398,18 @@ export function servicesPage({ services, c, token }) {
       <p class="lead-muted">${c['servicos.texto'] || ''}</p>
     </div></section>
     <section class="section pt-4"><div class="container">
-      ${services.length ? html`<div class="row g-4">${services.map((sv) => html`<div class="col-md-6 col-lg-4"><article class="service-card">
+      ${services.length ? html`<div class="card-grid">${services.map((sv) => html`<article class="service-card">
         <span class="service-icon">${icon(sv.icone || 'gear')}</span>
         <h2><a href="/servicos/${sv.slug}">${sv.nome}</a></h2>
         <p>${sv.resumo}</p>
         ${sv.beneficios.length ? html`<ul class="check-list small">${sv.beneficios.slice(0, 3).map((b) => html`<li>${b}</li>`)}</ul>` : ''}
         ${sv.preco !== null ? html`<p class="small fw-semibold">${sv.preco_descricao || ''} ${formatMoney(sv.preco)}</p>` : ''}
-        <a class="btn btn-outline-ink btn-sm mt-auto" href="/servicos/${sv.slug}">Saiba mais</a>
-      </article></div>`)}</div>` : html`<div class="empty-state">${icon('tools')}<h2>Nenhum serviço publicado</h2><p>Em breve publicaremos nossos serviços. Enquanto isso, fale com a gente.</p><a class="btn btn-accent" href="/contato">Entrar em contato</a></div>`}
+        <a class="btn btn-outline-ink btn-sm mt-auto" href="/servicos/${sv.slug}">Ver o serviço</a>
+      </article>`)}</div>` : html`<div class="empty-state">${icon('tools')}<h2>Nenhum serviço publicado</h2><p>Em breve publicaremos nossos serviços. Enquanto isso, fale com a gente.</p><a class="btn btn-accent" href="/contato">Entrar em contato</a></div>`}
     </div></section>
     <section class="section section-alt"><div class="container narrow"><div class="form-card">
       <h2>Fale sobre o seu projeto</h2>
-      ${contactForm({ tipo: 'orcamento', token, servicos: services, submitLabel: 'Solicitar orçamento', idPrefix: 'srv-' })}
+      ${contactForm({ tipo: 'orcamento', token, servicos: services, submitLabel: 'Pedir orçamento', idPrefix: 'srv-' })}
     </div></div></section>`;
 }
 
@@ -379,8 +425,8 @@ export function servicePage({ sv, token }) {
         ${sv.preco !== null ? html`<p class="mt-3"><strong>Investimento:</strong> ${sv.preco_descricao || ''} ${formatMoney(sv.preco)}</p>` : html`<p class="mt-3 text-body-secondary">Valor definido conforme o escopo.</p>`}
       </div>
       <div class="col-lg-5"><div class="form-card">
-        <h2 class="h4">Solicitar orçamento</h2>
-        ${contactForm({ tipo: 'orcamento', token, compact: true, servico: sv, submitLabel: 'Solicitar orçamento', idPrefix: 'sv-' })}
+        <h2 class="h4">Pedir orçamento</h2>
+        ${contactForm({ tipo: 'orcamento', token, compact: true, servico: sv, submitLabel: 'Pedir orçamento', idPrefix: 'sv-' })}
       </div></div>
     </div></div></section>`;
 }
@@ -388,21 +434,19 @@ export function servicePage({ sv, token }) {
 // ------------------------------------------------------------------ contato
 export function contactPage({ s, token, tipo, produtos, servicos, values = {}, errors = {}, success = null, produtoSel = null }) {
   const wa = whatsappLink(s);
-  const titles = { contato: 'Fale conosco', orcamento: 'Solicitar orçamento', apresentacao: 'Solicitar apresentação', personalizado: 'Desenvolvimento personalizado' };
+  const titles = { contato: 'Fale conosco', orcamento: 'Pedir orçamento', apresentacao: 'Pedir apresentação', personalizado: 'Sistema sob medida' };
   return html`<section class="page-hero"><div class="container">
       ${breadcrumbs([{ href: '/', label: 'Início' }, { label: titles[tipo] }])}
       <h1>${titles[tipo]}</h1>
-      <p class="lead-muted">${tipo === 'orcamento' ? 'Conte o que você precisa. A solicitação de orçamento é gratuita e não exige pagamento.' : 'Responderemos pelo e-mail informado.'}</p>
+      <p class="lead-muted">${{ orcamento: 'Conte o que você precisa. O pedido de orçamento é gratuito e não exige pagamento.', personalizado: 'Descreva o processo que precisa virar sistema. Com isso preparamos as perguntas e a proposta.', apresentacao: 'Diga qual sistema quer ver e os melhores horários. A resposta chega pelo e-mail informado.' }[tipo] || 'A resposta chega pelo e-mail informado.'}</p>
     </div></section>
     <section class="section pt-4"><div class="container"><div class="row g-5">
       <div class="col-lg-8"><div class="form-card">
-        ${success ? html`<div class="alert alert-success" role="status" tabindex="-1" autofocus>${icon('check-circle')} ${success}</div><a class="btn btn-outline-ink" href="/">Voltar ao início</a>`
-          : html`<div class="btn-group mb-4 flex-wrap" role="group" aria-label="Tipo de solicitação">
-              <a class="btn btn-sm ${tipo === 'contato' ? 'btn-primary-ink' : 'btn-outline-ink'}" href="/contato">Mensagem</a>
-              <a class="btn btn-sm ${tipo === 'orcamento' ? 'btn-primary-ink' : 'btn-outline-ink'}" href="/orcamento">Orçamento</a>
-              <a class="btn btn-sm ${tipo === 'personalizado' ? 'btn-primary-ink' : 'btn-outline-ink'}" href="/contato?tipo=personalizado">Sistema personalizado</a>
-            </div>
-            ${contactForm({ tipo, token, produtos, servicos, values: { ...values, produto: values.produto || produtoSel || '' }, errors, submitLabel: tipo === 'orcamento' ? 'Solicitar orçamento' : 'Enviar', idPrefix: 'ct-' })}`}
+        ${success ? html`<div class="alert alert-success" role="status" tabindex="-1">${icon('check-circle')} ${success}</div><a class="btn btn-outline-ink" href="/">Voltar ao início</a>`
+          : html`<nav class="segmented" aria-label="Tipo de solicitação">
+              ${[['contato', '/contato', 'Mensagem'], ['orcamento', '/orcamento', 'Orçamento'], ['personalizado', '/contato?tipo=personalizado', 'Sistema sob medida'], ['apresentacao', '/contato?tipo=apresentacao', 'Apresentação']].map(([t, href, label]) => html`<a href="${href}"${tipo === t ? raw(' aria-current="page"') : ''}>${label}</a>`)}
+            </nav>
+            ${contactForm({ tipo, token, produtos, servicos, values: { ...values, produto: values.produto || produtoSel || '' }, errors, submitLabel: { orcamento: 'Pedir orçamento', personalizado: 'Enviar levantamento', apresentacao: 'Pedir apresentação' }[tipo] || 'Enviar mensagem', idPrefix: 'ct-' })}`}
       </div></div>
       <aside class="col-lg-4" aria-label="Outros canais">
         <div class="info-card">
@@ -441,7 +485,7 @@ export function faqPage({ faqs }) {
     </div></section>
     <section class="section pt-4"><div class="container narrow">
       ${faqs.length ? faqList(faqs, 'faq-geral') : html`<div class="empty-state">${icon('question-circle')}<h2>Nenhuma pergunta cadastrada</h2><p>Envie sua dúvida pelo formulário de contato.</p></div>`}
-      <div class="text-center mt-4"><p>Não encontrou sua resposta?</p><a class="btn btn-accent" href="/contato">Enviar pergunta</a></div>
+      <div class="faq-more"><p>Não encontrou a sua resposta?</p><a class="btn btn-accent" href="/contato">Enviar uma pergunta</a></div>
     </div></section>`;
 }
 

@@ -23,7 +23,7 @@
 
 Ícones de interface: [Bootstrap Icons](https://icons.getbootstrap.com/) (licença MIT), servidos a partir de `node_modules`.
 
-Fonte: [Montserrat](https://github.com/JulietaUla/Montserrat) (SIL Open Font License 1.1), arquivo variável `montserrat-latin-wght-normal.woff2` obtido do pacote `@fontsource-variable/montserrat@5.1.1` e servido em `frontend/public/assets/fonts/montserrat/` junto com a licença (`OFL.txt`).
+Fonte: [Archivo](https://github.com/Omnibus-Type/Archivo) (SIL Open Font License 1.1), arquivo variável `archivo-latin-standard-normal.woff2` (eixos de peso e largura) obtido do pacote `@fontsource-variable/archivo` e servido em `frontend/public/assets/fonts/archivo/` junto com a licença (`OFL.txt`). A imagem de compartilhamento (`og-default`) ainda foi gerada com a identidade anterior; ver pendências em `docs/ui/RELATORIO.md`.
 
 ## Modelo para novas imagens de terceiros
 

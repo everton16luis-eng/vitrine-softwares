@@ -14,12 +14,11 @@ export async function renderErrorPage(req, res, status, detail) {
   let settings = FALLBACK_SETTINGS;
   try { settings = { ...FALLBACK_SETTINGS, ...(await getPublicSettings()) }; } catch { /* banco indisponível: usa padrão */ }
   const m = MESSAGES[status] || { title: 'Não foi possível concluir', text: detail || 'Verifique os dados e tente novamente.', icon: 'info-circle' };
-  const body = html`<section class="section error-page"><div class="container narrow text-center">
-    <i class="bi bi-${m.icon} error-icon" aria-hidden="true"></i>
-    <p class="eyebrow">Erro ${status}</p>
+  const body = html`<section class="section error-page"><div class="container narrow">
+    <p class="error-code" aria-hidden="true">${status}</p>
     <h1>${m.title}</h1>
     <p class="lead-muted">${status < 500 && detail ? detail : m.text}</p>
-    <div class="d-flex justify-content-center flex-wrap gap-2 mt-4">
+    <div class="error-actions">
       <a class="btn btn-accent" href="/">Ir para o início</a>
       <a class="btn btn-outline-ink" href="/servicos">Ver serviços</a>
       <a class="btn btn-link" href="/contato">Falar com a gente</a>

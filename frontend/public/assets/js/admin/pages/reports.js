@@ -21,7 +21,7 @@ export async function render(c) {
       if (!r.linhas.length) { out.append(emptyState('Sem dados no período', 'Ajuste o período ou o tipo de relatório.')); return; }
       const keys = Object.keys(r.linhas[0]);
       out.append(el('p', { class: 'small text-body-secondary' }, `${r.titulo} · ${r.linhas.length} linha(s) · ${r.inicio.split('-').reverse().join('/')} a ${r.fim.split('-').reverse().join('/')}`),
-        el('div', { class: 'table-responsive' }, el('table', { class: 'table table-sm table-striped' },
+        el('div', { class: 'table-responsive', tabindex: '0', role: 'region', 'aria-label': r.titulo }, el('table', { class: 'table table-sm table-striped' },
           el('thead', {}, el('tr', {}, keys.map((k) => el('th', { scope: 'col' }, k.replace(/_/g, ' '))))),
           el('tbody', {}, r.linhas.slice(0, 500).map((row) => el('tr', {}, keys.map((k) => el('td', {}, row[k] === null ? '—' : typeof row[k] === 'boolean' ? (row[k] ? 'Sim' : 'Não') : String(row[k])))))))));
       if (r.linhas.length > 500) out.append(el('p', { class: 'small' }, 'Exibindo as primeiras 500 linhas. Exporte o CSV para ver tudo.'));

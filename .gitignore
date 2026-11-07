@@ -11,3 +11,6 @@ backups/
 coverage/
 .DS_Store
 Thumbs.db
+
+# Capturas de tela dos testes visuais (geradas por npm run test:e2e); os relatorio.json ficam no repositório
+docs/ui/capturas/**/*.png

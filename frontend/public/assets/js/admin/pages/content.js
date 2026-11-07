@@ -1,5 +1,5 @@
 import { get, put } from '../../shared/api.js';
-import { el, icon, badge, date, toast, toastError, loading } from '../../shared/ui.js';
+import { el, icon, badge, date, toast, toastError, loading, tabSet } from '../../shared/ui.js';
 import { crudPage, yesNo, pageHeader } from './_crud.js';
 
 const GROUPS = { home: 'Página inicial', servicos: 'Página de serviços' };
@@ -50,9 +50,9 @@ async function blocks(area, ctx) {
 }
 
 export async function render(c, ctx) {
-  const tabs = el('ul', { class: 'nav nav-tabs mb-3' });
-  const area = el('div');
-  c.append(tabs, area);
+  const t = tabSet([['textos', 'Textos e imagens'], ['paginas', 'Páginas'], ['faqs', 'Perguntas frequentes']], (k) => show(k), 'Conteúdo do site');
+  const area = t.panel;
+  c.append(t.list, area);
   const views = {
     textos: () => blocks(area, ctx),
     paginas: () => crudPage(area, ctx, {
@@ -88,12 +88,8 @@ export async function render(c, ctx) {
     })
   };
   const show = async (k) => {
-    tabs.querySelectorAll('button').forEach((b) => b.classList.toggle('active', b.dataset.tab === k));
     area.textContent = '';
     try { await views[k](); } catch (err) { toastError(err); }
   };
-  for (const [k, l] of [['textos', 'Textos e imagens'], ['paginas', 'Páginas'], ['faqs', 'Perguntas frequentes']]) {
-    tabs.append(el('li', { class: 'nav-item' }, el('button', { class: 'nav-link', type: 'button', dataset: { tab: k }, onclick: () => show(k) }, l)));
-  }
-  await show('textos');
+  await t.show('textos');
 }
