@@ -1,0 +1,24 @@
+# Trecho para o prometheus.yml (Prometheus no mesmo VPS da central).
+# O token fica em arquivo legível só pelo usuário do Prometheus (mesmo valor de METRICS_TOKEN no .env da central).
+scrape_configs:
+  - job_name: central-backup
+    scrape_interval: 60s
+    metrics_path: /api/v1/metrics
+    authorization:
+      type: Bearer
+      credentials_file: /etc/prometheus/central-backup.token
+    static_configs:
+      - targets: ['127.0.0.1:4300']
+
+# Regras sugeridas (arquivo de regras do Prometheus):
+# groups:
+#   - name: central-backup
+#     rules:
+#       - alert: BackupSemSucessoHa26h
+#         expr: time() - central_backup_last_success_timestamp_seconds > 26 * 3600
+#       - alert: AgenteSemContato
+#         expr: central_server_up == 0
+#         for: 5m
+#       - alert: DiscoQuaseCheio
+#         expr: central_server_disk_used_ratio > 0.9
+#         for: 15m

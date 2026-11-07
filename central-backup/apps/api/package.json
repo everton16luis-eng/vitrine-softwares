@@ -1,0 +1,20 @@
+{
+  "name": "@central/api",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@central/contracts": "*",
+    "@central/database": "*",
+    "@central/security": "*",
+    "@central/shared": "*",
+    "@fastify/cookie": "^11.1.5",
+    "@fastify/helmet": "^13.2.0",
+    "@fastify/rate-limit": "^11.2.2",
+    "@fastify/swagger": "^9.9.3",
+    "@fastify/type-provider-typebox": "^6.3.0",
+    "fastify": "^5.12.8",
+    "nodemailer": "^6.10.1",
+    "typebox": "^1.4.5"
+  }
+}

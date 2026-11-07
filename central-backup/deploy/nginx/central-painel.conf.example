@@ -1,0 +1,40 @@
+# Exemplo de site Nginx para publicar o painel da Central de Backup com HTTPS.
+# NÃO substitui a configuração de outros sites: copie para /etc/nginx/sites-available/central-painel,
+# ajuste server_name e certificados, crie o link em sites-enabled e rode `nginx -t` antes de recarregar.
+# No .env da central: NODE_ENV=production (cookie Secure) e TRUST_PROXY=1 (IP real nos logs e na auditoria).
+server {
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    http2 on;
+    server_name backup.exemplo.com.br;
+
+    ssl_certificate     /etc/letsencrypt/live/backup.exemplo.com.br/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/backup.exemplo.com.br/privkey.pem;
+
+    add_header Strict-Transport-Security "max-age=31536000" always;
+    client_max_body_size 2m;
+
+    # painel web e API pela mesma origem (o cookie de sessão é SameSite=Strict)
+    location / {
+        proxy_pass http://127.0.0.1:4300;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_read_timeout 180s;   # navegação em snapshots usa restic ls
+    }
+
+    # métricas do Prometheus só pela rede local (o token também é exigido)
+    location = /api/v1/metrics {
+        allow 127.0.0.1;
+        deny all;
+        proxy_pass http://127.0.0.1:4300;
+    }
+}
+
+server {
+    listen 80;
+    listen [::]:80;
+    server_name backup.exemplo.com.br;
+    return 301 https://$host$request_uri;
+}

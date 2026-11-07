@@ -1,0 +1,11 @@
+{
+  "name": "@central/agent",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@central/contracts": "*",
+    "@central/security": "*",
+    "@central/shared": "*"
+  }
+}

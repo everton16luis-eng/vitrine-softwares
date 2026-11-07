@@ -1,0 +1,27 @@
+[Unit]
+Description=Central de Backup - rest-server (repositórios restic, somente inclusão)
+After=network-online.target
+Wants=network-online.target
+ConditionPathExists=/srv/central-backup/repos/.htpasswd
+
+[Service]
+Type=simple
+# mesmo usuário do worker da central: a central faz forget/prune direto no disco
+User=central
+Group=central
+ExecStart=/usr/local/bin/rest-server --path /srv/central-backup/repos --listen 127.0.0.1:8000 --append-only --private-repos
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+ReadWritePaths=/srv/central-backup/repos
+CapabilityBoundingSet=
+AmbientCapabilities=
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+LockPersonality=yes
+UMask=0077
+
+[Install]
+WantedBy=multi-user.target

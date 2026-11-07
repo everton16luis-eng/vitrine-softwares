@@ -1,0 +1,21 @@
+[Unit]
+Description=Central de Backup - pgBackRest (%i)
+Documentation=https://github.com/everton16luis-eng/vitrine-softwares/tree/master/docs/central-backup/fase-8.md
+After=postgresql.service
+
+# Disparada pelo agente (systemctl start central-pgbackrest@<stanza>.<tipo>.service), autorizado só
+# para esta família de unidades pela regra polkit 49-central-pgbackrest.rules. Roda como postgres,
+# dono do PGDATA; o resultado fica em /var/lib/central-pgbackrest/<instância>/ para o agente ler.
+[Service]
+Type=oneshot
+User=postgres
+Group=postgres
+ExecStart=/opt/central-agent/apps/agent/install/pgbackrest-run.sh %i
+StateDirectory=central-pgbackrest
+StateDirectoryMode=0755
+TimeoutStartSec=12h
+Nice=10
+IOSchedulingClass=best-effort
+IOSchedulingPriority=7
+NoNewPrivileges=yes
+PrivateTmp=no

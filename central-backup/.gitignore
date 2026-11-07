@@ -1,0 +1,9 @@
+# segredos e estado local: KEK, CA, certificados, estado do agente
+.data/
+*.pem
+*.key
+kek
+.tools/
+
+# build do painel web (gerado no servidor com npm run web:build)
+apps/web/dist/

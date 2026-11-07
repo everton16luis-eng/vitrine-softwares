@@ -24,7 +24,7 @@ Plataforma web para **apresentar, divulgar, comercializar e administrar software
 13. [Pendências e integrações que exigem configuração](#pendências-e-integrações-que-exigem-configuração)
 
 Documentação complementar em [`docs/`](docs/):
-[API](docs/API.md) · [Banco de dados](docs/BANCO-DE-DADOS.md) · [Segurança e LGPD](docs/SEGURANCA-E-LGPD.md) · [Pagamentos](docs/PAGAMENTOS.md) · [Imagens e licenças](docs/IMAGENS.md) · [Deploy](docs/DEPLOY.md) · [Deploy em VPS compartilhada](docs/DEPLOY-VPS.md) · [Central de Implantação](docs/IMPLANTACOES.md)
+[API](docs/API.md) · [Banco de dados](docs/BANCO-DE-DADOS.md) · [Segurança e LGPD](docs/SEGURANCA-E-LGPD.md) · [Pagamentos](docs/PAGAMENTOS.md) · [Imagens e licenças](docs/IMAGENS.md) · [Deploy](docs/DEPLOY.md) · [Deploy em VPS compartilhada](docs/DEPLOY-VPS.md) · [Central de Implantação](docs/IMPLANTACOES.md) · [Central de Backup e DR](docs/central-backup/README.md)
 
 ---
 

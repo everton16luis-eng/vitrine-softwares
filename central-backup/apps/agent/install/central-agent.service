@@ -1,0 +1,47 @@
+[Unit]
+Description=Central de Backup - agente
+Documentation=https://github.com/everton16luis-eng/vitrine-softwares/tree/master/docs/central-backup
+After=network-online.target
+Wants=network-online.target
+ConditionPathExists=/var/lib/central-agent/agent.json
+
+[Service]
+Type=simple
+User=central-agent
+Group=central-agent
+Environment=CENTRAL_AGENT_DIR=/var/lib/central-agent
+Environment=NODE_NO_WARNINGS=1
+ExecStart=/usr/bin/env node /opt/central-agent/apps/agent/src/main.ts run
+Restart=on-failure
+RestartSec=15
+# 78 = credencial recusada pela central (agente revogado): não reiniciar em laço
+RestartPreventExitStatus=78
+StateDirectory=central-agent
+StateDirectoryMode=0700
+
+# O agente roda sem root e com o sistema de arquivos somente leitura (só o diretório de estado é
+# gravável). CAP_DAC_READ_SEARCH permite LER qualquer arquivo para o backup, sem permitir escrita
+# nem execução privilegiada; o restaurador (Fase 4) é um processo separado.
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=read-only
+# NoNewPrivileges impede ganho de privilégio pelos filhos (restic, pg_dump herdam só a leitura)
+PrivateTmp=yes
+PrivateDevices=no
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
+RestrictSUIDSGID=yes
+LockPersonality=yes
+RestrictRealtime=yes
+CapabilityBoundingSet=CAP_DAC_READ_SEARCH
+AmbientCapabilities=CAP_DAC_READ_SEARCH
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+# restic precisa de memória proporcional ao índice do repositório
+MemoryMax=1G
+CPUQuota=25%
+Nice=10
+IOSchedulingClass=idle
+
+[Install]
+WantedBy=multi-user.target

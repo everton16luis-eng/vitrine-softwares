@@ -1,0 +1,38 @@
+{
+  "name": "central-backup",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Central de backup, monitoramento e disaster recovery (aplicação separada do site).",
+  "type": "module",
+  "engines": {
+    "node": ">=22.18"
+  },
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "db:migrate": "node packages/database/src/cli/migrate.ts",
+    "db:seed": "node packages/database/src/cli/seed.ts",
+    "admin:create": "node apps/api/src/cli/create-admin.ts",
+    "ca:init": "node apps/api/src/cli/init-ca.ts",
+    "start:panel": "node apps/api/src/main.ts panel",
+    "start:gateway": "node apps/api/src/main.ts gateway",
+    "start:worker": "node apps/api/src/main.ts worker",
+    "central": "node apps/api/src/cli/central.ts",
+    "agent": "node apps/agent/src/main.ts",
+    "test": "node --test --test-concurrency=1 \"tests/**/*.test.ts\"",
+    "test:unit": "node --test \"tests/unit/*.test.ts\"",
+    "web:gen": "node scripts/web-gen.ts",
+    "web:dev": "npm run dev -w @central/web",
+    "web:build": "npm run web:gen && npm run build -w @central/web"
+  },
+  "devDependencies": {
+    "@types/node": "^22.18.0",
+    "@types/nodemailer": "^6.4.24",
+    "@types/pg": "^8.23.1",
+    "typescript": "~5.9.3",
+    "yaml": "^2.9.1"
+  }
+}

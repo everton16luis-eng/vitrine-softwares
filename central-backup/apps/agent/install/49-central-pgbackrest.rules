@@ -1,0 +1,11 @@
+// Permite ao usuário central-agent APENAS iniciar unidades central-pgbackrest@<stanza>.<tipo>.service.
+// Requer polkit >= 0.106 (Ubuntu 23.04+, Debian 12+). Instalado por install.sh quando há pgbackrest.
+polkit.addRule(function (action, subject) {
+  if (action.id === "org.freedesktop.systemd1.manage-units" && subject.user === "central-agent") {
+    var unit = action.lookup("unit") || "";
+    var verb = action.lookup("verb") || "";
+    if (verb === "start" && /^central-pgbackrest@[A-Za-z0-9][A-Za-z0-9_.-]{0,62}\.(full|diff|incr|info)\.service$/.test(unit)) {
+      return polkit.Result.YES;
+    }
+  }
+});

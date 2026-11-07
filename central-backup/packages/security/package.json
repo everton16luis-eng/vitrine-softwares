@@ -1,0 +1,19 @@
+{
+  "name": "@central/security",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./ca": "./src/ca.ts",
+    "./signing": "./src/signing.ts",
+    "./tokens": "./src/tokens.ts",
+    "./seal": "./src/seal.ts"
+  },
+  "dependencies": {
+    "@central/shared": "*",
+    "@peculiar/x509": "^3.1.0",
+    "argon2": "^0.45.2",
+    "reflect-metadata": "^0.2.2"
+  }
+}
