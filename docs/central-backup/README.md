@@ -13,6 +13,7 @@ Decisões em [06-riscos-e-decisoes.md](06-riscos-e-decisoes.md#3-decisões-tomad
 | [05-plano.md](05-plano.md) | Estrutura do monorepo, fases, estratégia de testes, critérios de aceitação |
 | [06-riscos-e-decisoes.md](06-riscos-e-decisoes.md) | Riscos técnicos e decisões que dependem da empresa |
 | [fase-1.md](fase-1.md) | Fase 1: o que foi feito, desvios do plano, instalação, testes e pendências |
+| [instalacao-vps.md](instalacao-vps.md) | **Roteiro de instalação no VPS da vitrine** (serviços systemd, banco, KEK, painel, primeiro agente) |
 
 ## 1. O que existe hoje e o que muda
 

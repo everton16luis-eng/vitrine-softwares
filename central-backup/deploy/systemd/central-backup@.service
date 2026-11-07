@@ -1,0 +1,52 @@
+# Central de Backup — processos da central (um por instância):
+#   central-backup@panel    painel web + API em 127.0.0.1:4300 (publicado pelo Nginx)
+#   central-backup@gateway  gateway mTLS dos agentes em 0.0.0.0:8443
+#   central-backup@worker   agendador, verificação, retenção e alertas (rode só UMA instância)
+#
+# Instalação: docs/central-backup/instalacao-vps.md
+#   sudo cp deploy/systemd/central-backup@.service /etc/systemd/system/
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable --now central-backup@panel central-backup@gateway central-backup@worker
+[Unit]
+Description=Central de Backup - %i
+Documentation=https://github.com/everton16luis-eng/vitrine-softwares/tree/master/docs/central-backup
+After=network-online.target postgresql.service
+Wants=network-online.target
+ConditionPathExists=/opt/central-backup/.env
+
+[Service]
+Type=simple
+User=central
+Group=central
+WorkingDirectory=/opt/central-backup
+Environment=NODE_NO_WARNINGS=1
+# cache do restic (navegação em snapshots, verificação, retenção)
+Environment=XDG_CACHE_HOME=/var/cache/central-backup
+CacheDirectory=central-backup
+CacheDirectoryMode=0700
+ExecStart=/usr/bin/env node apps/api/src/main.ts %i
+Restart=on-failure
+RestartSec=5
+
+# Endurecimento: a central só escreve no próprio diretório de dados (.data) e nos repositórios.
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+ReadWritePaths=/opt/central-backup/.data -/srv/central-backup/repos
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
+RestrictSUIDSGID=yes
+LockPersonality=yes
+RestrictRealtime=yes
+CapabilityBoundingSet=
+AmbientCapabilities=
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+UMask=0077
+# não disputar recursos com o site que roda no mesmo VPS (decisão D2)
+MemoryMax=1G
+CPUQuota=50%
+
+[Install]
+WantedBy=multi-user.target
