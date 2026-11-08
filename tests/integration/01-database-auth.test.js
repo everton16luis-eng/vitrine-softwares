@@ -22,8 +22,8 @@ describe('inicialização do banco de dados', { skip }, () => {
     const produtos = await h.db.many('SELECT slug, dados_demonstrativos, preco, status_comercial FROM produtos ORDER BY ordem');
     assert.deepEqual(produtos.map((p) => p.slug), ['portal-de-noticias', 'churchflow', 'spacecontrol', 'fleetmanager', 'sistemas-personalizados']);
     assert.ok(produtos.every((p) => p.preco === null), 'nenhum preço inventado');
-    // O Portal Regional de Notícias é um sistema real (capturas das telas); os demais seguem ilustrativos.
-    assert.deepEqual(produtos.filter((p) => !p.dados_demonstrativos).map((p) => p.slug), ['portal-de-noticias']);
+    // Portal Regional de Notícias e Gerenciamento de Igrejas são sistemas reais (capturas das telas); os demais seguem ilustrativos.
+    assert.deepEqual(produtos.filter((p) => !p.dados_demonstrativos).map((p) => p.slug), ['portal-de-noticias', 'churchflow']);
     const { n } = await h.db.one('SELECT count(*)::int n FROM clientes');
     assert.equal(n, 0, 'nenhum cliente fictício deve ser criado');
   });
@@ -52,6 +52,30 @@ describe('inicialização do banco de dados', { skip }, () => {
     assert.equal(imgs.at(-1).url_estatica, '/uploads/minha.png', 'imagem do painel preservada, depois das capturas');
     const { n } = await h.db.one("SELECT count(*)::int n FROM produto_funcionalidades WHERE produto_id = $1 AND titulo = 'Editada no painel'", [id]);
     assert.equal(n, 1, 'funcionalidades editadas no painel não são trocadas');
+  });
+
+  test('seed 08 troca o exemplo ChurchFlow pelo Gerenciamento de Igrejas e preserva textos editados', async () => {
+    const { seed } = await import('../../database/seeds/08-gerenciamento-de-igrejas.js');
+    const tx = { query: (sql, params) => h.db.query(sql, params), one: (sql, params) => h.db.one(sql, params) };
+    const { id } = await h.db.one("SELECT id FROM produtos WHERE slug = 'churchflow'");
+    // Banco antigo: exemplo ChurchFlow, mas com o resumo já editado no painel.
+    await h.db.query("UPDATE produtos SET nome = 'ChurchFlow', resumo = 'Resumo escrito no painel', status_comercial = 'em_desenvolvimento', imagem_url = '/assets/images/produtos/churchflow-capa.svg' WHERE id = $1", [id]);
+    await h.db.query('DELETE FROM produto_faqs WHERE produto_id = $1', [id]);
+    await h.db.query("INSERT INTO produto_faqs (produto_id, pergunta, resposta, ordem) VALUES ($1, 'Os dados da demonstração são reais?', 'x', 0), ($1, 'O sistema já está disponível para contratação?', 'y', 1)", [id]);
+    await h.db.query('DELETE FROM produto_imagens WHERE produto_id = $1', [id]);
+    await h.db.query("INSERT INTO produto_imagens (produto_id, url_estatica, legenda, ordem) VALUES ($1, '/assets/images/produtos/churchflow-escalas.svg', 'antiga', 0)", [id]);
+
+    await seed(tx);
+
+    const p = await h.db.one('SELECT nome, resumo, status_comercial, imagem_url FROM produtos WHERE id = $1', [id]);
+    assert.equal(p.nome, 'ChurchFlow', 'textos editados no painel não são trocados');
+    assert.equal(p.resumo, 'Resumo escrito no painel');
+    assert.equal(p.status_comercial, 'em_desenvolvimento');
+    assert.equal(p.imagem_url, '/assets/images/produtos/gerenciamento-de-igrejas-capa.webp');
+    const { n } = await h.db.one("SELECT count(*)::int n FROM produto_imagens WHERE produto_id = $1 AND url_estatica LIKE '%gerenciamento-de-igrejas-%.webp'", [id]);
+    assert.equal(n, 11);
+    const faq = await h.db.one('SELECT pergunta FROM produto_faqs WHERE produto_id = $1 ORDER BY ordem LIMIT 1', [id]);
+    assert.equal(faq.pergunta, 'As telas são do sistema real?');
   });
 
   test('seeds são idempotentes', async () => {

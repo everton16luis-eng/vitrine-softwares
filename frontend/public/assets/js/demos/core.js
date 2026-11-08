@@ -60,6 +60,49 @@ export function flash(container, message, tone = 'ok') {
 }
 
 /**
+ * Tela "Tour: telas reais": percorre capturas do sistema em funcionamento.
+ * passos: [{ img: URL da captura, area, titulo, itens: [texto], ver: id da tela da simulação }]
+ */
+export function tourView(passos) {
+  return function tour(c, app) {
+    let i = 0;
+    const img = el('img', { class: 'demo-tour-img', width: '1440', height: '900', alt: '', decoding: 'async' });
+    const zoom = el('a', { class: 'demo-tour-zoom', target: '_blank', rel: 'noopener', title: 'Abrir a captura em tamanho real' }, img);
+    const area = el('span', { class: 'demo-tour-area' });
+    const titulo = el('h3', { class: 'demo-tour-title', tabindex: '-1' });
+    const lista = el('ul', { class: 'demo-tour-list' });
+    const pos = el('span', { class: 'demo-muted small', 'aria-live': 'polite' });
+    const anterior = el('button', { type: 'button', class: 'btn btn-sm btn-outline-light', onclick: () => ir(i - 1) }, icon('arrow-left'), ' Anterior');
+    const proxima = el('button', { type: 'button', class: 'btn btn-sm btn-accent', onclick: () => ir(i + 1) }, 'Próxima ', icon('arrow-right'));
+    const testar = el('button', { type: 'button', class: 'btn btn-sm btn-outline-light', onclick: () => app.go(passos[i].ver) }, icon('play-circle'), ' Experimentar na simulação');
+    const indice = el('ol', { class: 'demo-tour-steps', 'aria-label': 'Telas do tour' }, passos.map((t, k) =>
+      el('li', {}, el('button', { type: 'button', onclick: () => ir(k, true) }, el('span', { class: 'demo-tour-n' }, String(k + 1)), el('span', {}, t.titulo)))));
+    function ir(k, foco = false) {
+      i = (k + passos.length) % passos.length;
+      const t = passos[i];
+      img.src = t.img;
+      img.alt = `Captura real do sistema: ${t.titulo} (dados fictícios)`;
+      zoom.href = t.img;
+      area.textContent = t.area;
+      titulo.textContent = t.titulo;
+      lista.replaceChildren(...t.itens.map((x) => el('li', {}, x)));
+      pos.textContent = `Tela ${i + 1} de ${passos.length}`;
+      indice.querySelectorAll('button').forEach((b, n) => b.setAttribute('aria-current', n === i ? 'step' : 'false'));
+      testar.hidden = !t.ver;
+      if (foco) titulo.focus();
+    }
+    const raiz = el('div', { class: 'demo-tour', onkeydown: (e) => {
+      if (e.key === 'ArrowRight') ir(i + 1, true);
+      if (e.key === 'ArrowLeft') ir(i - 1, true);
+    } },
+    el('figure', { class: 'demo-tour-shot' }, zoom, el('figcaption', { class: 'demo-muted small' }, 'Captura do sistema em execução, com dados fictícios. Clique para ampliar.')),
+    el('div', { class: 'demo-tour-info' }, area, titulo, lista, el('div', { class: 'demo-tour-nav' }, anterior, proxima, pos), testar));
+    c.append(card(null, el('p', { class: 'demo-muted mb-3' }, 'Estas são as telas do sistema real. Avance pelos botões ou pelas setas do teclado; em cada tela, "Experimentar na simulação" abre a parte interativa correspondente.'), indice, raiz));
+    ir(0);
+  };
+}
+
+/**
  * Monta a aplicação de demonstração com menu lateral.
  * views: [{ id, label, icon, render(container, app) }]
  */

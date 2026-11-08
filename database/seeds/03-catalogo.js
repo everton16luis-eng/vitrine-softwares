@@ -1,5 +1,6 @@
 // Catálogo inicial. Os produtos ilustrativos são marcados como dados_demonstrativos; o Portal Regional
-// de Notícias é um sistema real, com capturas das telas em funcionamento (demonstrativo: false).
+// de Notícias e o Gerenciamento de Igrejas são sistemas reais, com capturas das telas em funcionamento
+// (demonstrativo: false).
 // NENHUM preço é inventado. Situações comerciais iniciais conservadoras:
 // os sistemas aparecem como "Em desenvolvimento" ou "Demonstração disponível" (com demonstração visual
 // de dados fictícios); o administrador altera conforme a realidade.
@@ -59,26 +60,47 @@ export const PRODUCTS = [
     ]
   },
   {
-    slug: 'churchflow', nome: 'ChurchFlow', categoria: 'gestao-institucional', ordem: 10, destaque: true,
-    resumo: 'Plataforma para organizar membros, visitantes, voluntários, eventos, escalas de serviço e relatórios de igrejas e instituições.',
-    descricao: 'O **ChurchFlow** (nome provisório) centraliza a organização de uma comunidade: cadastro de membros e visitantes, equipes de voluntários, escalas com confirmação de participação, calendário de eventos e relatórios administrativos.\n\nCada voluntário pode ter uma área individual para consultar e confirmar as próprias escalas, reduzindo trocas de mensagens e esquecimentos.',
-    problema: 'Escalas montadas em planilhas e grupos de mensagens, confirmações perdidas, cadastros duplicados e dificuldade para saber quem participa de cada atividade.',
-    publico: '- Igrejas e comunidades religiosas\n- Associações e instituições com equipes de voluntários\n- Organizações que realizam eventos recorrentes',
-    requisitos: '- Navegador atualizado (Chrome, Edge, Firefox ou Safari)\n- Acesso à internet\n- Hospedagem em servidor Node.js com PostgreSQL (pode ser fornecida na implantação)',
-    status: 'em_desenvolvimento', modelo: 'sob_orcamento', demo: 'interna',
+    slug: 'churchflow', nome: 'Gerenciamento de Igrejas', categoria: 'gestao-institucional', ordem: 10, destaque: true, demonstrativo: false, capa: 'gerenciamento-de-igrejas-capa.webp',
+    resumo: 'Sistema de gestão de igrejas: cadastro único de pessoas, voluntários e escalas com confirmação pelo celular, eventos, ministério infantil com etiquetas e QR code, avisos e relatórios.',
+    descricao: 'O **Gerenciamento de Igrejas** organiza a rotina da secretaria, dos líderes e dos voluntários em um só sistema: cadastro único de visitantes e membros, voluntários com funções e disponibilidade, escalas com confirmação, eventos e relatórios.\n\nCada voluntário tem a sua **Minha área**, aberta pelo celular, para confirmar ou recusar escalas, **passar a vaga** para outro voluntário e informar ausências — com avisos no celular e lembrete na véspera. No ministério infantil, a recepção das crianças registra quem deixou, imprime **duas etiquetas** e confere a saída lendo o **QR code** pela câmera.\n\nAs telas desta página são capturas do sistema em funcionamento, com dados fictícios (igreja, pessoas e logo genéricos).',
+    problema: 'Escalas montadas em planilhas e grupos de mensagens, confirmações perdidas, cadastros duplicados, crianças entregues sem conferência e dificuldade para saber quem participa de cada atividade.',
+    publico: '- Igrejas e comunidades religiosas\n- Associações e instituições com equipes de voluntários\n- Organizações com ministério infantil ou eventos recorrentes',
+    requisitos: '- Navegador atualizado no computador ou no celular (Chrome, Edge, Firefox ou Safari)\n- Servidor Node.js com PostgreSQL e HTTPS (pode ser fornecido na implantação)\n- Opcional: impressora de etiquetas para a recepção das crianças',
+    status: 'demonstracao_disponivel', modelo: 'sob_orcamento', demo: 'interna',
     funcionalidades: [
-      f('Membros e visitantes', 'Cadastro com histórico de participação e acompanhamento de visitantes.', 'person-vcard'),
-      f('Gestão de voluntários', 'Equipes, funções e disponibilidade de cada voluntário.', 'people'),
-      f('Escalas com confirmação', 'Montagem de escalas e confirmação de presença pelo próprio voluntário.', 'calendar-check'),
-      f('Calendário de eventos', 'Eventos, cultos e atividades em uma agenda única.', 'calendar3'),
-      f('Usuários e permissões', 'Perfis de acesso para líderes, secretaria e administração.', 'shield-lock'),
-      f('Relatórios administrativos', 'Participação, frequência e escalas por período.', 'bar-chart'),
-      f('Área do voluntário', 'Espaço individual para consultar e confirmar compromissos.', 'person-badge'),
-      f('Atividades e equipes', 'Controle de ministérios, equipes e suas atividades.', 'diagram-3')
+      f('Cadastro único de pessoas', 'Visitantes e membros na mesma base, com classificação, apto ao voluntariado e acesso ao sistema.', 'person-vcard'),
+      f('Voluntários e funções', 'Funções, vagas por escala, disponibilidade por dia e ficha completa com histórico e ausências.', 'people'),
+      f('Escalas com confirmação', 'Calendário de escalas, confirmações pendentes, substituição e verificação de ausências ao escalar.', 'calendar-check'),
+      f('Minha área do voluntário', 'Confirmar, recusar, passar a vaga, informar ausências e trocar a senha pelo celular.', 'person-badge'),
+      f('Eventos', 'Próximos eventos com as funções necessárias; o evento realizado vira histórico.', 'calendar3'),
+      f('Crianças e responsáveis', 'Ficha com responsáveis, autorizações e quem pode buscar; turmas por faixa etária.', 'balloon'),
+      f('Turmas com etiqueta e QR code', 'Entrada com quem deixou, duas etiquetas, saída lendo o QR pela câmera e encerramento automático.', 'qr-code'),
+      f('Lista de presença', 'Entrada e saída nas turmas, por data.', 'clipboard-check'),
+      f('Avisos no celular', 'Central de avisos e notificações no celular sem aplicativo, com lembrete na véspera.', 'bell'),
+      f('Relatórios', '8 tipos e o relatório por evento, com pré-visualização e exportação em PDF, Excel e CSV.', 'bar-chart'),
+      f('Usuários e permissões', 'Perfis por área (administração, secretaria, financeiro, voluntário) com proteção contra escalada de privilégio.', 'shield-lock'),
+      f('Configurações e backup', 'Dados da igreja, preferências e backup do banco manual e automático.', 'hdd-stack')
     ],
-    beneficios: [f('Menos mensagens', 'Confirmações centralizadas no sistema.'), f('Escalas equilibradas', 'Visão de quem está sobrecarregado ou disponível.'), f('Histórico organizado', 'Participação registrada ao longo do tempo.'), f('Acesso pelo celular', 'Interface responsiva para voluntários.')],
-    faqs: [['Os dados da demonstração são reais?', 'Não. A demonstração usa somente nomes e dados fictícios.'], ['O sistema já está disponível para contratação?', 'O ChurchFlow está em desenvolvimento. Registre seu interesse para ser avisado e participar da definição das funcionalidades.']],
-    imagens: [['churchflow-escalas.svg', 'Escalas de serviço com status de confirmação'], ['churchflow-membros.svg', 'Cadastro de membros e visitantes'], ['churchflow-relatorios.svg', 'Relatórios de participação']]
+    beneficios: [f('Menos mensagens', 'Confirmações e trocas de escala centralizadas no sistema.'), f('Escalas equilibradas', 'Visão de quem está disponível, sobrecarregado ou ausente.'), f('Crianças seguras', 'Entrega conferida pela etiqueta e pelo QR code.'), f('Acesso pelo celular', 'Voluntários usam pelo navegador, sem instalar aplicativo.')],
+    faqs: [
+      ['As telas são do sistema real?', 'Sim. As imagens são capturas do sistema em funcionamento, com dados fictícios: igreja, pessoas e logo genéricos. A demonstração interativa simula os fluxos principais no seu navegador.'],
+      ['Precisa instalar aplicativo?', 'Não. O sistema funciona no navegador do computador e do celular; o voluntário pode adicioná-lo à tela inicial e receber avisos.'],
+      ['Posso usar o nome e o logo da minha igreja?', 'Sim. Nome, logo e dados da igreja são configurados na implantação e nas Configurações.'],
+      ['Os dados da igreja ficam protegidos?', 'Cada perfil acessa só as áreas permitidas, as senhas exigem regras fortes e o backup do banco pode ser automático.']
+    ],
+    imagens: [
+      ['gerenciamento-de-igrejas-capa.webp', 'Dashboard: visitantes, membros, voluntários e escalas da semana'],
+      ['gerenciamento-de-igrejas-escalas.webp', 'Calendário de escalas com confirmações e pendências'],
+      ['gerenciamento-de-igrejas-celular.webp', 'No celular: Minha área, escalas e dashboard'],
+      ['gerenciamento-de-igrejas-minha-area.webp', 'Minha área do voluntário'],
+      ['gerenciamento-de-igrejas-participantes.webp', 'Cadastro único de participantes'],
+      ['gerenciamento-de-igrejas-voluntarios.webp', 'Voluntários com funções e disponibilidade'],
+      ['gerenciamento-de-igrejas-criancas.webp', 'Crianças, responsáveis e turmas'],
+      ['gerenciamento-de-igrejas-turmas.webp', 'Turmas: recepção das crianças no culto'],
+      ['gerenciamento-de-igrejas-eventos.webp', 'Cadastro de eventos com as funções necessárias'],
+      ['gerenciamento-de-igrejas-funcoes.webp', 'Funções e vagas por escala'],
+      ['gerenciamento-de-igrejas-relatorios.webp', 'Relatórios com exportação em PDF, Excel e CSV']
+    ]
   },
   {
     slug: 'spacecontrol', nome: 'SpaceControl', categoria: 'gestao-de-locacoes', ordem: 20, destaque: true,

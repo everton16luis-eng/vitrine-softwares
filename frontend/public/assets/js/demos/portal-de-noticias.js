@@ -1,4 +1,4 @@
-import { el, icon, kpis, table, badge, card, field, flash, mountDemo, addDays, fmtDateLong, money } from './core.js';
+import { el, icon, kpis, table, badge, card, field, flash, mountDemo, tourView, addDays, fmtDateLong, money } from './core.js';
 
 // Dados 100% fictícios: municípios, fontes, autores e notícias são inventados.
 // Nenhuma notícia é publicada automaticamente — coleta e IA apenas preparam a fila de revisão.
@@ -225,69 +225,33 @@ function relatorios(c) {
 // Tour pelas telas reais: capturas do sistema rodando com o conteúdo de demonstração (fictício).
 const IMG = (k) => `/assets/images/produtos/portal-de-noticias-${k}.webp`;
 const TOUR = [
-  { img: 'capa', area: 'Portal do leitor', titulo: 'Capa do portal', ver: 'portal',
+  { img: IMG('capa'), area: 'Portal do leitor', titulo: 'Capa do portal', ver: 'portal',
     itens: ['Manchete e lista lateral montadas com as matérias publicadas ou escolhidas em "Destaques da home".', 'Menus por município e por categoria, busca e espaços de anúncio no tamanho real.', 'Páginas geradas no servidor: carregam rápido e são boas para SEO.'] },
-  { img: 'materia', area: 'Portal do leitor', titulo: 'Página da matéria', ver: 'portal',
+  { img: IMG('materia'), area: 'Portal do leitor', titulo: 'Página da matéria', ver: 'portal',
     itens: ['Oito modelos de página: clássico, destaque, nota, urgente, serviço, entrevista, fotorreportagem e especial.', 'Crédito da fonte e do autor, com link para a publicação original.', 'Dados estruturados de notícia, Open Graph, sitemap e feed RSS.'] },
-  { img: 'celular', area: 'Portal do leitor', titulo: 'No celular', ver: 'portal',
+  { img: IMG('celular'), area: 'Portal do leitor', titulo: 'No celular', ver: 'portal',
     itens: ['O portal e o painel editorial funcionam no celular: a equipe revisa e publica de onde estiver.', 'Menus compactos de municípios e categorias.'] },
-  { img: 'municipio', area: 'Portal do leitor', titulo: 'Notícias por município', ver: 'portal',
+  { img: IMG('municipio'), area: 'Portal do leitor', titulo: 'Notícias por município', ver: 'portal',
     itens: ['Cada município e cada região têm a sua página, com busca dentro da seção.', 'Busca em português sem acento: "previsao" encontra "previsão".'] },
-  { img: 'painel', area: 'Painel editorial', titulo: 'Dashboard', ver: 'painel',
+  { img: IMG('painel'), area: 'Painel editorial', titulo: 'Dashboard', ver: 'painel',
     itens: ['Coletadas hoje, aguardando revisão, aprovadas, publicadas, falhas de coleta e situação do worker.', 'Publicações por categoria e por município, com acessos medidos pelo próprio portal.'] },
-  { img: 'revisao', area: 'Painel editorial', titulo: 'Fila de revisão', ver: 'revisao',
+  { img: IMG('revisao'), area: 'Painel editorial', titulo: 'Fila de revisão', ver: 'revisao',
     itens: ['Tudo o que a coleta traz espera decisão humana: nada é publicado sozinho.', 'Filtros por situação, fonte, município, categoria e situação da IA; possíveis duplicatas aparecem sinalizadas.'] },
-  { img: 'editor', area: 'Painel editorial', titulo: 'Editor com sugestão da IA', ver: 'revisao',
+  { img: IMG('editor'), area: 'Painel editorial', titulo: 'Editor com sugestão da IA', ver: 'revisao',
     itens: ['Texto original da fonte ao lado, escolha do modelo da página e créditos.', 'A IA (Claude ou Gemini, opcional) sugere título, resumo, categoria e alertas; o editor decide o que aproveitar.', 'Aprovar e publicar, agendar, pedir correção ou rejeitar, com histórico de versões.'] },
-  { img: 'destaques', area: 'Painel editorial', titulo: 'Destaques da home', ver: 'noticias',
+  { img: IMG('destaques'), area: 'Painel editorial', titulo: 'Destaques da home', ver: 'noticias',
     itens: ['O editor escolhe a manchete e os itens da lateral ou deixa no automático (mais recentes).', 'Prévia da página inicial antes de salvar.'] },
-  { img: 'publicidade', area: 'Comercial', titulo: 'Campanhas publicitárias', ver: 'publicidade',
+  { img: IMG('publicidade'), area: 'Comercial', titulo: 'Campanhas publicitárias', ver: 'publicidade',
     itens: ['Anunciantes, campanhas por período e posição, anúncios em imagem ou texto e matéria patrocinada.', 'Impressões e cliques medidos; contratos, pagamentos e mídia kit gerado com os dados do sistema.'] },
-  { img: 'relatorios', area: 'Gestão', titulo: 'Relatórios', ver: 'relatorios',
+  { img: IMG('relatorios'), area: 'Gestão', titulo: 'Relatórios', ver: 'relatorios',
     itens: ['Coletas, duplicados, aprovações e tempo médio entre a coleta e a aprovação.', 'Relatórios comerciais e de custo da IA, com exportação em CSV.'] }
 ];
-
-function tour(c, app) {
-  let i = 0;
-  const img = el('img', { class: 'pn-tour-img', width: '1440', height: '900', alt: '', decoding: 'async' });
-  const zoom = el('a', { class: 'pn-tour-zoom', target: '_blank', rel: 'noopener', title: 'Abrir a captura em tamanho real' }, img);
-  const area = el('span', { class: 'pn-kicker' });
-  const titulo = el('h3', { class: 'pn-tour-title', tabindex: '-1' });
-  const lista = el('ul', { class: 'pn-tour-list' });
-  const pos = el('span', { class: 'demo-muted small', 'aria-live': 'polite' });
-  const anterior = el('button', { type: 'button', class: 'btn btn-sm btn-outline-light', onclick: () => ir(i - 1) }, icon('arrow-left'), ' Anterior');
-  const proxima = el('button', { type: 'button', class: 'btn btn-sm btn-accent', onclick: () => ir(i + 1) }, 'Próxima ', icon('arrow-right'));
-  const testar = el('button', { type: 'button', class: 'btn btn-sm btn-outline-light', onclick: () => app.go(TOUR[i].ver) }, icon('play-circle'), ' Experimentar na simulação');
-  const passos = el('ol', { class: 'pn-tour-steps', 'aria-label': 'Telas do tour' }, TOUR.map((t, k) =>
-    el('li', {}, el('button', { type: 'button', onclick: () => ir(k, true) }, el('span', { class: 'pn-tour-n' }, String(k + 1)), el('span', {}, t.titulo)))));
-  function ir(k, foco = false) {
-    i = (k + TOUR.length) % TOUR.length;
-    const t = TOUR[i];
-    img.src = IMG(t.img);
-    img.alt = `Captura real do sistema: ${t.titulo} (conteúdo de demonstração)`;
-    zoom.href = IMG(t.img);
-    area.textContent = t.area;
-    titulo.textContent = t.titulo;
-    lista.replaceChildren(...t.itens.map((x) => el('li', {}, x)));
-    pos.textContent = `Tela ${i + 1} de ${TOUR.length}`;
-    passos.querySelectorAll('button').forEach((b, n) => b.setAttribute('aria-current', n === i ? 'step' : 'false'));
-    if (foco) titulo.focus();
-  }
-  const raiz = el('div', { class: 'pn-tour', onkeydown: (e) => {
-    if (e.key === 'ArrowRight') ir(i + 1, true);
-    if (e.key === 'ArrowLeft') ir(i - 1, true);
-  } },
-  el('figure', { class: 'pn-tour-shot' }, zoom, el('figcaption', { class: 'demo-muted small' }, 'Captura do sistema em execução, com conteúdo de demonstração fictício. Clique para ampliar.')),
-  el('div', { class: 'pn-tour-info' }, area, titulo, lista, el('div', { class: 'pn-tour-nav' }, anterior, proxima, pos), testar));
-  c.append(card(null, el('p', { class: 'demo-muted mb-3' }, 'Estas são as telas do sistema real. Avance pelos botões ou pelas setas do teclado; em cada tela, "Experimentar na simulação" abre a parte interativa correspondente.'), passos, raiz));
-  ir(0);
-}
 
 export function start(root) {
   const app = mountDemo(root, {
     name: 'Portal Regional de Notícias',
     views: [
-      { id: 'tour', label: 'Tour: telas reais', icon: 'images', render: tour },
+      { id: 'tour', label: 'Tour: telas reais', icon: 'images', render: tourView(TOUR) },
       { id: 'painel', label: 'Painel', icon: 'speedometer2', render: (c, a) => painel(c, a) },
       { id: 'portal', label: 'Portal (leitor)', icon: 'newspaper', render: portal },
       { id: 'revisao', label: 'Fila de revisão', icon: 'check2-square', render: revisao },
