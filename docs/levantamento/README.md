@@ -21,6 +21,13 @@ com versionamento e relatório PDF.
 6. **Relatórios PDF** — pré-visualização em HTML e geração do PDF da versão em exibição. Cada PDF fica
    guardado no armazenamento privado, ligado à versão, com páginas, tamanho e SHA-256; nunca é sobrescrito.
    Nome: `levantamento-requisitos-<cliente>-<projeto>.pdf` (sufixo `-vN` a partir da versão 2).
+7. **Questionário em Word para o cliente** — botão *Questionário* no cabeçalho do levantamento (ou o
+   cartão na aba *Relatórios PDF*): baixa um `.docx` com todas as perguntas do levantamento, numeradas por
+   etapa, com quadros para escrever, caixas de marcar nas alternativas e obrigatórias com `*`. **Em branco**
+   para enviar antes da reunião; **Com as respostas já registradas** para o cliente revisar e completar.
+   As orientações do entrevistador não aparecem. Nome: `questionario-<cliente>-<projeto>.docx`. No
+   *Banco de perguntas*, *Questionário (Word)* baixa o roteiro ativo em branco
+   (`questionario-descoberta.docx`). Cada download fica registrado na auditoria.
 
 Também: duplicar (mesmas perguntas, sem respostas), comparar duas entrevistas ou versões, arquivar,
 histórico de alterações (valor anterior/novo, usuário, data) e o **banco de perguntas** (etapas,
@@ -31,7 +38,7 @@ perguntas/etapas/categorias personalizadas podem ser excluídas — as do roteir
 
 | Código | Permite |
 | --- | --- |
-| `levantamentos.ver` | Consultar levantamentos, versões, histórico, pré-visualização e PDFs |
+| `levantamentos.ver` | Consultar levantamentos, versões, histórico, pré-visualização, PDFs e baixar o questionário em Word |
 | `levantamentos.criar` | Criar e duplicar levantamentos, clientes e projetos |
 | `levantamentos.editar` | Responder, 5 porquês, consolidação, arquivar/desarquivar, editar clientes e projetos |
 | `levantamentos.perguntas` | Gerenciar o banco de perguntas |
@@ -51,21 +58,13 @@ próprio CSS; versões antigas usam um rodapé de reserva.
 
 ## Atualização em produção (VPS)
 
-Comandos um por linha, como usuário do sistema (`vitrine`), na pasta da aplicação:
+Siga a seção "Atualizar o site" de [DEPLOY-VPS.md](../DEPLOY-VPS.md) (backup, `git pull`, `npm ci` e
+migração sempre com `sudo -u vitrine`, na pasta `/var/www/vitrine-softwares`). Esta atualização tem um
+passo a mais: aplicar só os seeds deste módulo (permissões e roteiro inicial de 8 etapas e 75
+perguntas), sem tocar no catálogo:
 
 ```bash
-npm ci --omit=dev
-```
-
-```bash
-npm run db:migrate
-```
-
-Aplicar só os seeds deste módulo (permissões e roteiro inicial de 8 etapas e 75 perguntas), sem tocar
-no catálogo:
-
-```bash
-node --input-type=module -e "import { withTransaction, closePool } from './backend/src/database/pool.js'; for (const f of ['01-acesso.js', '06-levantamento-requisitos.js']) { const m = await import('./database/seeds/' + f); await withTransaction((tx) => m.seed(tx)); } await closePool();"
+sudo -u vitrine node --input-type=module -e "import { withTransaction, closePool } from './backend/src/database/pool.js'; for (const f of ['01-acesso.js', '06-levantamento-requisitos.js']) { const m = await import('./database/seeds/' + f); await withTransaction((tx) => m.seed(tx)); } await closePool();"
 ```
 
 Instalar o Google Chrome, se o servidor ainda não tiver (Ubuntu x86-64; o pacote `.deb` oficial evita o
@@ -96,5 +95,7 @@ enquanto o navegador não for encontrado.
   proteções no banco, PDF guardado.
 - `tests/e2e/levantamento.mjs` — fluxo completo no navegador (desktop e 390 px) com axe-core; capturas em
   `docs/ui/capturas/levantamento/`.
+- `tests/e2e/questionario-exemplo.mjs` — gera `docs/levantamento/exemplos/questionario-em-branco.docx` e
+  `questionario-com-respostas.docx`.
 - `tests/e2e/relatorios-exemplo.mjs` — gera os PDFs de exemplo em `docs/levantamento/exemplos/`
   (pequeno, intermediário, extenso, respostas muito longas, sem respostas, 5 porquês).

@@ -482,4 +482,45 @@ describe('levantamento de requisitos', { skip }, () => {
     // Relatório de outro levantamento não é servido por este caminho
     assert.equal((await admin.get(`${API}/levantamentos/${ctx.dup}/relatorios/${r1.body.id}/arquivo`)).status, 404);
   });
+
+  test('questionário em Word para o cliente: em branco, com respostas, por versão e com permissões', async () => {
+    const JSZip = (await import('jszip')).default;
+    const bin = (res, cb) => { const c = []; res.on('data', (d) => c.push(d)); res.on('end', () => cb(null, Buffer.concat(c))); };
+    const docXml = async (r) => (await JSZip.loadAsync(r.body)).file('word/document.xml').async('string');
+    const s = (await admin.get(`${API}/levantamentos/${ctx.s1}`)).body;
+    assert.equal(s.versao.status, 'em_trabalho', 'pré-condição: versão reaberta em trabalho');
+    const q = s.etapas[0].perguntas[2];
+    await admin.put(`${API}/levantamentos/${ctx.s1}/respostas/${q.id}`, { valor: 'Resposta exclusiva do questionário & <teste>' });
+
+    const branco = await leitor.agent.get(`${API}/levantamentos/${ctx.s1}/questionario.docx`).buffer(true).parse(bin);
+    assert.equal(branco.status, 200);
+    assert.equal(branco.headers['content-type'], 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+    assert.match(branco.headers['content-disposition'], /attachment; filename="questionario-joana-prado-gestao-de-encomendas\.docx"/);
+    assert.equal(branco.body.subarray(0, 2).toString(), 'PK');
+    const xb = await docXml(branco);
+    assert.ok(xb.includes(s.etapas[0].perguntas[0].enunciado), 'traz as perguntas do roteiro do levantamento');
+    assert.ok(xb.includes('Gestão de encomendas') && xb.includes('Joana Prado'));
+    assert.ok(xb.includes('w14:checkbox'), 'alternativas como caixas de seleção do Word');
+    assert.ok(!xb.includes('Resposta exclusiva'), 'em branco não leva respostas');
+    if (s.etapas[0].perguntas[0].orientacao) assert.ok(!xb.includes(s.etapas[0].perguntas[0].orientacao), 'orientações do entrevistador ficam de fora');
+
+    const com = await leitor.agent.get(`${API}/levantamentos/${ctx.s1}/questionario.docx?respostas=1`).buffer(true).parse(bin);
+    const xc = await docXml(com);
+    assert.ok(xc.includes('Resposta exclusiva do questionário &amp; &lt;teste&gt;'), 'respostas da versão atual, escapadas');
+    const v1 = await leitor.agent.get(`${API}/levantamentos/${ctx.s1}/questionario.docx?respostas=1&versao=1`).buffer(true).parse(bin);
+    assert.ok(!(await docXml(v1)).includes('Resposta exclusiva'), 'a versão 1 não tem a resposta nova');
+
+    const roteiro = await admin.agent.get(`${API}/roteiro/questionario.docx`).buffer(true).parse(bin);
+    assert.equal(roteiro.status, 200);
+    assert.match(roteiro.headers['content-disposition'], /questionario-descoberta\.docx/);
+    assert.ok((await docXml(roteiro)).includes('Me conte um pouco sobre a sua ideia.'));
+
+    assert.equal((await consulta.get(`${API}/levantamentos/${ctx.s1}/questionario.docx`)).status, 403);
+    assert.equal((await consulta.get(`${API}/roteiro/questionario.docx`)).status, 403);
+    assert.ok([401, 403].includes((await cliente.get(`${API}/levantamentos/${ctx.s1}/questionario.docx`)).status));
+    assert.equal((await h.anon().get(`${API}/levantamentos/${ctx.s1}/questionario.docx`)).status, 401);
+    assert.equal((await admin.get(`${API}/levantamentos/999999/questionario.docx`)).status, 404);
+    const aud = await h.db.many("SELECT detalhes FROM auditoria WHERE acao = 'exportar_questionario' AND entidade_id = $1 ORDER BY id", [String(ctx.s1)]);
+    assert.deepEqual(aud.map((a) => a.detalhes.com_respostas), [false, true, true]);
+  });
 });

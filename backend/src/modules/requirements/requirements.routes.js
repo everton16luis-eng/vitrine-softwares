@@ -31,6 +31,7 @@ r.get('/resumo', ver, async (req, res) => res.json(await surveys.overview()));
 
 // ------------------------------------------------------------------ banco de perguntas
 r.get('/roteiro', verOuPerguntas, async (req, res) => res.json(await bank.getBank()));
+r.get('/roteiro/questionario.docx', verOuPerguntas, async (req, res) => reports.sendDocx(res, await reports.bankQuestionnaire()));
 r.post('/etapas', perguntas, async (req, res) => res.status(201).json(await bank.createStage(req.body, req)));
 r.put('/etapas/ordem', perguntas, async (req, res) => res.json(await bank.reorder('etapas', req.body, req)));
 r.put('/etapas/:id', perguntas, async (req, res) => res.json(await bank.updateStage(id(req), req.body, req)));
@@ -85,6 +86,9 @@ r.get('/levantamentos/:id/historico', ver, async (req, res) => res.json(await su
 
 // ------------------------------------------------------------------ relatórios
 r.get('/levantamentos/:id/previa', ver, async (req, res) => res.type('html').send(await reports.previewHtml(id(req), versaoParam(req.query))));
+r.get('/levantamentos/:id/questionario.docx', ver, async (req, res) => {
+  reports.sendDocx(res, await reports.surveyQuestionnaire(id(req), { versao: versaoParam(req.query), comRespostas: req.query.respostas === '1' }, req));
+});
 r.get('/levantamentos/:id/relatorios', ver, async (req, res) => res.json(await reports.listReports(id(req))));
 r.post('/levantamentos/:id/relatorios', pdf, async (req, res) => {
   const versao = req.body?.versao === undefined || req.body?.versao === null ? null : parseId(req.body.versao, 'Versão');

@@ -4,10 +4,16 @@ import { get, post, put, del, download } from '../../shared/api.js';
 import { el, icon, date, datetime, dataTable, formModal, confirmDialog, toast, toastError, tabSet, emptyState, scrollRegion, withBusy, debounce } from '../../shared/ui.js';
 import {
   API, reference, statusChip, versionChip, muted, progressBar, formatAnswer, isAnswered, computeProgress,
-  duplicateModal, reportUrl, fileSize, SELECTION, TEXT_TYPES
+  duplicateModal, reportUrl, fileSize, SELECTION, TEXT_TYPES, questionnaireName
 } from './requirements-common.js';
 
 const TABS = [['entrevista', 'Entrevista'], ['porques', '5 porquês'], ['revisao', 'Revisão e conclusão'], ['relatorios', 'Relatórios PDF'], ['versoes', 'Versões e histórico']];
+/** Baixa o questionário em Word (em branco ou com as respostas da versão em exibição). */
+function downloadQuestionnaire(btn, s, comRespostas, vq) {
+  const q = new URLSearchParams(vq ? vq.slice(1) : '');
+  if (comRespostas) q.set('respostas', '1');
+  return withBusy(btn, () => download(`${API}/levantamentos/${s.id}/questionario.docx${q.size ? `?${q}` : ''}`, questionnaireName(s.cliente_nome, s.projeto_nome)), 'Questionário gerado.');
+}
 const hhmm = (d) => d.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
 
 // ------------------------------------------------------------------ autosave
@@ -113,6 +119,12 @@ export async function render(c, ctx, id) {
           el('div', { class: 'lr-chips mt-2' }, statusChip(ref, s.status), versionChip(ref, s.versao.status), s.origem_codigo ? el('span', { class: 'small text-body-secondary' }, `duplicado de ${s.origem_codigo}`) : null)),
         el('div', { class: 'page-actions' },
           el('a', { class: 'btn btn-outline-secondary', href: `${API}/levantamentos/${s.id}/previa${vq}`, target: '_blank', rel: 'noopener' }, icon('eye'), ' Pré-visualizar'),
+          el('div', { class: 'dropdown' },
+            el('button', { class: 'btn btn-outline-secondary dropdown-toggle', type: 'button', 'data-bs-toggle': 'dropdown', 'aria-expanded': 'false' }, icon('file-earmark-word'), ' Questionário'),
+            el('ul', { class: 'dropdown-menu dropdown-menu-end' },
+              el('li', {}, el('span', { class: 'dropdown-item-text small text-body-secondary' }, 'Arquivo Word para o cliente responder')),
+              el('li', {}, el('button', { class: 'dropdown-item', type: 'button', onclick: (e) => downloadQuestionnaire(e.currentTarget, s, false, vq) }, icon('file-earmark'), ' Em branco')),
+              el('li', {}, el('button', { class: 'dropdown-item', type: 'button', onclick: (e) => downloadQuestionnaire(e.currentTarget, s, true, vq) }, icon('file-earmark-text'), ' Com as respostas já registradas')))),
           more)));
     if (viewingOld) {
       header.append(el('div', { class: 'alert alert-info d-flex flex-wrap gap-2 align-items-center', role: 'status' }, icon('clock-history'),
@@ -547,6 +559,12 @@ export async function render(c, ctx, id) {
       el('div', { class: 'page-actions' },
         el('a', { class: 'btn btn-outline-secondary', href: `${API}/levantamentos/${s.id}/previa${vq}`, target: '_blank', rel: 'noopener' }, icon('eye'), ' Pré-visualizar'),
         canPdf ? gen : null)));
+    panel.append(el('div', { class: 'lr-docx card mb-4' }, el('div', { class: 'card-body d-flex flex-wrap justify-content-between align-items-center gap-3' },
+      el('div', { class: 'lr-measure' }, el('h2', { class: 'h6 mb-1' }, icon('file-earmark-word'), ' Questionário para o cliente (Word)'),
+        el('p', { class: 'small text-body-secondary mb-0' }, 'Todas as perguntas deste levantamento, com quadros para escrever e caixas para marcar. Envie antes da reunião ou para o cliente completar depois. As orientações do entrevistador não aparecem.')),
+      el('div', { class: 'page-actions' },
+        el('button', { class: 'btn btn-outline-secondary', type: 'button', onclick: (e) => downloadQuestionnaire(e.currentTarget, s, false, vq) }, icon('download'), ' Em branco'),
+        el('button', { class: 'btn btn-outline-secondary', type: 'button', onclick: (e) => downloadQuestionnaire(e.currentTarget, s, true, vq) }, icon('download'), ' Com respostas')))));
     if (!list.length) { panel.append(emptyState('Nenhum PDF gerado ainda.', 'Use a pré-visualização para conferir o conteúdo antes de gerar.')); return; }
     panel.append(scrollRegion(el('table', { class: 'table align-middle mb-0' },
       el('thead', {}, el('tr', {}, ['Arquivo', 'Versão', 'Gerado em', 'Por', 'Páginas', 'Tamanho', ''].map((h) => el('th', { scope: 'col', class: h === 'Páginas' || h === 'Tamanho' ? 'text-end' : '' }, h)))),

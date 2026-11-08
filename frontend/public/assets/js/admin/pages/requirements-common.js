@@ -212,3 +212,11 @@ export async function duplicateModal(ctx, survey) {
 /** Abre um PDF guardado numa nova aba (a sessão é enviada pelo cookie). */
 export const reportUrl = (surveyId, relId, inline = true) => `${API}/levantamentos/${surveyId}/relatorios/${relId}/arquivo${inline ? '?inline=1' : ''}`;
 export const fileSize = (n) => (n >= 1048576 ? `${(n / 1048576).toLocaleString('pt-BR', { maximumFractionDigits: 1 })} MB` : `${Math.max(1, Math.round(n / 1024))} KB`);
+
+/** Mesmo nome que o servidor usa: questionario-<cliente>-<projeto>.docx. */
+export function questionnaireName(cliente, projeto) {
+  const slug = (x) => String(x || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 60).replace(/-+$/g, '');
+  const parts = ['questionario', slug(cliente), slug(projeto)].filter(Boolean);
+  return `${parts.length > 1 ? parts.join('-') : 'questionario-descoberta'}.docx`;
+}

@@ -58,7 +58,7 @@ async function login(page) {
 }
 const waitSaved = (page) => page.locator('.lr-save.is-ok').waitFor({ timeout: 10000 });
 const modal = (page) => page.locator('.modal.show');
-const submitModal = async (page, label) => { await modal(page).getByRole('button', { name: label }).click(); await modal(page).waitFor({ state: 'detached', timeout: 15000 }); await settle(page); };
+const submitModal = async (page, label) => { await modal(page).getByRole('button', { name: label }).click(); try { await modal(page).waitFor({ state: 'detached', timeout: 15000 }); } catch (e) { console.log('MODAL:', await modal(page).innerText().catch(() => '?')); throw e; } await settle(page); };
 
 /** Responde a pergunta de forma genérica, conforme o controle que ela tem. */
 async function answer(q, text) {
@@ -189,6 +189,12 @@ const browser = await launch();
   await page.locator('.lr-file').first().waitFor({ timeout: 60000 });
   check(/levantamento-requisitos-joana-prado-gestao-de-encomendas\.pdf/.test(await page.locator('.lr-file').first().innerText()), 'PDF gerado com o nome padronizado');
   await shoot(page, problems, '09-relatorios', vp);
+
+  // Questionário em Word para o cliente
+  const dl = page.waitForEvent('download', { timeout: 30000 });
+  await page.locator('.lr-docx').getByRole('button', { name: 'Em branco' }).click();
+  const file = await dl;
+  check(file.suggestedFilename() === 'questionario-joana-prado-gestao-de-encomendas.docx', 'Baixa o questionário em Word com nome padronizado');
 
   // Reabrir → versão 2
   await page.getByRole('tab', { name: 'Revisão e conclusão' }).click();

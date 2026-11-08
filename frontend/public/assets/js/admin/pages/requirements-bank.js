@@ -1,6 +1,6 @@
 // Levantamento de Requisitos: banco de perguntas (etapas, categorias, perguntas e alternativas).
 // Alterações valem para os próximos levantamentos; os existentes guardam o próprio roteiro.
-import { get, post, put, del } from '../../shared/api.js';
+import { get, post, put, del, download } from '../../shared/api.js';
 import { el, icon, formModal, confirmDialog, toast, toastError, tabSet, emptyState, withBusy, badge } from '../../shared/ui.js';
 import { pageHeader } from './_crud.js';
 import { API, SELECTION, muted } from './requirements-common.js';
@@ -13,6 +13,7 @@ export async function render(c, ctx) {
 
   c.append(el('a', { class: 'back-link', href: '#/levantamentos' }, icon('arrow-left'), 'Levantamentos'),
     pageHeader('Banco de perguntas', 'Roteiro usado nas novas entrevistas. Alterações não afetam levantamentos já criados: cada um guarda as perguntas com que foi feito.',
+      el('button', { class: 'btn btn-outline-secondary', type: 'button', title: 'Questionário em Word com o roteiro ativo, sem cliente', onclick: (e) => withBusy(e.currentTarget, () => download(`${API}/roteiro/questionario.docx`, 'questionario-descoberta.docx'), 'Questionário gerado.') }, icon('file-earmark-word'), ' Questionário (Word)'),
       canManage ? el('button', { class: 'btn btn-outline-secondary', type: 'button', onclick: () => stageModal(null) }, icon('plus-lg'), ' Nova etapa') : null,
       canManage ? el('button', { class: 'btn btn-primary', type: 'button', onclick: () => questionModal(null) }, icon('plus-lg'), ' Nova pergunta') : null));
   if (!canManage) c.append(el('div', { class: 'alert alert-secondary small', role: 'status' }, icon('lock'), ' Seu perfil permite apenas consultar o roteiro.'));

@@ -10,6 +10,8 @@ import { getSettings } from '../settings/settings.service.js';
 import { getSurvey } from './surveys.service.js';
 import { reportFileName } from './answers.js';
 import { buildReportModel, renderReport, logoDataUri } from './report-document.js';
+import { buildQuestionnaireDocx, questionnaireFileName } from './questionnaire-docx.js';
+import { getBank } from './bank.service.js';
 
 const newKey = () => {
   const now = new Date();
@@ -72,4 +74,32 @@ export async function streamReport(id, relId, res, { inline = false } = {}) {
   const stream = storage().read(row.arquivo_chave, { privado: true });
   stream.on('error', () => { if (!res.headersSent) res.status(404).json({ erro: 'Arquivo do relatório não encontrado no armazenamento.', codigo: 'NAO_ENCONTRADO' }); else res.end(); });
   stream.pipe(res);
+}
+
+// ------------------------------------------------------------------ questionário em Word
+/** Questionário do levantamento (perguntas do roteiro dele), em branco ou com as respostas da versão. */
+export async function surveyQuestionnaire(id, { versao = null, comRespostas = false } = {}, req) {
+  const s = await getSurvey(id, { versao });
+  const settings = await getSettings();
+  const buffer = await buildQuestionnaireDocx({
+    etapas: s.etapas, settings, cliente: s.cliente_nome, empresa: s.cliente_empresa, projeto: s.projeto_nome, codigo: s.codigo, comRespostas
+  });
+  await audit(req, 'exportar_questionario', 'levantamento', id, { versao: s.versao.numero, com_respostas: comRespostas });
+  return { buffer, nome: questionnaireFileName(s.cliente_nome, s.projeto_nome) };
+}
+
+/** Questionário genérico com o roteiro ativo do banco de perguntas (sem cliente). */
+export async function bankQuestionnaire() {
+  const bank = await getBank();
+  const etapas = bank.etapas.filter((e) => e.ativa).map((e) => ({ ...e, perguntas: e.perguntas.filter((q) => q.ativa) })).filter((e) => e.perguntas.length);
+  const buffer = await buildQuestionnaireDocx({ etapas, settings: await getSettings() });
+  return { buffer, nome: questionnaireFileName(null, null) };
+}
+
+export function sendDocx(res, { buffer, nome }) {
+  res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+  res.setHeader('Content-Disposition', `attachment; filename="${nome}"`);
+  res.setHeader('Cache-Control', 'private, no-store');
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.end(buffer);
 }
