@@ -48,7 +48,15 @@ async function main(): Promise<number> {
   }
 }
 
+/** Falhas de conexão (ex.: "localhost" com IPv6 e IPv4 recusados) chegam como AggregateError sem mensagem. */
+function describe(err: unknown): string {
+  const e = err as Error & { code?: string; errors?: Error[] };
+  if (e.message) return e.message;
+  if (e.errors?.length) return e.errors.map((x) => (x as Error & { code?: string }).code ? `${(x as Error & { code?: string }).code}: ${x.message}` : x.message).join('; ');
+  return e.code || String(err);
+}
+
 main().then((code) => { process.exitCode = code; }, (err) => {
-  console.error(`[central-agent] ${(err as Error).message}`);
+  console.error(`[central-agent] ${describe(err)}`);
   process.exitCode = (err as Error).message.includes('recusou') ? EXIT_REVOKED : 1;
 });

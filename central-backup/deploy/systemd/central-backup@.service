@@ -42,7 +42,8 @@ LockPersonality=yes
 RestrictRealtime=yes
 CapabilityBoundingSet=
 AmbientCapabilities=
-RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+# AF_NETLINK: o Node lista as interfaces de rede (os.networkInterfaces) ao abrir o gateway
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX AF_NETLINK
 UMask=0077
 # não disputar recursos com o site que roda no mesmo VPS (decisão D2)
 MemoryMax=1G

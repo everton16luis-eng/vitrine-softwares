@@ -36,7 +36,8 @@ LockPersonality=yes
 RestrictRealtime=yes
 CapabilityBoundingSet=CAP_DAC_READ_SEARCH
 AmbientCapabilities=CAP_DAC_READ_SEARCH
-RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+# AF_NETLINK: o inventário lista as interfaces de rede (os.networkInterfaces)
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX AF_NETLINK
 # restic precisa de memória proporcional ao índice do repositório
 MemoryMax=1G
 CPUQuota=25%
