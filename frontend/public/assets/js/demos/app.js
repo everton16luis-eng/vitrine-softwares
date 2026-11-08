@@ -4,6 +4,7 @@ const DEMOS = {
   spacecontrol: () => import('./spacecontrol.js'),
   fleetmanager: () => import('./fleetmanager.js'),
   'livro-caixa': () => import('./livro-caixa.js'),
+  'gestao-de-barbearias': () => import('./gestao-de-barbearias.js'),
   'portal-de-noticias': () => import('./portal-de-noticias.js')
 };
 

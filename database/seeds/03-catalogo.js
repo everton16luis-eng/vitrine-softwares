@@ -1,6 +1,6 @@
 // Catálogo inicial. Os produtos ilustrativos são marcados como dados_demonstrativos; o Portal Regional
-// de Notícias, o Gerenciamento de Igrejas, o Sistema de Locação de Salas e o Livro-Caixa Pessoal são
-// sistemas reais, com capturas das telas em funcionamento (demonstrativo: false).
+// de Notícias, o Gerenciamento de Igrejas, o Sistema de Locação de Salas, o Livro-Caixa Pessoal e a
+// Gestão de Barbearias são sistemas reais, com capturas das telas em funcionamento (demonstrativo: false).
 // NENHUM preço é inventado. Situações comerciais iniciais conservadoras:
 // os sistemas aparecem como "Em desenvolvimento" ou "Demonstração disponível" (com demonstração visual
 // de dados fictícios); o administrador altera conforme a realidade.
@@ -12,6 +12,7 @@ const CATEGORIES = [
   ['Gestão operacional', 'gestao-operacional', 'Controle de ativos, manutenção e custos operacionais.'],
   ['Comunicação e mídia', 'comunicacao-e-midia', 'Portais de conteúdo, fluxos editoriais e publicidade.'],
   ['Gestão financeira', 'gestao-financeira', 'Controle de caixa, entradas, saídas e relatórios financeiros.'],
+  ['Gestão de serviços', 'gestao-de-servicos', 'Agenda, atendimento, caixa e comissões para negócios de serviços.'],
   ['Desenvolvimento sob demanda', 'desenvolvimento-sob-demanda', 'Sistemas criados a partir das necessidades de cada cliente.']
 ];
 
@@ -173,6 +174,42 @@ export const PRODUCTS = [
       ['livro-caixa-inicio.webp', 'Tela inicial: abrir o arquivo ou criar um livro-caixa'], ['livro-caixa-celular.webp', 'Dashboard, novo lançamento e relatório no celular']]
   },
   {
+    slug: 'gestao-de-barbearias', nome: 'Gestão de Barbearias', categoria: 'gestao-de-servicos', ordem: 27, destaque: true, demonstrativo: false, capa: 'barbearia-capa.webp',
+    resumo: 'Sistema completo para barbearias: agenda por profissional, agendamento online, app do barbeiro, caixa, comissões, financeiro, estoque e site próprio com cinco modelos.',
+    descricao: 'A **Gestão de Barbearias** reúne em um só sistema tudo o que acontece na barbearia, do horário marcado ao dinheiro no caixa.\n\nO **dono** acompanha a agenda de cada profissional, o caixa com conferência no fechamento, as comissões, o financeiro (contas a pagar e a receber, fluxo de caixa e resultado), o estoque de produtos e doze relatórios. Cada barbearia tem os próprios usuários e permissões: proprietário, gerente, recepção e barbeiros.\n\nO **cliente agenda pela internet**, sem criar conta: escolhe o serviço, o profissional ou o primeiro disponível, a data e um horário livre. O sistema nunca marca dois clientes no mesmo horário e respeita a jornada, o almoço e as folgas de cada profissional.\n\nO **barbeiro usa o app no celular**: vê a agenda do dia, inicia e finaliza o atendimento, registra observações, pede folga e acompanha as próprias comissões e recebimentos.\n\nQuem contrata ainda ganha um **site próprio**, com cinco modelos (Black Label, Urban Culture, Heritage, Modern Minimal e Signature), editor com prévia em computador, tablet e celular, versões para restaurar e domínio próprio. Serviços, preços e equipe vêm direto do cadastro.\n\nAs telas desta página são capturas do sistema em funcionamento, com dados fictícios.',
+    problema: 'Agenda em caderno ou no WhatsApp, horários marcados em dobro, comissão calculada à mão no fim do mês, caixa que não fecha e nenhuma presença na internet para o cliente agendar sozinho.',
+    publico: '- Barbearias com um ou vários profissionais\n- Donos que querem controlar agenda, caixa e comissões em um só lugar\n- Barbeiros que atendem pela agenda no celular\n- Salões e estúdios com atendimento por hora marcada',
+    requisitos: '- Navegador atualizado no computador, tablet ou celular\n- O app do barbeiro funciona no navegador do celular e pode ser instalado na tela inicial\n- Para o site com domínio próprio: um domínio registrado em nome da barbearia\n- Lembretes por WhatsApp exigem um número dedicado',
+    status: 'demonstracao_disponivel', modelo: 'sob_orcamento', demo: 'interna',
+    funcionalidades: [
+      f('Agenda por profissional', 'Dia, semana e mês, com bloqueios, encaixes e situação de cada atendimento; o banco recusa horário duplo.', 'calendar-week'),
+      f('Agendamento online', 'Página pública para o cliente escolher serviço, profissional, data e horário livre, sem criar conta.', 'calendar-plus'),
+      f('App do barbeiro', 'Agenda do dia, início e fim do atendimento, observações, folgas, comissões e recebimentos no celular.', 'phone'),
+      f('Caixa', 'Abertura, recebimento com pagamento dividido, desconto, sangria, suprimento, estorno e fechamento com conferência.', 'cash-stack'),
+      f('Comissões', 'Regras por serviço e profissional, percentual ou valor fixo, bônus, ajustes, adiantamentos e pagamento.', 'percent'),
+      f('Financeiro', 'Contas a pagar e a receber, parcelas, fornecedores, fluxo de caixa, resultado e previsão de 30 dias.', 'graph-up-arrow'),
+      f('Estoque', 'Produtos com custo, preço, mínimo e fornecedor; venda com baixa automática e histórico imutável.', 'box-seam'),
+      f('Site com cinco modelos', 'Editor com prévia, seções, cores, imagens, SEO, versões, subdomínio e domínio próprio.', 'globe'),
+      f('Lembretes por WhatsApp', 'Confirmação e lembrete do horário para o cliente que autorizar, com fila e histórico de envios.', 'whatsapp'),
+      f('Relatórios e auditoria', 'Doze relatórios do dono e cinco do barbeiro, com CSV e PDF; ações sensíveis ficam registradas.', 'file-earmark-bar-graph')
+    ],
+    beneficios: [f('Sem horário em dobro', 'A disponibilidade é calculada no servidor, a partir da jornada de cada profissional.'), f('Comissão sem planilha', 'Gerada ao finalizar o atendimento, com a regra congelada.'), f('Cliente agenda sozinho', 'Link próprio e site da barbearia, 24 horas por dia.'), f('Dados isolados', 'Cada barbearia só enxerga os próprios dados, garantido pelo banco.')],
+    faqs: [
+      ['O cliente precisa baixar aplicativo ou criar conta?', 'Não. Ele agenda pelo navegador, informando nome e celular, e recebe um link para consultar ou cancelar o horário.'],
+      ['Cada barbeiro vê a agenda dos outros?', 'Não. No app, o barbeiro vê só a própria agenda, as próprias comissões e os próprios recebimentos. O dono e a gerência veem tudo, conforme as permissões.'],
+      ['Posso trocar o modelo do site depois?', 'Sim. Você vê a demonstração de cada modelo com os dados da sua barbearia, aplica e publica quando quiser; textos e imagens são mantidos e versões anteriores podem ser restauradas.'],
+      ['Os dados da demonstração são reais?', 'Não. As capturas e a simulação usam uma barbearia, clientes e valores fictícios.']
+    ],
+    imagens: [['barbearia-capa.webp', 'Agenda do dia com uma coluna por profissional'], ['barbearia-painel.webp', 'Visão geral: faturamento, comissões, agenda e ocupação'],
+      ['barbearia-agendamento.webp', 'Agendamento online: serviço, profissional, data e horário livre'], ['barbearia-agendamento-celular.webp', 'Agendamento online no celular, do serviço à confirmação'],
+      ['barbearia-app-barbeiro.webp', 'App do barbeiro: agenda, atendimento e comissões'], ['barbearia-caixa.webp', 'Caixa com abertura, movimentações e fechamentos anteriores'],
+      ['barbearia-comissoes.webp', 'Comissões por profissional no período'], ['barbearia-financeiro.webp', 'Financeiro: resultado, dinheiro no período e vencimentos'],
+      ['barbearia-estoque.webp', 'Estoque de produtos com custo, venda e mínimo'], ['barbearia-meu-site.webp', 'Editor do site com prévia do rascunho'],
+      ['barbearia-site-black-label.webp', 'Site no modelo Black Label'], ['barbearia-site-urban-culture.webp', 'Site no modelo Urban Culture'],
+      ['barbearia-site-heritage.webp', 'Site no modelo Heritage'], ['barbearia-site-modern-minimal.webp', 'Site no modelo Modern Minimal'],
+      ['barbearia-site-signature.webp', 'Site no modelo Signature'], ['barbearia-sites-celular.webp', 'Modelos Urban Culture, Heritage e Signature no celular']]
+  },
+  {
     slug: 'fleetmanager', nome: 'FleetManager', categoria: 'gestao-operacional', ordem: 30, destaque: true,
     resumo: 'Gestão de frota de veículos e máquinas: quilometragem, horímetro, manutenções, abastecimentos, documentos e custos operacionais.',
     descricao: 'O **FleetManager** (nome provisório) reúne as informações da frota em um painel: cadastro de veículos e máquinas, leituras de quilometragem e horímetro, histórico de manutenções com alertas de revisão, pneus e componentes, abastecimentos e vencimento de documentos.\n\nOs custos operacionais são consolidados por veículo, permitindo comparar consumo e despesas.',
@@ -266,7 +303,7 @@ export async function seed(tx) {
   // Planos sem preço inventado: apenas modalidades "sob orçamento" e "personalizado".
   const plans = [
     ['Implantação sob orçamento', 'Licenciamento, implantação e treinamento com valores definidos conforme o porte e as necessidades da instituição.', 'sob_orcamento',
-      ['portal-de-noticias', 'churchflow', 'spacecontrol', 'livro-caixa', 'fleetmanager'], ['Configuração inicial', 'Importação de dados existentes', 'Treinamento da equipe']],
+      ['portal-de-noticias', 'churchflow', 'spacecontrol', 'livro-caixa', 'gestao-de-barbearias', 'fleetmanager'], ['Configuração inicial', 'Importação de dados existentes', 'Treinamento da equipe']],
     ['Projeto personalizado', 'Desenvolvimento sob medida, com escopo, prazos e investimento definidos em proposta.', 'personalizado',
       ['sistemas-personalizados'], ['Levantamento de requisitos', 'Desenvolvimento em etapas', 'Implantação e suporte conforme contrato']]
   ];

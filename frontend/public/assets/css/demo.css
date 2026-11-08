@@ -123,3 +123,73 @@
   .demo-nav ul { grid-auto-flow: column; overflow-x: auto; }
   .demo-nav button span { white-space: nowrap; }
 }
+/* Gestão de Barbearias */
+.bb-resumo .demo-kpi strong { font-size: 1.15rem; overflow-wrap: normal; }
+.bb-acoes { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+.bb-filtros { display: flex; flex-wrap: wrap; gap: 1rem; align-items: end; }
+.bb-filtros .demo-field { min-width: 200px; }
+.bb-grade { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1rem; }
+.bb-coluna { background: #121a2b; border: 1px solid rgba(255,255,255,.07); border-radius: 12px; padding: 1rem; min-width: 0; }
+.bb-coluna h3 { font-size: 1rem; margin: 0 0 .8rem; }
+.bb-lista { list-style: none; margin: 0; padding: 0; display: grid; gap: .6rem; }
+.bb-ag { display: flex; flex-direction: column; gap: .2rem; padding: .7rem .8rem; border-radius: 10px; background: rgba(255,255,255,.04); border-left: 3px solid #8d97ab; min-width: 0; }
+.bb-ag.s-confirmado { border-left-color: #6ea8fe; }
+.bb-ag.s-em_atendimento { border-left-color: #ffd166; }
+.bb-ag.s-finalizado { border-left-color: #6fe8c3; }
+.bb-ag.s-cancelado, .bb-ag.s-falta { border-left-color: #ff9b9b; opacity: .75; }
+.bb-linha { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; justify-content: space-between; margin-top: .3rem; }
+.bb-servicos { list-style: none; margin: 0; padding: 0; }
+.bb-servicos li + li { border-top: 1px solid rgba(255,255,255,.07); }
+.bb-servicos label { display: flex; align-items: center; gap: .8rem; padding: .55rem 0; cursor: pointer; }
+.bb-grow { flex: 1 1 auto; min-width: 0; }
+.bb-data { max-width: 260px; }
+.bb-horas { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .8rem; }
+.bb-horas .btn { min-width: 4.2rem; }
+.bb-form { display: grid; gap: .8rem; max-width: 520px; }
+.bb-total { font-weight: 600; margin: 0; }
+.bb-celular { max-width: 380px; margin: 1rem auto 0; border: 10px solid #05080f; border-radius: 28px; padding: .9rem; background: #0b111d; display: grid; gap: .8rem; }
+.bb-celular-topo { display: flex; justify-content: space-between; align-items: baseline; font-weight: 700; }
+.bb-celular .demo-kpis { grid-template-columns: 1fr 1fr; }
+.bb-receber { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .4rem; }
+.bb-receber select { width: auto; flex: 1 1 150px; }
+.bb-receber input { width: 7rem; flex: 0 0 7rem; }
+.bb-modelos { list-style: none; margin: 0; padding: 0; display: grid; gap: .6rem; }
+.bb-modelos li { display: flex; align-items: center; gap: .8rem; padding: .6rem; border: 1px solid rgba(255,255,255,.08); border-radius: 10px; }
+.bb-modelos li.atual { border-color: var(--accent); }
+.bb-amostra { flex: 0 0 44px; height: 44px; border-radius: 8px; border: 1px solid rgba(255,255,255,.15); }
+.bb-amostra.m-classico { background: linear-gradient(135deg, #0a0a0b 60%, #b8a47e 60%); }
+.bb-amostra.m-urbano { background: linear-gradient(135deg, #e9e5da 50%, #ff4a1c 50%); }
+.bb-amostra.m-vintage { background: linear-gradient(135deg, #16302b 60%, #9a7433 60%); }
+.bb-amostra.m-minimalista { background: linear-gradient(135deg, #f5f5f2 70%, #c8321f 70%); }
+.bb-amostra.m-comercial { background: linear-gradient(135deg, #12283a 60%, #f2a81d 60%); }
+.bb-site { border-radius: 10px; overflow: hidden; --bg: #0a0a0b; --tx: #f3efe6; --ac: #b8a47e; --hero: #17171b; background: var(--bg); color: var(--tx); font-family: Georgia, 'Times New Roman', serif; }
+.bb-site.m-urbano { --bg: #e9e5da; --tx: #121212; --ac: #ff4a1c; --hero: #121212; font-family: Impact, 'Arial Narrow', sans-serif; }
+.bb-site.m-vintage { --bg: #f0e8d8; --tx: #16302b; --ac: #9a7433; --hero: #16302b; font-family: 'Book Antiqua', Palatino, Georgia, serif; }
+.bb-site.m-minimalista { --bg: #f5f5f2; --tx: #161616; --ac: #c8321f; --hero: #f5f5f2; font-family: 'Helvetica Neue', Arial, sans-serif; }
+.bb-site.m-comercial { --bg: #fbf9f4; --tx: #12283a; --ac: #f2a81d; --hero: #12283a; font-family: 'Segoe UI', system-ui, sans-serif; }
+.bb-site-topo { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .5rem; padding: .8rem 1.2rem; border-bottom: 1px solid color-mix(in srgb, var(--tx) 15%, transparent); font-size: .85rem; }
+.bb-site-marca { font-weight: 700; }
+.bb-site-menu { opacity: .75; }
+.bb-site-hero { padding: 2.2rem 1.2rem; background: var(--hero); color: #fff; }
+.bb-site.m-minimalista .bb-site-hero { color: var(--tx); border-bottom: 4px solid var(--ac); }
+.bb-site-hero h3 { font-size: clamp(1.5rem, 4vw, 2.4rem); line-height: 1.1; margin: .3rem 0 1.2rem; max-width: 18ch; font-family: inherit; }
+.bb-site.m-urbano .bb-site-hero h3 { text-transform: uppercase; font-size: clamp(1.8rem, 5vw, 3rem); color: var(--ac); }
+.bb-site-kicker { font-size: .8rem; text-transform: uppercase; letter-spacing: .1em; margin: 0; color: var(--ac); }
+.bb-site.m-urbano .bb-site-kicker { color: #fff; }
+.bb-site-cta { border: 0; border-radius: 4px; padding: .6rem 1.1rem; background: var(--ac); color: #121212; font-weight: 700; font-family: inherit; }
+.bb-site.m-minimalista .bb-site-cta { color: #fff; border-radius: 0; }
+.bb-site.m-comercial .bb-site-cta { border-radius: 999px; }
+.bb-site-corpo { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; padding: 1.4rem 1.2rem; }
+.bb-site-corpo h4 { font-size: 1.05rem; margin: 0 0 .7rem; color: var(--tx); font-family: inherit; border-bottom: 2px solid var(--ac); display: inline-block; padding-bottom: .2rem; }
+.bb-site-corpo p { margin: 0; }
+.bb-site-precos, .bb-site-equipe { list-style: none; margin: 0 0 1rem; padding: 0; }
+.bb-site-precos li { display: flex; justify-content: space-between; gap: 1rem; padding: .35rem 0; border-bottom: 1px dotted color-mix(in srgb, var(--tx) 30%, transparent); }
+.bb-site-equipe li { display: flex; align-items: center; gap: .6rem; padding: .25rem 0; }
+.bb-avatar { width: 2rem; height: 2rem; border-radius: 50%; display: inline-grid; place-items: center; background: var(--ac); color: #121212; font-size: .75rem; font-weight: 700; font-family: system-ui, sans-serif; }
+.bb-site.m-vintage .bb-site-kicker { color: #e2c48a; }
+.bb-site.m-vintage .bb-site-cta { background: #e2c48a; }
+.bb-coluna h3 { color: #fff; }
+.bb-coluna h3 .demo-muted { color: #aab4c6; font-weight: 400; }
+.bb-site-hero h3 { color: inherit; }
+.bb-site.m-vintage .bb-avatar, .bb-site.m-minimalista .bb-avatar { background: var(--tx); color: var(--bg); }
+.bb-modelos .btn { flex: none; white-space: nowrap; }
