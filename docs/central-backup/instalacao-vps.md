@@ -71,7 +71,7 @@ Cada `sha256sum -c` precisa responder `OK`; se não responder, pare.
 id central >/dev/null 2>&1 || sudo useradd --system --home-dir /var/lib/central-backup --create-home --shell /usr/sbin/nologin central
 cd /var/www/vitrine-softwares && sudo -u vitrine git pull --ff-only
 sudo install -d -m 0755 /opt/central-backup
-sudo rsync -a --delete --exclude node_modules --exclude .data --exclude .env --exclude .tools \
+sudo rsync -a --delete --exclude node_modules --exclude .data --exclude .env --exclude .tools --exclude apps/web/dist \
   /var/www/vitrine-softwares/central-backup/ /opt/central-backup/
 cd /opt/central-backup
 sudo env HOME=/tmp npm ci --no-audit --no-fund
@@ -199,7 +199,7 @@ O rest-server precisa de HTTPS para agentes remotos (proxy TLS numa porta dedica
 
 ```bash
 cd /var/www/vitrine-softwares && sudo -u vitrine git pull --ff-only
-sudo rsync -a --delete --exclude node_modules --exclude .data --exclude .env --exclude .tools \
+sudo rsync -a --delete --exclude node_modules --exclude .data --exclude .env --exclude .tools --exclude apps/web/dist \
   /var/www/vitrine-softwares/central-backup/ /opt/central-backup/
 cd /opt/central-backup && sudo env HOME=/tmp npm ci --no-audit --no-fund && sudo env HOME=/tmp npm run web:build
 sudo chown -R root:root /opt/central-backup && sudo chown -R central:central /opt/central-backup/.data /opt/central-backup/.env
