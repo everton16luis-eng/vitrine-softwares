@@ -3,6 +3,7 @@ const DEMOS = {
   churchflow: () => import('./churchflow.js'),
   spacecontrol: () => import('./spacecontrol.js'),
   fleetmanager: () => import('./fleetmanager.js'),
+  'livro-caixa': () => import('./livro-caixa.js'),
   'portal-de-noticias': () => import('./portal-de-noticias.js')
 };
 

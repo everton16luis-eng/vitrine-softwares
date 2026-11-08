@@ -87,7 +87,7 @@ describe('produtos, publicação e catálogo público', { skip }, () => {
 
   test('filtros, pesquisa e paginação no catálogo público', async () => {
     const all = await h.anon().get('/api/publico/produtos');
-    assert.equal(all.body.total, 5);
+    assert.equal(all.body.total, 6);
     const busca = await h.anon().get('/api/publico/produtos?busca=abastecimento');
     assert.deepEqual(busca.body.items.map((p) => p.slug), ['fleetmanager'], 'busca em funcionalidades');
     const cat = await h.anon().get('/api/publico/produtos?categoria=gestao-de-locacoes');
@@ -107,7 +107,7 @@ describe('produtos, publicação e catálogo público', { skip }, () => {
   });
 
   test('páginas públicas principais respondem e têm SEO básico', async () => {
-    for (const path of ['/', '/softwares', '/softwares/churchflow', '/softwares/churchflow/demonstracao', '/softwares/portal-de-noticias', '/softwares/portal-de-noticias/demonstracao', '/servicos', '/contato', '/orcamento', '/sobre', '/politica-de-privacidade', '/perguntas-frequentes', '/robots.txt']) {
+    for (const path of ['/', '/softwares', '/softwares/churchflow', '/softwares/churchflow/demonstracao', '/softwares/portal-de-noticias', '/softwares/portal-de-noticias/demonstracao', '/softwares/livro-caixa', '/softwares/livro-caixa/demonstracao', '/servicos', '/contato', '/orcamento', '/sobre', '/politica-de-privacidade', '/perguntas-frequentes', '/robots.txt']) {
       const r = await h.anon().get(path);
       assert.equal(r.status, 200, path);
     }

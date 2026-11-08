@@ -1,6 +1,6 @@
 // Catálogo inicial. Os produtos ilustrativos são marcados como dados_demonstrativos; o Portal Regional
-// de Notícias e o Gerenciamento de Igrejas são sistemas reais, com capturas das telas em funcionamento
-// (demonstrativo: false).
+// de Notícias, o Gerenciamento de Igrejas, o Sistema de Locação de Salas e o Livro-Caixa Pessoal são
+// sistemas reais, com capturas das telas em funcionamento (demonstrativo: false).
 // NENHUM preço é inventado. Situações comerciais iniciais conservadoras:
 // os sistemas aparecem como "Em desenvolvimento" ou "Demonstração disponível" (com demonstração visual
 // de dados fictícios); o administrador altera conforme a realidade.
@@ -11,6 +11,7 @@ const CATEGORIES = [
   ['Gestão de locações', 'gestao-de-locacoes', 'Reservas, contratos e controle de espaços e utensílios.'],
   ['Gestão operacional', 'gestao-operacional', 'Controle de ativos, manutenção e custos operacionais.'],
   ['Comunicação e mídia', 'comunicacao-e-midia', 'Portais de conteúdo, fluxos editoriais e publicidade.'],
+  ['Gestão financeira', 'gestao-financeira', 'Controle de caixa, entradas, saídas e relatórios financeiros.'],
   ['Desenvolvimento sob demanda', 'desenvolvimento-sob-demanda', 'Sistemas criados a partir das necessidades de cada cliente.']
 ];
 
@@ -139,6 +140,39 @@ export const PRODUCTS = [
       ['locacao-de-salas-celular.webp', 'Painel, locação e vistoria no celular']]
   },
   {
+    slug: 'livro-caixa', nome: 'Livro-Caixa Pessoal', categoria: 'gestao-financeira', ordem: 25, destaque: true, demonstrativo: false, capa: 'livro-caixa-capa.webp',
+    resumo: 'Livro-caixa digital para controlar entradas e saídas do dia a dia: saldo do dia ou acumulado, categorias, formas de pagamento e relatórios. Funciona 100% offline, sem servidor.',
+    descricao: 'O **Livro-Caixa Pessoal** registra cada entrada e saída em segundos e mostra o livro-caixa com **Data, Descrição, Entrada, Saída e Saldo**, como no caderno, mas sem conta errada: os valores são guardados em centavos e editar um lançamento antigo recalcula todos os saldos seguintes.\n\nVocê escolhe como ver o saldo: **diário**, em que cada dia abre em R$ 0,00 e fecha com o resultado do dia (ideal para acompanhar o movimento de uma loja), ou **acumulado**, o livro-caixa tradicional a partir do saldo inicial. Quem fecha o caixa depois da meia-noite define a **virada do dia** (até 06:00).\n\nFunciona **direto no navegador, sem internet, sem servidor e sem login**. Os dados ficam em um arquivo SQLite no seu computador, que você exporta como backup e abre de novo no próximo uso; o arquivo importado é validado antes de substituir o atual.\n\nAs telas desta página são capturas do sistema em funcionamento, com lançamentos fictícios.',
+    problema: 'Controle de caixa em caderno ou planilha: contas erradas, saldo que não fecha, lançamentos sem categoria e nenhuma visão de para onde o dinheiro está indo.',
+    publico: '- Quem quer organizar as finanças pessoais ou da família\n- Autônomos, feirantes e pequenos comércios que fecham o caixa todo dia\n- Quem prefere manter os dados no próprio computador, sem nuvem',
+    requisitos: '- Navegador atualizado (Chrome, Edge ou Firefox)\n- Não precisa de internet, servidor nem instalação: basta abrir o arquivo index.html\n- Recomendado: guardar cópias do arquivo exportado em pen drive ou nuvem pessoal',
+    status: 'demonstracao_disponivel', modelo: 'sob_orcamento', demo: 'interna',
+    funcionalidades: [
+      f('Lançamentos rápidos', 'Entrada ou saída, valor, descrição com sugestões, categoria e forma de pagamento; a data já vem preenchida.', 'plus-circle'),
+      f('Livro-caixa com saldo', 'Data, descrição, entrada, saída e saldo, com saldo anterior, totais e saldo final do período.', 'journal-text'),
+      f('Saldo diário ou acumulado', 'Cada dia começando em R$ 0,00 ou o livro-caixa tradicional, sem alterar nenhum lançamento.', 'arrow-repeat'),
+      f('Virada do dia', 'Para quem fecha depois da meia-noite: lançamentos até as 06:00 contam no dia anterior.', 'moon'),
+      f('Formas de pagamento', 'Dinheiro, Pix, débito, crédito ou outro, com totais do dia e do mês por forma.', 'credit-card'),
+      f('Categorias', 'Categorias de receitas e despesas prontas, editáveis, com desativação e exclusão só sem uso.', 'tags'),
+      f('Dashboard', 'Saldo do dia, entradas e saídas do dia e do mês, fechamento dos últimos dias e últimas movimentações.', 'speedometer2'),
+      f('Relatórios', 'Diário, mensal e por período, com resumo por categoria e por forma de pagamento; CSV e impressão A4.', 'file-earmark-bar-graph'),
+      f('Filtros e busca', 'Movimentações por período, tipo, categoria, forma de pagamento e texto.', 'funnel'),
+      f('Arquivo SQLite próprio', 'Exportação, importação com validação completa e cópia de segurança da sessão no navegador.', 'database')
+    ],
+    beneficios: [f('Saldo sempre certo', 'Valores em centavos e saldos recalculados a cada alteração.'), f('Sem servidor para manter', 'Roda no navegador, sem internet.'), f('Seus dados com você', 'Um arquivo no seu computador, que abre em qualquer ferramenta SQLite.'), f('Fechamento do dia', 'Veja quanto entrou e saiu em cada dia.')],
+    faqs: [
+      ['Precisa de internet?', 'Não. O sistema abre direto do computador (arquivo index.html) e funciona totalmente offline.'],
+      ['Onde ficam os dados?', 'Em um arquivo .sqlite que você exporta e guarda onde quiser. O navegador mantém uma cópia da sessão só como rede de segurança: o arquivo exportado é a fonte oficial.'],
+      ['Serve para uma loja?', 'Sim. O modo de saldo diário mostra o movimento de cada dia, com totais por forma de pagamento. Para vários usuários ao mesmo tempo, avalie um projeto personalizado.'],
+      ['Os dados da demonstração são reais?', 'Não. As capturas e a simulação usam lançamentos fictícios.']
+    ],
+    imagens: [['livro-caixa-capa.webp', 'Dashboard: saldo do dia, entradas e saídas e fechamento dos últimos dias'], ['livro-caixa-livro-diario.webp', 'Livro-caixa no modo diário, com abertura e fechamento de cada dia'],
+      ['livro-caixa-livro-acumulado.webp', 'Livro-caixa tradicional, com saldo acumulado'], ['livro-caixa-movimentacoes.webp', 'Novo lançamento e lista de movimentações com filtros'],
+      ['livro-caixa-dashboard-acumulado.webp', 'Dashboard com totais por forma de pagamento'], ['livro-caixa-relatorios.webp', 'Relatório mensal com resumo dia a dia'],
+      ['livro-caixa-categorias.webp', 'Categorias de entrada e de saída'], ['livro-caixa-backup.webp', 'Banco de dados e backup: exportar, importar e modo do saldo'],
+      ['livro-caixa-inicio.webp', 'Tela inicial: abrir o arquivo ou criar um livro-caixa'], ['livro-caixa-celular.webp', 'Dashboard, novo lançamento e relatório no celular']]
+  },
+  {
     slug: 'fleetmanager', nome: 'FleetManager', categoria: 'gestao-operacional', ordem: 30, destaque: true,
     resumo: 'Gestão de frota de veículos e máquinas: quilometragem, horímetro, manutenções, abastecimentos, documentos e custos operacionais.',
     descricao: 'O **FleetManager** (nome provisório) reúne as informações da frota em um painel: cadastro de veículos e máquinas, leituras de quilometragem e horímetro, histórico de manutenções com alertas de revisão, pneus e componentes, abastecimentos e vencimento de documentos.\n\nOs custos operacionais são consolidados por veículo, permitindo comparar consumo e despesas.',
@@ -232,7 +266,7 @@ export async function seed(tx) {
   // Planos sem preço inventado: apenas modalidades "sob orçamento" e "personalizado".
   const plans = [
     ['Implantação sob orçamento', 'Licenciamento, implantação e treinamento com valores definidos conforme o porte e as necessidades da instituição.', 'sob_orcamento',
-      ['portal-de-noticias', 'churchflow', 'spacecontrol', 'fleetmanager'], ['Configuração inicial', 'Importação de dados existentes', 'Treinamento da equipe']],
+      ['portal-de-noticias', 'churchflow', 'spacecontrol', 'livro-caixa', 'fleetmanager'], ['Configuração inicial', 'Importação de dados existentes', 'Treinamento da equipe']],
     ['Projeto personalizado', 'Desenvolvimento sob medida, com escopo, prazos e investimento definidos em proposta.', 'personalizado',
       ['sistemas-personalizados'], ['Levantamento de requisitos', 'Desenvolvimento em etapas', 'Implantação e suporte conforme contrato']]
   ];

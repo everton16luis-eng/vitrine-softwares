@@ -20,10 +20,10 @@ describe('inicialização do banco de dados', { skip }, () => {
     const perfis = await h.db.many('SELECT codigo FROM perfis ORDER BY codigo');
     assert.deepEqual(perfis.map((p) => p.codigo), ['administrador', 'consulta', 'editor_conteudo', 'gerente_comercial']);
     const produtos = await h.db.many('SELECT slug, dados_demonstrativos, preco, status_comercial FROM produtos ORDER BY ordem');
-    assert.deepEqual(produtos.map((p) => p.slug), ['portal-de-noticias', 'churchflow', 'spacecontrol', 'fleetmanager', 'sistemas-personalizados']);
+    assert.deepEqual(produtos.map((p) => p.slug), ['portal-de-noticias', 'churchflow', 'spacecontrol', 'livro-caixa', 'fleetmanager', 'sistemas-personalizados']);
     assert.ok(produtos.every((p) => p.preco === null), 'nenhum preço inventado');
-    // Portal Regional de Notícias, Gerenciamento de Igrejas e Sistema de Locação de Salas são sistemas reais (capturas das telas); os demais seguem ilustrativos.
-    assert.deepEqual(produtos.filter((p) => !p.dados_demonstrativos).map((p) => p.slug), ['portal-de-noticias', 'churchflow', 'spacecontrol']);
+    // Portal Regional de Notícias, Gerenciamento de Igrejas, Sistema de Locação de Salas e Livro-Caixa Pessoal são sistemas reais (capturas das telas); os demais seguem ilustrativos.
+    assert.deepEqual(produtos.filter((p) => !p.dados_demonstrativos).map((p) => p.slug), ['portal-de-noticias', 'churchflow', 'spacecontrol', 'livro-caixa']);
     const { n } = await h.db.one('SELECT count(*)::int n FROM clientes');
     assert.equal(n, 0, 'nenhum cliente fictício deve ser criado');
   });
@@ -114,11 +114,36 @@ describe('inicialização do banco de dados', { skip }, () => {
     assert.equal(f, 4);
   });
 
+  test('seed 10 acrescenta o Livro-Caixa em banco antigo sem mexer no que existe', async () => {
+    const { seed } = await import('../../database/seeds/10-livro-caixa.js');
+    const tx = { query: (sql, params) => h.db.query(sql, params), one: (sql, params) => h.db.one(sql, params) };
+    // Banco antigo: sem o produto e sem a categoria; um produto editado no painel.
+    await h.db.query("DELETE FROM produtos WHERE slug = 'livro-caixa'");
+    await h.db.query("DELETE FROM categorias WHERE slug = 'gestao-financeira'");
+    await h.db.query("UPDATE produtos SET resumo = 'Resumo editado no painel' WHERE slug = 'fleetmanager'");
+
+    await seed(tx);
+    await seed(tx); // idempotente
+
+    const p = await h.db.one("SELECT p.nome, p.dados_demonstrativos, p.publicado, p.preco, c.slug AS categoria FROM produtos p JOIN categorias c ON c.id = p.categoria_id WHERE p.slug = 'livro-caixa'");
+    assert.equal(p.nome, 'Livro-Caixa Pessoal');
+    assert.equal(p.dados_demonstrativos, false);
+    assert.equal(p.publicado, true);
+    assert.equal(p.preco, null);
+    assert.equal(p.categoria, 'gestao-financeira');
+    const { n } = await h.db.one("SELECT count(*)::int n FROM produto_imagens i JOIN produtos p ON p.id = i.produto_id WHERE p.slug = 'livro-caixa'");
+    assert.equal(n, 10);
+    const { pl } = await h.db.one("SELECT count(*)::int pl FROM planos_produtos pp JOIN produtos p ON p.id = pp.produto_id WHERE p.slug = 'livro-caixa'");
+    assert.equal(pl, 1, 'incluído no plano sob orçamento existente');
+    const fleet = await h.db.one("SELECT resumo FROM produtos WHERE slug = 'fleetmanager'");
+    assert.equal(fleet.resumo, 'Resumo editado no painel', 'outros produtos não são alterados');
+  });
+
   test('seeds são idempotentes', async () => {
     const { runSeeds } = await import('../../backend/src/database/seeder.js');
     await runSeeds({ log: () => {} });
     const { n } = await h.db.one('SELECT count(*)::int n FROM produtos');
-    assert.equal(n, 5);
+    assert.equal(n, 6);
   });
 
   test('valores monetários usam NUMERIC', async () => {

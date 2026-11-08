@@ -111,6 +111,12 @@
 .sl-etapas li.atual { color: #0b111d; background: var(--accent); border-color: var(--accent); font-weight: 700; }
 .sl-num { width: 6rem; }
 .sl-resumo .demo-kpi strong { font-size: 1.15rem; overflow-wrap: normal; }
+/* Livro-Caixa Pessoal */
+.lc-saldo { font-size: 2rem; margin: 0; }
+.lc-pos { color: #6fe8c3; }
+.lc-neg { color: #ff9b9b; }
+.lc-resumo .demo-kpi strong { font-size: 1.15rem; overflow-wrap: normal; }
+.lc-rotulo { font-size: .78rem; color: #8d97ab; font-weight: 600; }
 @media (max-width: 767.98px) {
   .demo-layout { grid-template-columns: minmax(0, 1fr); }
   .demo-nav { min-width: 0; border-right: 0; border-bottom: 1px solid rgba(255,255,255,.06); }
