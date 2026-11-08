@@ -27,7 +27,12 @@ export function createApp() {
 
   // ---------------------------------------------------------- arquivos estáticos
   const staticOpts = { index: false, fallthrough: true, maxAge: env.isProduction ? '7d' : 0 };
-  app.use('/assets', express.static(path.join(FRONTEND, 'assets'), staticOpts));
+  // JS e CSS não têm versão no nome: o navegador revalida a cada carga (304 se nada mudou),
+  // senão uma atualização do site só apareceria após o cache de 7 dias expirar.
+  app.use('/assets', express.static(path.join(FRONTEND, 'assets'), {
+    ...staticOpts,
+    setHeaders: (res, file) => { if (/\.(?:m?js|css)$/i.test(file)) res.setHeader('Cache-Control', 'no-cache'); }
+  }));
   app.use('/vendor/bootstrap', express.static(path.join(MODULES, 'bootstrap', 'dist'), staticOpts));
   app.use('/vendor/bootstrap-icons', express.static(path.join(MODULES, 'bootstrap-icons'), staticOpts));
   app.use('/vendor/chart.js', express.static(path.join(MODULES, 'chart.js', 'dist'), staticOpts));
