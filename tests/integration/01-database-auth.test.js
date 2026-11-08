@@ -22,8 +22,8 @@ describe('inicialização do banco de dados', { skip }, () => {
     const produtos = await h.db.many('SELECT slug, dados_demonstrativos, preco, status_comercial FROM produtos ORDER BY ordem');
     assert.deepEqual(produtos.map((p) => p.slug), ['portal-de-noticias', 'churchflow', 'spacecontrol', 'fleetmanager', 'sistemas-personalizados']);
     assert.ok(produtos.every((p) => p.preco === null), 'nenhum preço inventado');
-    // Portal Regional de Notícias e Gerenciamento de Igrejas são sistemas reais (capturas das telas); os demais seguem ilustrativos.
-    assert.deepEqual(produtos.filter((p) => !p.dados_demonstrativos).map((p) => p.slug), ['portal-de-noticias', 'churchflow']);
+    // Portal Regional de Notícias, Gerenciamento de Igrejas e Sistema de Locação de Salas são sistemas reais (capturas das telas); os demais seguem ilustrativos.
+    assert.deepEqual(produtos.filter((p) => !p.dados_demonstrativos).map((p) => p.slug), ['portal-de-noticias', 'churchflow', 'spacecontrol']);
     const { n } = await h.db.one('SELECT count(*)::int n FROM clientes');
     assert.equal(n, 0, 'nenhum cliente fictício deve ser criado');
   });
@@ -76,6 +76,42 @@ describe('inicialização do banco de dados', { skip }, () => {
     assert.equal(n, 11);
     const faq = await h.db.one('SELECT pergunta FROM produto_faqs WHERE produto_id = $1 ORDER BY ordem LIMIT 1', [id]);
     assert.equal(faq.pergunta, 'As telas são do sistema real?');
+  });
+
+  test('seed 09 troca o exemplo SpaceControl pelo Sistema de Locação de Salas', async () => {
+    const { seed } = await import('../../database/seeds/09-locacao-de-salas.js');
+    const tx = { query: (sql, params) => h.db.query(sql, params), one: (sql, params) => h.db.one(sql, params) };
+    const { id } = await h.db.one("SELECT id FROM produtos WHERE slug = 'spacecontrol'");
+    // Banco antigo, intacto: exemplo SpaceControl completo.
+    await h.db.query("UPDATE produtos SET nome = 'SpaceControl', resumo = $2, status_comercial = 'em_desenvolvimento', dados_demonstrativos = true, imagem_url = '/assets/images/produtos/spacecontrol-capa.svg' WHERE id = $1",
+      [id, 'Sistema para controlar reservas de salas e espaços, contratos, checklists de entrega e devolução e o inventário de utensílios.']);
+    await h.db.query("DELETE FROM produto_funcionalidades WHERE produto_id = $1", [id]);
+    const antigas = ['Cadastro de espaços', 'Agenda de reservas', 'Cadastro de locatários', 'Gestão de contratos', 'Checklist de entrega e devolução',
+      'Inventário de utensílios', 'Danos e avarias', 'Cobranças adicionais', 'Histórico de locações', 'Relatórios financeiros e operacionais'];
+    for (const [i, t] of antigas.entries()) await h.db.query("INSERT INTO produto_funcionalidades (produto_id, tipo, titulo, descricao, ordem) VALUES ($1, 'funcionalidade', $2, 'x', $3)", [id, t, i]);
+    for (const [i, t] of ['Agenda sem conflitos', 'Inventário confiável', 'Cobranças justas', 'Contratos padronizados'].entries()) {
+      await h.db.query("INSERT INTO produto_funcionalidades (produto_id, tipo, titulo, descricao, ordem) VALUES ($1, 'beneficio', $2, 'x', $3)", [id, t, i]);
+    }
+    await h.db.query('DELETE FROM produto_faqs WHERE produto_id = $1', [id]);
+    await h.db.query("INSERT INTO produto_faqs (produto_id, pergunta, resposta, ordem) VALUES ($1, 'O sistema emite nota fiscal?', 'x', 0)", [id]);
+    await h.db.query('DELETE FROM produto_imagens WHERE produto_id = $1', [id]);
+    await h.db.query("INSERT INTO produto_imagens (produto_id, url_estatica, legenda, ordem) VALUES ($1, '/assets/images/produtos/spacecontrol-agenda.svg', 'a', 0), ($1, '/assets/images/produtos/spacecontrol-checklist.svg', 'b', 1), ($1, '/assets/images/produtos/spacecontrol-inventario.svg', 'c', 2)", [id]);
+
+    await seed(tx);
+    await seed(tx); // idempotente
+
+    const p = await h.db.one('SELECT nome, status_comercial, dados_demonstrativos, imagem_url FROM produtos WHERE id = $1', [id]);
+    assert.equal(p.nome, 'Sistema de Locação de Salas');
+    assert.equal(p.status_comercial, 'demonstracao_disponivel');
+    assert.equal(p.dados_demonstrativos, false);
+    assert.equal(p.imagem_url, '/assets/images/produtos/locacao-de-salas-capa.webp');
+    const imgs = await h.db.many('SELECT url_estatica FROM produto_imagens WHERE produto_id = $1 ORDER BY ordem', [id]);
+    assert.equal(imgs.length, 12);
+    assert.ok(imgs.every((i) => i.url_estatica.includes('locacao-de-salas-')));
+    const { n } = await h.db.one("SELECT count(*)::int n FROM produto_funcionalidades WHERE produto_id = $1 AND tipo = 'funcionalidade'", [id]);
+    assert.equal(n, 12);
+    const { f } = await h.db.one('SELECT count(*)::int f FROM produto_faqs WHERE produto_id = $1', [id]);
+    assert.equal(f, 4);
   });
 
   test('seeds são idempotentes', async () => {

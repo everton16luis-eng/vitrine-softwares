@@ -104,6 +104,13 @@
 /* Gerenciamento de Igrejas: etiqueta da turma */
 .cf-etiqueta { display: inline-flex; align-items: center; gap: .3rem; font-family: ui-monospace, monospace; font-weight: 700; color: #fff; background: rgba(255,255,255,.08); border: 1px dashed rgba(255,255,255,.3); border-radius: 6px; padding: .1rem .5rem; }
 .cf-codigo { width: 6.5rem; }
+/* Locação de Salas: etapas da locação */
+.sl-etapas { list-style: none; margin: .4rem 0 1rem; padding: 0; display: flex; flex-wrap: wrap; gap: .35rem; }
+.sl-etapas li { font-size: .76rem; padding: .2rem .6rem; border-radius: 999px; border: 1px solid rgba(255,255,255,.14); color: #8d97ab; }
+.sl-etapas li.feita { color: #6fe8c3; border-color: rgba(47,216,164,.35); }
+.sl-etapas li.atual { color: #0b111d; background: var(--accent); border-color: var(--accent); font-weight: 700; }
+.sl-num { width: 6rem; }
+.sl-resumo .demo-kpi strong { font-size: 1.15rem; overflow-wrap: normal; }
 @media (max-width: 767.98px) {
   .demo-layout { grid-template-columns: minmax(0, 1fr); }
   .demo-nav { min-width: 0; border-right: 0; border-bottom: 1px solid rgba(255,255,255,.06); }

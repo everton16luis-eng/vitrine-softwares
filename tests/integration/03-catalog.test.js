@@ -95,7 +95,7 @@ describe('produtos, publicação e catálogo público', { skip }, () => {
     const modelo = await h.anon().get('/api/publico/produtos?modelo=personalizado');
     assert.deepEqual(modelo.body.items.map((p) => p.slug), ['sistemas-personalizados']);
     const disp = await h.anon().get('/api/publico/produtos?disponibilidade=em_desenvolvimento');
-    assert.deepEqual(disp.body.items.map((p) => p.slug).sort(), ['fleetmanager', 'spacecontrol']);
+    assert.deepEqual(disp.body.items.map((p) => p.slug).sort(), ['fleetmanager']);
     const p1 = await h.anon().get('/api/publico/produtos?limite=2&pagina=1');
     const p2 = await h.anon().get('/api/publico/produtos?limite=2&pagina=2');
     assert.equal(p1.body.pages, 3);

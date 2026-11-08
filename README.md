@@ -2,7 +2,7 @@
 
 Plataforma web para **apresentar, divulgar, comercializar e administrar softwares** de um profissional independente ou pequena empresa de tecnologia: site público otimizado para SEO, catálogo com páginas individuais e demonstrações, captação de contatos e orçamentos, gestão comercial (leads, clientes, orçamentos, pedidos, pagamentos, contratos e licenças), painel administrativo com permissões, área do cliente e auditoria.
 
-> **Estado atual:** o catálogo tem dois sistemas reais — **Portal Regional de Notícias** e **Gerenciamento de Igrejas** —, com capturas das telas em funcionamento (dados fictícios) e demonstrações com tour pelas telas reais. SpaceControl, FleetManager e Sistemas Personalizados seguem como **registros demonstrativos**, com nomes provisórios. Nenhum produto tem preço inventado. Ajuste tudo pelo painel antes de divulgar o site.
+> **Estado atual:** o catálogo tem três sistemas reais — **Portal Regional de Notícias**, **Gerenciamento de Igrejas** e **Sistema de Locação de Salas** —, com capturas das telas em funcionamento (dados fictícios) e demonstrações com tour pelas telas reais. FleetManager e Sistemas Personalizados seguem como **registros demonstrativos**, com nomes provisórios. Nenhum produto tem preço inventado. Ajuste tudo pelo painel antes de divulgar o site.
 
 ---
 
@@ -254,7 +254,7 @@ Recomendações: backups diários automatizados (Agendador de Tarefas do Windows
 6. Clique em **Publicar**. O produto aparece no catálogo e no sitemap; a URL é `/softwares/<slug>`.
 7. Para tirar do ar, use **Despublicar**; para preservar o histórico, use **Arquivar**. A exclusão definitiva só é permitida para produtos sem histórico comercial.
 
-Demonstrações: escolha "Interna" apenas para os produtos que possuem módulo de demonstração em `frontend/public/assets/js/demos/` (Portal Regional de Notícias, Gerenciamento de Igrejas, SpaceControl, FleetManager) ou "Link externo" para um ambiente online, informando a URL e eventuais avisos.
+Demonstrações: escolha "Interna" apenas para os produtos que possuem módulo de demonstração em `frontend/public/assets/js/demos/` (Portal Regional de Notícias, Gerenciamento de Igrejas, Sistema de Locação de Salas, FleetManager) ou "Link externo" para um ambiente online, informando a URL e eventuais avisos.
 
 ## Clientes e parceiros na página inicial
 
