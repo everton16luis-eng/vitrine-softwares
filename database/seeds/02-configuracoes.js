@@ -141,19 +141,57 @@ Dúvidas sobre estes termos podem ser enviadas pela página de contato.`],
   ['politica-de-cookies', 'Política de Cookies', 'juridica', true,
     `> MODELO — revise com profissional habilitado antes da publicação definitiva.
 
-## Cookies utilizados
+## 1. O que são cookies
 
-Este site utiliza **somente cookies estritamente necessários**:
+Cookies são pequenos arquivos que um site grava no seu navegador para lembrar informações entre uma página e outra. Tecnologias parecidas, como o armazenamento local do navegador (*localStorage*), funcionam da mesma forma e também são tratadas nesta política.
 
-- **sid / __Host-sid** — mantém a sessão de usuários autenticados no painel e na área do cliente. Expira ao sair ou após o período de inatividade.
+## 2. Resumo
 
-## Cookies não utilizados
+- Usamos **apenas um cookie**, estritamente necessário, e somente para quem entra no painel administrativo ou na área do cliente.
+- Quem apenas navega pelo site, consulta softwares ou envia um formulário **não recebe nenhum cookie** nosso.
+- **Não usamos** cookies de publicidade, de redes sociais, de análise de comportamento nem de rastreamento entre sites.
+- Por isso o site não pede consentimento para cookies: os estritamente necessários dispensam essa autorização, e não há outros.
 
-Não utilizamos cookies de publicidade, de redes sociais ou de análise de comportamento. A contagem de visualizações de produtos é feita de forma agregada, sem cookies e sem identificar visitantes.
+## 3. Cookie utilizado
 
-## Como gerenciar
+**sid** (em produção, **__Host-sid**)
 
-Você pode apagar cookies nas configurações do navegador. Sem o cookie de sessão não é possível acessar áreas autenticadas.`]
+- **Finalidade:** manter você conectado depois de entrar no painel administrativo ou na área do cliente. Sem ele, cada página pediria login novamente.
+- **Quando é gravado:** somente após um login bem-sucedido.
+- **Conteúdo:** um código aleatório que identifica a sessão. Não contém seu nome, e-mail, senha ou outro dado pessoal; o servidor guarda apenas uma versão irreversível (hash) desse código.
+- **Duração:** é apagado ao sair (botão Sair). Por padrão, a sessão também termina após 2 horas sem uso ou 12 horas depois do login, o que ocorrer primeiro.
+- **Proteções:** inacessível a scripts da página (*HttpOnly*), enviado somente por conexão segura (*Secure*), restrito a este domínio (*__Host-*) e não enviado em requisições iniciadas por outros sites (*SameSite=Lax*).
+- **Origem:** próprio (primeira parte). Não é compartilhado com terceiros.
+- **Base legal:** necessário para prestar o serviço solicitado por você (acesso à área restrita) e para a segurança da conta.
+
+## 4. Armazenamento local
+
+**aviso-cookies** (*localStorage*)
+
+- **Finalidade:** lembrar que você já fechou o aviso de cookies, para que ele não apareça em todas as páginas.
+- **Conteúdo:** apenas o valor "1". Fica somente no seu navegador e nunca é enviado ao servidor.
+- **Duração:** até você limpar os dados do site no navegador.
+
+## 5. Conteúdo de terceiros
+
+Algumas páginas de software podem exibir um vídeo demonstrativo incorporado:
+
+- **YouTube:** usamos o modo de privacidade aprimorada (youtube-nocookie.com), que não grava cookies antes de você dar play no vídeo.
+- **Vimeo:** o player é carregado com a opção "não rastrear" (*dnt*), que desativa os cookies de rastreamento do Vimeo.
+
+Ao reproduzir um vídeo, o serviço de vídeo pode gravar seus próprios dados de reprodução, conforme a política de privacidade dele. Links externos, como o botão do WhatsApp, levam a sites com políticas próprias, que não controlamos.
+
+## 6. Estatísticas sem cookies
+
+A contagem de visualizações dos softwares é feita no servidor, agregada por dia, sem cookies e sem identificar quem visitou. O administrador pode desligar essa contagem em Configurações.
+
+## 7. Como controlar
+
+Você pode ver, bloquear ou apagar cookies e o armazenamento local nas configurações do seu navegador, inclusive só para este site. Bloquear o cookie de sessão não afeta a navegação pública, mas impede o acesso ao painel e à área do cliente.
+
+## 8. Alterações e contato
+
+Se passarmos a usar qualquer cookie que não seja estritamente necessário, esta política será atualizada **antes** do uso e o site passará a pedir seu consentimento. Dúvidas podem ser enviadas pela [página de contato](/contato). Para exercer seus direitos de titular, use o [formulário de solicitações](/privacidade/solicitacao). Consulte também a [Política de Privacidade](/politica-de-privacidade).`]
 ];
 
 const FAQS = [
