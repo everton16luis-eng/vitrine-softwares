@@ -106,6 +106,10 @@ Ajuste:
 | `GATEWAY_HOSTNAMES` | `agentes.SEUDOMINIO,IP_PUBLICO,localhost` — **o domínio primeiro**; `localhost` permite o agente deste VPS |
 | `GATEWAY_PUBLIC_URL` | `https://agentes.SEUDOMINIO:8443` |
 
+Se a porta 8443 já estiver em uso (o diagnóstico mostra quem escuta nela), **não mexa no outro
+serviço**: escolha uma porta livre (ex.: `GATEWAY_PORT=9443`) e use a mesma porta em
+`GATEWAY_PUBLIC_URL`, no `enroll` do passo 9 e na regra de firewall do passo 10.
+
 Os nomes vão no certificado do gateway, que só é reemitido se o **primeiro** nome mudar: defina todos
 agora. Apague a linha `DATABASE_URL_TEST` (testes não rodam em produção).
 

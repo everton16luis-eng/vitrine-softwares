@@ -6,7 +6,7 @@ storage/uploads/*
 !storage/uploads/.gitkeep
 storage/private/*
 !storage/private/.gitkeep
-backups/
+/backups/
 *.log
 coverage/
 .DS_Store
