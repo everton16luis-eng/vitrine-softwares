@@ -14,6 +14,7 @@
 | --- | --- | --- | --- | --- | --- |
 | `frontend/public/assets/images/hero-dashboard.svg` | Ilustração de painel genérico (dados ilustrativos) | Criada para o projeto (`scripts/generate-images.js`) | Projeto | Própria | 2026-10-26 |
 | `frontend/public/assets/images/og-default.svg` / `.png` | Imagem padrão para compartilhamento (Open Graph), sem logotipo — identidade provisória | Criada para o projeto | Projeto | Própria | 2026-11-02 |
+| `frontend/public/assets/images/produtos/portal-de-noticias-*.webp` | Capturas reais do Portal Regional de Notícias (projeto `portal-noticias-sc`) em execução local, com o conteúdo de demonstração fictício do próprio sistema (`npm run db:seed:demo`) e nome de site genérico; computador 1440 × 900 e celular 390 px (composição de três telas) | Capturas do sistema próprio (Playwright) | Projeto | Própria | 2026-11-08 |
 | `frontend/public/assets/images/produtos/churchflow-*.svg` | Mockups de telas do ChurchFlow (dados fictícios) | Criada para o projeto | Projeto | Própria | 2026-10-26 |
 | `frontend/public/assets/images/produtos/spacecontrol-*.svg` | Mockups de telas do SpaceControl (dados fictícios) | Criada para o projeto | Projeto | Própria | 2026-10-26 |
 | `frontend/public/assets/images/produtos/fleetmanager-*.svg` | Mockups de telas do FleetManager (dados fictícios) | Criada para o projeto | Projeto | Própria | 2026-10-26 |

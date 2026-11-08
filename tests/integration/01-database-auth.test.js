@@ -21,9 +21,37 @@ describe('inicialização do banco de dados', { skip }, () => {
     assert.deepEqual(perfis.map((p) => p.codigo), ['administrador', 'consulta', 'editor_conteudo', 'gerente_comercial']);
     const produtos = await h.db.many('SELECT slug, dados_demonstrativos, preco, status_comercial FROM produtos ORDER BY ordem');
     assert.deepEqual(produtos.map((p) => p.slug), ['portal-de-noticias', 'churchflow', 'spacecontrol', 'fleetmanager', 'sistemas-personalizados']);
-    assert.ok(produtos.every((p) => p.dados_demonstrativos && p.preco === null));
+    assert.ok(produtos.every((p) => p.preco === null), 'nenhum preço inventado');
+    // O Portal Regional de Notícias é um sistema real (capturas das telas); os demais seguem ilustrativos.
+    assert.deepEqual(produtos.filter((p) => !p.dados_demonstrativos).map((p) => p.slug), ['portal-de-noticias']);
     const { n } = await h.db.one('SELECT count(*)::int n FROM clientes');
     assert.equal(n, 0, 'nenhum cliente fictício deve ser criado');
+  });
+
+  test('seed 07 troca o exemplo antigo do Portal de Notícias e preserva o que foi editado', async () => {
+    const { seed } = await import('../../database/seeds/07-portal-noticias-real.js');
+    const tx = { query: (sql, params) => h.db.query(sql, params), one: (sql, params) => h.db.one(sql, params) };
+    const { id } = await h.db.one("SELECT id FROM produtos WHERE slug = 'portal-de-noticias'");
+    // Simula um banco instalado antes: exemplo antigo + uma imagem enviada pelo painel.
+    await h.db.query("UPDATE produtos SET nome = 'Portal de Notícias', resumo = $2, imagem_url = '/assets/images/produtos/portal-de-noticias-capa.svg', dados_demonstrativos = true WHERE id = $1",
+      [id, 'Portal regional de notícias com coleta automatizada de fontes autorizadas, sugestões editoriais por IA, revisão humana obrigatória, publicidade e redes sociais.']);
+    await h.db.query('DELETE FROM produto_imagens WHERE produto_id = $1', [id]);
+    await h.db.query("INSERT INTO produto_imagens (produto_id, url_estatica, legenda, ordem) VALUES ($1, '/assets/images/produtos/portal-de-noticias-revisao.svg', 'antiga', 0), ($1, '/assets/images/produtos/portal-de-noticias-fontes.svg', 'antiga', 1), ($1, '/uploads/minha.png', 'do painel', 2)", [id]);
+    await h.db.query("UPDATE produto_funcionalidades SET titulo = 'Editada no painel' WHERE produto_id = $1 AND tipo = 'funcionalidade' AND ordem = 0", [id]);
+
+    await seed(tx);
+    await seed(tx); // idempotente
+
+    const p = await h.db.one('SELECT nome, imagem_url, dados_demonstrativos FROM produtos WHERE id = $1', [id]);
+    assert.equal(p.nome, 'Portal Regional de Notícias');
+    assert.equal(p.imagem_url, '/assets/images/produtos/portal-de-noticias-capa.webp');
+    assert.equal(p.dados_demonstrativos, false);
+    const imgs = await h.db.many('SELECT url_estatica FROM produto_imagens WHERE produto_id = $1 ORDER BY ordem', [id]);
+    assert.equal(imgs.length, 11);
+    assert.ok(imgs.every((i) => !i.url_estatica.endsWith('.svg')), 'ilustrações antigas removidas');
+    assert.equal(imgs.at(-1).url_estatica, '/uploads/minha.png', 'imagem do painel preservada, depois das capturas');
+    const { n } = await h.db.one("SELECT count(*)::int n FROM produto_funcionalidades WHERE produto_id = $1 AND titulo = 'Editada no painel'", [id]);
+    assert.equal(n, 1, 'funcionalidades editadas no painel não são trocadas');
   });
 
   test('seeds são idempotentes', async () => {

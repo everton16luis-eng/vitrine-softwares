@@ -1,5 +1,6 @@
-// Catálogo demonstrativo. Todos os produtos são marcados como dados_demonstrativos
-// e NENHUM preço é inventado. Situações comerciais iniciais conservadoras:
+// Catálogo inicial. Os produtos ilustrativos são marcados como dados_demonstrativos; o Portal Regional
+// de Notícias é um sistema real, com capturas das telas em funcionamento (demonstrativo: false).
+// NENHUM preço é inventado. Situações comerciais iniciais conservadoras:
 // os sistemas aparecem como "Em desenvolvimento" ou "Demonstração disponível" (com demonstração visual
 // de dados fictícios); o administrador altera conforme a realidade.
 // Inserção apenas se o slug ainda não existir — edições do painel são preservadas.
@@ -14,30 +15,48 @@ const CATEGORIES = [
 
 const f = (titulo, descricao, icone) => ({ titulo, descricao, icone });
 
-const PRODUCTS = [
+export const PRODUCTS = [
   {
-    slug: 'portal-de-noticias', nome: 'Portal de Notícias', categoria: 'comunicacao-e-midia', ordem: 5, destaque: true,
-    resumo: 'Portal regional de notícias com coleta automatizada de fontes autorizadas, sugestões editoriais por IA, revisão humana obrigatória, publicidade e redes sociais.',
-    descricao: 'O **Portal de Notícias** (nome provisório) reúne em um só sistema o site público e a redação: fontes autorizadas (RSS e páginas) são coletadas automaticamente, os itens duplicados são descartados e a IA pode sugerir título, resumo e categoria.\n\n**Nenhuma notícia é publicada automaticamente:** tudo passa pela fila de revisão da equipe, que aprova, agenda ou rejeita. O portal publicado tem SEO técnico, busca em português sem acento, crédito da fonte e do autor, gestão de anúncios e publicação no Instagram.',
-    problema: 'Redações pequenas que gastam horas copiando comunicados de prefeituras, órgãos e entidades, sem controle de duplicados, sem padronização editorial e sem uma forma organizada de vender e medir anúncios.',
-    publico: '- Portais e jornais regionais\n- Assessorias de comunicação\n- Veículos que agregam informações de órgãos públicos e entidades',
-    requisitos: '- Navegador atualizado\n- Hospedagem Node.js + PostgreSQL com HTTPS\n- Opcional: chave de IA (Claude ou Gemini), SMTP e conta profissional do Instagram',
+    slug: 'portal-de-noticias', nome: 'Portal Regional de Notícias', categoria: 'comunicacao-e-midia', ordem: 5, destaque: true, demonstrativo: false, capa: 'portal-de-noticias-capa.webp',
+    resumo: 'Portal de notícias regional com redação integrada: coleta automática de fontes autorizadas, sugestões da IA, revisão humana obrigatória, publicidade, Instagram e Facebook.',
+    descricao: 'O **Portal Regional de Notícias** reúne em um só sistema o site que o leitor vê e o painel da redação. Comunicados de prefeituras, câmaras, Defesa Civil e entidades chegam por coleta automática (RSS e páginas autorizadas), os repetidos são identificados e a IA, se estiver ligada, sugere título, resumo, categoria e alertas.\n\n**Nenhuma notícia vai ao ar sozinha:** cada item espera na fila de revisão até a equipe aprovar, agendar, pedir correção ou rejeitar. O portal publicado tem páginas por município e categoria, oito modelos de matéria, busca sem acento, crédito da fonte e do autor, SEO técnico, gestão de anúncios com mídia kit e publicação no Instagram e no Facebook.\n\nAs telas desta página são capturas do sistema em funcionamento, com conteúdo de demonstração fictício.',
+    problema: 'Redações pequenas gastam horas copiando comunicados de órgãos públicos e entidades, sem controle de duplicados, sem padrão editorial e sem um jeito organizado de vender e medir anúncios.',
+    publico: '- Portais e jornais regionais\n- Assessorias de comunicação\n- Veículos que reúnem informações de prefeituras, câmaras e entidades de uma região',
+    requisitos: '- Navegador atualizado (computador ou celular)\n- Servidor Node.js 20+ e PostgreSQL 14+ com HTTPS (pode ser fornecido na implantação)\n- Opcional: chave de IA (Claude ou Gemini), SMTP, conta profissional do Instagram e página do Facebook',
     status: 'demonstracao_disponivel', modelo: 'sob_orcamento', demo: 'interna',
     funcionalidades: [
-      f('Coleta automatizada', 'Fontes RSS e páginas autorizadas, com agendamento, teste de conexão e histórico.', 'rss'),
-      f('Deduplicação', 'Itens repetidos são identificados por endereço, conteúdo e título.', 'files'),
-      f('Sugestões por IA', 'Título, resumo e categoria sugeridos, com limite mensal de custo.', 'stars'),
-      f('Revisão humana obrigatória', 'Fila de revisão com aprovação, agendamento, versões e retirada.', 'check2-square'),
-      f('Modelos de matéria', 'Clássico, destaque, nota, urgente, serviço, entrevista, fotorreportagem e especial.', 'layout-text-window'),
-      f('SEO técnico', 'Sitemap, feed RSS, Open Graph e dados estruturados de notícia.', 'search'),
-      f('Crédito de fonte e autor', 'Atribuição clara e link para a publicação original.', 'person-check'),
-      f('Publicidade', 'Anunciantes, campanhas, posições, métricas, contratos e preparação para AdSense.', 'megaphone'),
-      f('Redes sociais', 'Artes e legendas para Feed e Stories do Instagram, com aprovação.', 'instagram'),
-      f('Painel completo', 'Usuários, permissões, auditoria, relatórios, backups e saúde do sistema.', 'shield-lock')
+      f('Coleta automatizada', 'Fontes RSS e páginas autorizadas, com política de uso registrada, teste de conexão, agendamento e histórico de coletas.', 'rss'),
+      f('Duplicados e mesmo fato', 'Itens repetidos são descartados e notícias parecidas aparecem lado a lado para o editor agrupar.', 'files'),
+      f('Sugestões da IA', 'Título, resumo, categoria e alertas sugeridos por Claude ou Gemini, com limite mensal de custo. Opcional.', 'stars'),
+      f('Revisão humana obrigatória', 'Fila de revisão com aprovação, agendamento, pedido de correção, rejeição e histórico de versões.', 'check2-square'),
+      f('Oito modelos de matéria', 'Clássico, destaque, nota, urgente, serviço, entrevista, fotorreportagem e especial.', 'layout-text-window'),
+      f('Municípios e categorias', 'Páginas por município, região e categoria, com destaques da home escolhidos pelo editor.', 'geo-alt'),
+      f('Busca e SEO técnico', 'Busca em português sem acento, sitemap, feed RSS, Open Graph e dados estruturados de notícia.', 'search'),
+      f('Crédito de fonte e autor', 'Atribuição clara e link para a publicação original em cada matéria.', 'person-check'),
+      f('Publicidade e mídia kit', 'Anunciantes, campanhas, posições, métricas, contratos, pagamentos e mídia kit gerado com os dados do portal.', 'megaphone'),
+      f('Instagram e Facebook', 'Artes de Feed e Stories geradas a partir da notícia, com legenda e aprovação antes de publicar.', 'instagram'),
+      f('Central via WhatsApp', 'Mensagens de grupos escolhidos viram rascunhos para revisão, agrupados por fato. Opcional.', 'whatsapp'),
+      f('Painel completo', 'Usuários, grupos de permissão, auditoria, relatórios, backups e saúde do sistema.', 'shield-lock')
     ],
-    beneficios: [f('Menos trabalho manual', 'Comunicados chegam prontos para revisão.'), f('Controle editorial', 'Nada vai ao ar sem aprovação.'), f('Receita com anúncios', 'Campanhas medidas e relatórios para anunciantes.'), f('Mais alcance', 'SEO e redes sociais integrados.')],
-    faqs: [['A IA publica notícias sozinha?', 'Não. A IA apenas sugere título, resumo e categoria; toda publicação depende de aprovação humana.'], ['Os dados da demonstração são reais?', 'Não. Municípios, fontes, notícias e anunciantes da demonstração são fictícios.']],
-    imagens: [['portal-de-noticias-revisao.svg', 'Fila de revisão com sugestão da IA'], ['portal-de-noticias-fontes.svg', 'Fontes e histórico de coletas'], ['portal-de-noticias-publicidade.svg', 'Campanhas publicitárias e métricas']]
+    beneficios: [f('Menos trabalho manual', 'Os comunicados chegam prontos para revisão.'), f('Controle editorial', 'Nada é publicado sem aprovação de uma pessoa.'), f('Receita com anúncios', 'Campanhas medidas e mídia kit com números reais.'), f('Mais alcance', 'SEO, Instagram e Facebook integrados.')],
+    faqs: [
+      ['A IA publica notícias sozinha?', 'Não. A IA só sugere título, resumo, categoria e alertas; toda publicação depende de aprovação humana. O sistema funciona normalmente sem IA.'],
+      ['As telas são do sistema real?', 'Sim. As imagens são capturas do sistema em funcionamento, preenchido com conteúdo de demonstração fictício. A demonstração interativa simula os fluxos principais no seu navegador.'],
+      ['Posso usar o nome e as cores do meu veículo?', 'Sim. Nome, logotipo, cores, municípios, regiões e categorias são configurados no painel.'],
+      ['Quais fontes podem ser coletadas?', 'Somente fontes cuja política de uso permite a reprodução ou o resumo com crédito. Cada fonte é testada e tem a política registrada antes de ser ativada.']
+    ],
+    imagens: [
+      ['portal-de-noticias-capa.webp', 'Capa do portal: manchete, destaques e espaço de anúncio'],
+      ['portal-de-noticias-materia.webp', 'Página da matéria com crédito da fonte'],
+      ['portal-de-noticias-celular.webp', 'No celular: capa, matéria e fila de revisão'],
+      ['portal-de-noticias-municipio.webp', 'Notícias por município'],
+      ['portal-de-noticias-painel.webp', 'Dashboard do painel editorial'],
+      ['portal-de-noticias-revisao.webp', 'Fila de revisão: nada é publicado sem aprovação'],
+      ['portal-de-noticias-editor.webp', 'Editor com modelos de página e sugestão da IA'],
+      ['portal-de-noticias-destaques.webp', 'Escolha dos destaques da página inicial'],
+      ['portal-de-noticias-publicidade.webp', 'Campanhas publicitárias com métricas'],
+      ['portal-de-noticias-relatorios.webp', 'Relatórios editoriais e comerciais']
+    ]
   },
   {
     slug: 'churchflow', nome: 'ChurchFlow', categoria: 'gestao-institucional', ordem: 10, destaque: true,
@@ -155,12 +174,12 @@ export async function seed(tx) {
       `INSERT INTO produtos (categoria_id, nome, slug, resumo, descricao, problema_resolvido, publico_alvo, requisitos_tecnicos, modelo_contratacao,
                              status_comercial, publicado, publicado_em, destaque, dados_demonstrativos, imagem_url, demo_tipo, demo_disponivel, demo_aviso,
                              seo_title, seo_description, ordem)
-       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,true,now(),$11,true,$12,$13,$14,$15,$16,$17,$18)
+       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,true,now(),$11,$19,$12,$13,$14,$15,$16,$17,$18)
        ON CONFLICT (slug) DO NOTHING RETURNING id`,
       [catIds[p.categoria], p.nome, p.slug, p.resumo, p.descricao, p.problema, p.publico, p.requisitos, p.modelo, p.status, p.destaque,
-        `/assets/images/produtos/${p.slug}-capa.svg`, p.demo, p.demo === 'interna',
+        `/assets/images/produtos/${p.capa || `${p.slug}-capa.svg`}`, p.demo, p.demo === 'interna',
         p.demo === 'interna' ? 'Demonstração visual com dados fictícios. Não representa um ambiente de produção.' : null,
-        `${p.nome} — ${p.resumo.split(',')[0].slice(0, 50)}`.slice(0, 70), p.resumo.slice(0, 170), p.ordem]);
+        `${p.nome} — ${p.resumo.split(',')[0].slice(0, 50)}`.slice(0, 70), p.resumo.slice(0, 170), p.ordem, p.demonstrativo !== false]);
     if (!created) continue;
     for (const [i, it] of p.funcionalidades.entries()) {
       await tx.query("INSERT INTO produto_funcionalidades (produto_id, tipo, titulo, descricao, icone, ordem) VALUES ($1,'funcionalidade',$2,$3,$4,$5)", [created.id, it.titulo, it.descricao, it.icone, i]);

@@ -83,6 +83,23 @@
 .pn-ia strong { color: #c4b5fd; }
 .pn-ia p { margin: .3rem 0; }
 .pn-art { width: 150px; aspect-ratio: 1; border-radius: 8px; padding: .6rem; display: flex; align-items: flex-end; color: #fff; font-weight: 700; font-size: .72rem; line-height: 1.25; }
+/* Portal de Notícias: tour pelas telas reais */
+.pn-tour-steps { list-style: none; margin: 0 0 1rem; padding: 0; display: flex; flex-wrap: wrap; gap: .4rem; }
+.pn-tour-steps button { display: inline-flex; align-items: center; gap: .45rem; background: transparent; border: 1px solid rgba(255,255,255,.14); color: #aab3c5; border-radius: 999px; padding: .25rem .7rem .25rem .3rem; font-size: .82rem; }
+.pn-tour-steps button:hover { color: #fff; border-color: rgba(255,255,255,.35); }
+.pn-tour-steps button[aria-current="step"] { color: #0b111d; background: var(--accent); border-color: var(--accent); }
+.pn-tour-n { display: inline-grid; place-items: center; width: 1.45rem; height: 1.45rem; border-radius: 50%; background: rgba(255,255,255,.08); font-weight: 700; font-size: .72rem; }
+.pn-tour-steps button[aria-current="step"] .pn-tour-n { background: rgba(11,17,29,.18); }
+.pn-tour { display: grid; grid-template-columns: minmax(0, 1.9fr) minmax(0, 1fr); gap: 1.4rem; align-items: start; }
+.pn-tour-shot { margin: 0; display: grid; gap: .5rem; }
+.pn-tour-zoom { display: block; border-radius: 10px; overflow: hidden; border: 1px solid rgba(255,255,255,.12); background: #fff; cursor: zoom-in; }
+.pn-tour-img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; }
+.pn-tour-info { display: grid; gap: .6rem; align-content: start; }
+.pn-tour-title { color: #fff; font-size: 1.3rem; margin: 0; outline: none; }
+.pn-tour-list { margin: 0; padding-left: 1.1rem; display: grid; gap: .45rem; color: #c3cad8; }
+.pn-tour-nav { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; margin-top: .4rem; }
+.pn-tour-info > .btn { justify-self: start; }
+@media (max-width: 991.98px) { .pn-tour { grid-template-columns: minmax(0, 1fr); } }
 @media (max-width: 767.98px) {
   .demo-layout { grid-template-columns: minmax(0, 1fr); }
   .demo-nav { min-width: 0; border-right: 0; border-bottom: 1px solid rgba(255,255,255,.06); }
