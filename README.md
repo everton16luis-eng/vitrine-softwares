@@ -24,7 +24,7 @@ Plataforma web para **apresentar, divulgar, comercializar e administrar software
 13. [Pendências e integrações que exigem configuração](#pendências-e-integrações-que-exigem-configuração)
 
 Documentação complementar em [`docs/`](docs/):
-[API](docs/API.md) · [Banco de dados](docs/BANCO-DE-DADOS.md) · [Segurança e LGPD](docs/SEGURANCA-E-LGPD.md) · [Pagamentos](docs/PAGAMENTOS.md) · [Imagens e licenças](docs/IMAGENS.md) · [Deploy](docs/DEPLOY.md) · [Deploy em VPS compartilhada](docs/DEPLOY-VPS.md) · [Central de Implantação](docs/IMPLANTACOES.md) · [Central de Backup e DR](docs/central-backup/README.md)
+[API](docs/API.md) · [Banco de dados](docs/BANCO-DE-DADOS.md) · [Segurança e LGPD](docs/SEGURANCA-E-LGPD.md) · [Pagamentos](docs/PAGAMENTOS.md) · [Imagens e licenças](docs/IMAGENS.md) · [Deploy](docs/DEPLOY.md) · [Deploy em VPS compartilhada](docs/DEPLOY-VPS.md) · [Central de Implantação](docs/IMPLANTACOES.md) · [Levantamento de Requisitos](docs/levantamento/README.md) · [Central de Backup e DR](docs/central-backup/README.md)
 
 ---
 
@@ -333,6 +333,10 @@ Resumo (detalhes e exemplos em [docs/DEPLOY.md](docs/DEPLOY.md); passo a passo c
 4. Proxy reverso com HTTPS (Nginx, Caddy, IIS ou o do provedor).
 5. Disco persistente para `storage/` (ou um driver de armazenamento externo).
 6. Backups automáticos do banco e de `storage/`.
+
+### Levantamento de Requisitos
+
+O menu *Descoberta → Levantamento de Requisitos* conduz a reunião de descoberta com o cliente (entrevista guiada, 5 porquês, consolidação, versões) e gera o relatório PDF com o Chrome/Chromium do servidor (`PDF_CHROME_PATH`, detectado sozinho quando omitido). Atualização em produção, permissões e instalação do Chrome em [docs/levantamento/README.md](docs/levantamento/README.md).
 
 ### Central de Implantação
 

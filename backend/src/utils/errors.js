@@ -28,6 +28,8 @@ export function fromPgError(err) {
       return conflict(uniqueMessage(err.constraint));
     case '23503':
       return conflict('Operação não permitida: existem registros relacionados.');
+    case 'P0001': // RAISE EXCEPTION das regras de integridade (ex.: histórico e versões travadas)
+      return conflict(err.message);
     case '23514':
       return new AppError('Os dados violam uma regra de negócio.', { status: 422, code: 'REGRA', details: { constraint: err.constraint } });
     case '22P02':

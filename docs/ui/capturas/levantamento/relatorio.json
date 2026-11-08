@@ -1,0 +1,387 @@
+{
+  "base": "http://localhost:3001",
+  "geradoEm": "2026-11-08T12:47:00.748Z",
+  "telas": [
+    {
+      "tela": "01-lista-vazia",
+      "viewport": "desktop",
+      "arquivo": "01-lista-vazia-desktop.png",
+      "url": "http://localhost:3001/admin#/levantamentos",
+      "console": [
+        "error: Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+      ],
+      "requisicoes": [
+        "401 GET http://localhost:3001/api/auth/me"
+      ],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "tela": "02-novo-levantamento",
+      "viewport": "desktop",
+      "arquivo": "02-novo-levantamento-desktop.png",
+      "url": "http://localhost:3001/admin#/levantamentos",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "tela": "03-entrevista-etapa1",
+      "viewport": "desktop",
+      "arquivo": "03-entrevista-etapa1-desktop.png",
+      "url": "http://localhost:3001/admin#/levantamentos/1?aba=entrevista",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "tela": "04-entrevista-etapa2",
+      "viewport": "desktop",
+      "arquivo": "04-entrevista-etapa2-desktop.png",
+      "url": "http://localhost:3001/admin#/levantamentos/1?aba=entrevista",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "tela": "05-cinco-porques",
+      "viewport": "desktop",
+      "arquivo": "05-cinco-porques-desktop.png",
+      "url": "http://localhost:3001/admin#/levantamentos/1?aba=porques",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "tela": "06-revisao",
+      "viewport": "desktop",
+      "arquivo": "06-revisao-desktop.png",
+      "url": "http://localhost:3001/admin#/levantamentos/1?aba=revisao",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "tela": "08-concluido",
+      "viewport": "desktop",
+      "arquivo": "08-concluido-desktop.png",
+      "url": "http://localhost:3001/admin#/levantamentos/1?aba=revisao",
+      "console": [
+        "warning: The resource http://localhost:3001/assets/fonts/archivo/archivo-latin-standard-normal.woff2 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally."
+      ],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "tela": "09-relatorios",
+      "viewport": "desktop",
+      "arquivo": "09-relatorios-desktop.png",
+      "url": "http://localhost:3001/admin#/levantamentos/1?aba=relatorios",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "tela": "10-versoes-historico",
+      "viewport": "desktop",
+      "arquivo": "10-versoes-historico-desktop.png",
+      "url": "http://localhost:3001/admin#/levantamentos/1?aba=versoes",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "tela": "11-comparar",
+      "viewport": "desktop",
+      "arquivo": "11-comparar-desktop.png",
+      "url": "http://localhost:3001/admin#/levantamentos/comparar?a=1:1&b=1:2",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "tela": "12-lista",
+      "viewport": "desktop",
+      "arquivo": "12-lista-desktop.png",
+      "url": "http://localhost:3001/admin#/levantamentos",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "tela": "13-banco-perguntas",
+      "viewport": "desktop",
+      "arquivo": "13-banco-perguntas-desktop.png",
+      "url": "http://localhost:3001/admin#/levantamentos/perguntas",
+      "console": [
+        "warning: The resource http://localhost:3001/assets/fonts/archivo/archivo-latin-standard-normal.woff2 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally."
+      ],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "tela": "14-nova-pergunta",
+      "viewport": "desktop",
+      "arquivo": "14-nova-pergunta-desktop.png",
+      "url": "http://localhost:3001/admin#/levantamentos/perguntas",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "tela": "15-categorias",
+      "viewport": "desktop",
+      "arquivo": "15-categorias-desktop.png",
+      "url": "http://localhost:3001/admin#/levantamentos/perguntas",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "tela": "16-clientes",
+      "viewport": "desktop",
+      "arquivo": "16-clientes-desktop.png",
+      "url": "http://localhost:3001/admin#/levantamentos?aba=clientes",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "tela": "17-cliente",
+      "viewport": "desktop",
+      "arquivo": "17-cliente-desktop.png",
+      "url": "http://localhost:3001/admin#/levantamentos/cliente/1",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "tela": "18-projeto",
+      "viewport": "desktop",
+      "arquivo": "18-projeto-desktop.png",
+      "url": "http://localhost:3001/admin#/levantamentos/projeto/1",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "tela": "01-lista",
+      "viewport": "celular",
+      "arquivo": "01-lista-celular.png",
+      "url": "http://localhost:3001/admin#/levantamentos",
+      "console": [
+        "error: Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+      ],
+      "requisicoes": [
+        "401 GET http://localhost:3001/api/auth/me"
+      ],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "tela": "03-entrevista",
+      "viewport": "celular",
+      "arquivo": "03-entrevista-celular.png",
+      "url": "http://localhost:3001/admin#/levantamentos/1?aba=entrevista",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "tela": "05-cinco-porques",
+      "viewport": "celular",
+      "arquivo": "05-cinco-porques-celular.png",
+      "url": "http://localhost:3001/admin#/levantamentos/1?aba=porques",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "tela": "06-revisao",
+      "viewport": "celular",
+      "arquivo": "06-revisao-celular.png",
+      "url": "http://localhost:3001/admin#/levantamentos/1?aba=revisao",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "tela": "09-relatorios",
+      "viewport": "celular",
+      "arquivo": "09-relatorios-celular.png",
+      "url": "http://localhost:3001/admin#/levantamentos/1?aba=relatorios",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "tela": "10-versoes-historico",
+      "viewport": "celular",
+      "arquivo": "10-versoes-historico-celular.png",
+      "url": "http://localhost:3001/admin#/levantamentos/1?aba=versoes",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "tela": "11-comparar",
+      "viewport": "celular",
+      "arquivo": "11-comparar-celular.png",
+      "url": "http://localhost:3001/admin#/levantamentos/comparar?a=1:1&b=1:2",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "tela": "13-banco-perguntas",
+      "viewport": "celular",
+      "arquivo": "13-banco-perguntas-celular.png",
+      "url": "http://localhost:3001/admin#/levantamentos/perguntas",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "tela": "16-clientes",
+      "viewport": "celular",
+      "arquivo": "16-clientes-celular.png",
+      "url": "http://localhost:3001/admin#/levantamentos?aba=clientes",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "tela": "17-cliente",
+      "viewport": "celular",
+      "arquivo": "17-cliente-celular.png",
+      "url": "http://localhost:3001/admin#/levantamentos/cliente/1",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "tela": "18-projeto",
+      "viewport": "celular",
+      "arquivo": "18-projeto-celular.png",
+      "url": "http://localhost:3001/admin#/levantamentos/projeto/1",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    },
+    {
+      "tela": "02-novo-levantamento",
+      "viewport": "celular",
+      "arquivo": "02-novo-levantamento-celular.png",
+      "url": "http://localhost:3001/admin#/levantamentos",
+      "console": [],
+      "requisicoes": [],
+      "acessibilidade": [],
+      "rolagemHorizontalPx": 0
+    }
+  ],
+  "verificacoes": [
+    {
+      "ok": true,
+      "what": "Menu lateral mostra \"Levantamento de Requisitos\""
+    },
+    {
+      "ok": true,
+      "what": "Criar levantamento abre a entrevista"
+    },
+    {
+      "ok": true,
+      "what": "Autosave mostra \"Salvo às…\""
+    },
+    {
+      "ok": true,
+      "what": "Pular pergunta marca como pulada"
+    },
+    {
+      "ok": true,
+      "what": "Avançar leva à etapa 2"
+    },
+    {
+      "ok": true,
+      "what": "Retomar abre na última etapa trabalhada"
+    },
+    {
+      "ok": true,
+      "what": "Resposta salva continua lá após recarregar"
+    },
+    {
+      "ok": true,
+      "what": "5 porquês grava 3 níveis"
+    },
+    {
+      "ok": true,
+      "what": "Pré-visualização do relatório responde com o conteúdo"
+    },
+    {
+      "ok": true,
+      "what": "Conclusão trava a versão 1"
+    },
+    {
+      "ok": true,
+      "what": "PDF gerado com o nome padronizado"
+    },
+    {
+      "ok": true,
+      "what": "Reabrir cria a versão 2"
+    },
+    {
+      "ok": true,
+      "what": "Versões lista v1 (concluída) e v2"
+    },
+    {
+      "ok": true,
+      "what": "Versão 1 abre somente leitura"
+    },
+    {
+      "ok": true,
+      "what": "Versão 1 preserva a resposta anterior"
+    },
+    {
+      "ok": true,
+      "what": "Comparação mostra a diferença entre versões"
+    },
+    {
+      "ok": true,
+      "what": "Duplicar cria outro levantamento"
+    },
+    {
+      "ok": true,
+      "what": "Duplicado não copia respostas"
+    },
+    {
+      "ok": true,
+      "what": "Nova pergunta aparece no banco"
+    }
+  ],
+  "surveyId": "1"
+}

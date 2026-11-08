@@ -25,6 +25,7 @@ import { renderQuoteDocument } from '../views/quote-document.js';
 import { partnersRouter } from '../modules/partners/partners.routes.js';
 import { deploymentsRouter } from '../modules/deployments/deployments.routes.js';
 import { listRecipesForSelect } from '../modules/deployments/recipes.service.js';
+import { requirementsRouter } from '../modules/requirements/requirements.routes.js';
 
 export const adminApi = Router();
 adminApi.use(requireStaff);
@@ -161,6 +162,9 @@ adminApi.post('/contratos/:id/arquivo', requirePermission('contratos.editar'), m
   res.json(await contractsService.get(id));
 });
 adminApi.use('/licencas', crudRouter(licensesService, { view: 'contratos.ver', edit: 'contratos.editar', remove: null }));
+
+// ------------------------------------------------------------- levantamento de requisitos
+adminApi.use('/requisitos', requirementsRouter);
 
 // ------------------------------------------------------------- central de implantação
 adminApi.use(deploymentsRouter);

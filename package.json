@@ -38,7 +38,8 @@
     "helmet": "^8.0.0",
     "multer": "^2.0.1",
     "nodemailer": "^6.10.0",
-    "pg": "^8.13.1"
+    "pg": "^8.13.1",
+    "playwright-core": "^1.55.0"
   },
   "optionalDependencies": {
     "sharp": "^0.33.5"

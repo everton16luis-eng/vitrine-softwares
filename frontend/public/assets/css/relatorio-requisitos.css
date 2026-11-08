@@ -1,0 +1,257 @@
+/* =====================================================================
+   RELATÓRIO DE DESCOBERTA E LEVANTAMENTO DE REQUISITOS
+   Modelo próprio no sistema "prancha técnica" (DESIGN.md): papel, tinta
+   nanquim, filetes de 1 px, carimbo com campos rotulados e o vermelhão
+   do lápis de revisão como única marca de destaque.
+   Usado na pré-visualização (tela) e no PDF (A4, via Chrome). No PDF este
+   arquivo vai embutido, com a fonte em data URI e as cores do painel.
+   ===================================================================== */
+
+@font-face {
+  font-family: "Archivo";
+  font-style: normal;
+  font-weight: 100 900;
+  font-stretch: 62% 125%;
+  font-display: block;
+  src: url("/assets/fonts/archivo/archivo-latin-standard-normal.woff2") format("woff2");
+}
+
+:root {
+  /* cores padrão da marca; o tema do painel (/theme.css ou embutido) sobrescreve */
+  --brand-ink: #12233D;
+  --brand-accent: #C8401E;
+  --brand-accent-text: #C8401E;
+  --brand-line: #1D5F8A;
+  --brand-line-text: #1D5F8A;
+
+  --ink: var(--brand-ink);
+  --ink-2: color-mix(in oklab, var(--brand-ink) 82%, #fff);
+  --ink-3: color-mix(in oklab, var(--brand-ink) 64%, #fff);
+  --paper: #F3F5F7;
+  --sheet: #FFFFFF;
+  --sheet-2: #F6F8FA;
+  --rule: color-mix(in oklab, var(--brand-ink) 14%, #fff);
+  --rule-strong: color-mix(in oklab, var(--brand-ink) 32%, #fff);
+  --grid-minor: color-mix(in oklab, var(--brand-ink) 5%, transparent);
+  --grid-major: color-mix(in oklab, var(--brand-ink) 9%, transparent);
+  --accent: var(--brand-accent);
+  --link: var(--brand-line-text);
+  --line: var(--brand-line);
+  --line-wash: color-mix(in oklab, var(--brand-line) 8%, #fff);
+  --progress: #855000; --progress-bg: #FBF0DA;
+
+  --font: "Archivo", "Segoe UI", Arial, sans-serif;
+  --mono: ui-monospace, "Cascadia Mono", Consolas, monospace;
+}
+
+/* ------------------------------------------------------------------ página A4 */
+@page {
+  size: A4;
+  margin: 24mm 19mm 22mm;
+  @top-left { content: ""; font: 500 7.4pt/1.2 var(--font); color: var(--ink-3); font-stretch: 92%; vertical-align: bottom; padding-bottom: 4mm; border-bottom: .25mm solid var(--rule); }
+  @top-right { content: ""; font: 600 7.4pt/1.2 var(--font); color: var(--ink-3); font-variant-numeric: tabular-nums; vertical-align: bottom; padding-bottom: 4mm; border-bottom: .25mm solid var(--rule); }
+  @bottom-left { content: ""; font: 500 7.4pt/1.2 var(--font); color: var(--ink-3); vertical-align: top; padding-top: 4mm; border-top: .25mm solid var(--rule); }
+  @bottom-right { content: "Página " counter(page) " de " counter(pages); font: 650 7.4pt/1.2 var(--font); color: var(--ink); font-variant-numeric: tabular-nums; vertical-align: top; padding-top: 4mm; border-top: .25mm solid var(--rule); }
+}
+@page capa {
+  margin: 0;
+  @top-left { content: none; } @top-right { content: none; } @bottom-left { content: none; } @bottom-right { content: none; }
+}
+
+/* ------------------------------------------------------------------ base */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body.relatorio {
+  margin: 0; font-family: var(--font); color: var(--ink); background: var(--sheet);
+  font-size: 10pt; line-height: 1.55; font-kerning: normal; font-feature-settings: "kern", "liga";
+  -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; hyphens: manual;
+}
+a { color: var(--link); text-decoration: underline; text-decoration-thickness: .5pt; text-underline-offset: 1.5pt; overflow-wrap: anywhere; }
+p { margin: 0 0 .55em; orphans: 3; widows: 3; text-wrap: pretty; }
+p:last-child { margin-bottom: 0; }
+ul, ol { margin: 0 0 .55em; padding-left: 1.2em; }
+li { orphans: 2; widows: 2; }
+h1, h2, h3, h4 { margin: 0; color: var(--ink); text-wrap: balance; break-after: avoid; }
+.mono { font-family: var(--mono); font-size: .92em; letter-spacing: .02em; }
+.vazio { color: var(--ink-3); font-style: italic; }
+.sub { display: block; font-weight: 450; color: var(--ink-2); font-size: .92em; margin-top: .15em; }
+.ref { display: inline-block; min-width: 2.2em; font-weight: 700; font-variant-numeric: tabular-nums; color: var(--line); font-stretch: 90%; }
+.manter { break-inside: avoid; }
+
+/* ------------------------------------------------------------------ capa */
+.capa {
+  page: capa; position: relative; width: 210mm; height: 296.6mm; overflow: hidden;
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(var(--grid-major) .25mm, transparent .25mm),
+    linear-gradient(90deg, var(--grid-major) .25mm, transparent .25mm),
+    linear-gradient(var(--grid-minor) .15mm, transparent .15mm),
+    linear-gradient(90deg, var(--grid-minor) .15mm, transparent .15mm);
+  background-size: 25mm 25mm, 25mm 25mm, 5mm 5mm, 5mm 5mm;
+  background-position: 10mm 10mm;
+  break-after: page;
+}
+.capa-quadro {
+  position: absolute; inset: 12mm; border: .45mm solid var(--ink); background: transparent;
+  display: grid; grid-template-rows: auto 1fr auto; padding: 14mm 14mm 0;
+}
+.registro { position: absolute; width: 7mm; height: 7mm; }
+.registro::before, .registro::after { content: ""; position: absolute; background: var(--ink); }
+.registro::before { left: 50%; top: 0; bottom: 0; width: .3mm; transform: translateX(-50%); }
+.registro::after { top: 50%; left: 0; right: 0; height: .3mm; transform: translateY(-50%); }
+.r-tl { top: -9.5mm; left: -9.5mm; } .r-tr { top: -9.5mm; right: -9.5mm; }
+.r-bl { bottom: -9.5mm; left: -9.5mm; } .r-br { bottom: -9.5mm; right: -9.5mm; }
+.capa-topo { display: flex; align-items: center; gap: 4mm; padding-bottom: 6mm; border-bottom: .25mm solid var(--rule-strong); }
+.capa-logo { max-height: 16mm; max-width: 70mm; object-fit: contain; }
+.capa-mark {
+  width: 11mm; height: 11mm; flex: none; border: .45mm solid var(--ink); border-radius: .8mm; background:
+    linear-gradient(var(--ink), var(--ink)) center / .45mm 46% no-repeat,
+    linear-gradient(var(--ink), var(--ink)) center / 46% .45mm no-repeat, var(--sheet);
+}
+.capa-empresa { font-weight: 720; font-stretch: 86%; font-size: 13pt; letter-spacing: -.01em; }
+.capa-titulo { align-self: center; position: relative; padding-left: 0; max-width: 150mm; }
+.capa-revisao { display: block; width: 22mm; height: 1.6mm; background: var(--accent); margin-bottom: 9mm; }
+.capa h1 {
+  font-size: 33pt; line-height: 1.02; font-weight: 740; font-stretch: 74%; letter-spacing: -.015em; text-transform: uppercase;
+  margin-bottom: 10mm;
+}
+.capa-projeto { font-size: 19pt; line-height: 1.2; font-weight: 640; font-stretch: 88%; margin-bottom: 2.5mm; letter-spacing: -.01em; }
+.capa-cliente { font-size: 12pt; color: var(--ink-2); font-weight: 480; }
+.capa-carimbo { margin: 0 -14mm; border-width: .45mm 0 0; border-radius: 0; background: var(--sheet); }
+.capa-carimbo > div { padding: 3.2mm 4mm 3.6mm; }
+.capa-carimbo dd { font-size: 10pt; }
+
+/* ------------------------------------------------------------------ carimbo */
+.carimbo {
+  display: grid; grid-template-columns: repeat(4, 1fr); margin: 0 0 7mm;
+  border: .3mm solid var(--rule-strong); border-radius: 1mm; overflow: hidden; background: var(--sheet); break-inside: avoid;
+}
+.carimbo > div { padding: 2.4mm 3mm 2.7mm; box-shadow: inset -.25mm -.25mm 0 var(--rule); min-width: 0; }
+.carimbo .span-2 { grid-column: span 2; }
+.carimbo .span-4 { grid-column: 1 / -1; }
+.carimbo dt { font-size: 7.2pt; font-weight: 520; color: var(--ink-3); margin-bottom: .6mm; letter-spacing: .01em; }
+.carimbo dd { margin: 0; font-size: 9.4pt; font-weight: 620; color: var(--ink); overflow-wrap: anywhere; line-height: 1.35; }
+.selo {
+  display: inline-flex; align-items: center; gap: 1.6mm; font-size: 8pt; font-weight: 640; line-height: 1.2;
+  padding: .8mm 2mm; border-radius: .6mm; color: #1D6A39; background: #E2F1E7;
+}
+.selo::before { content: ""; width: 1.5mm; height: 1.5mm; background: currentColor; transform: rotate(45deg); border-radius: .2mm; flex: none; }
+.selo-rascunho { color: var(--progress); background: var(--progress-bg); }
+.selo-vazio { color: #4A5565; background: #EEF1F4; font-weight: 560; }
+
+/* ------------------------------------------------------------------ seções */
+.secao { margin-bottom: 4mm; }
+.secao-quebra { break-before: page; }
+.secao-titulo {
+  display: grid; grid-template-columns: 15mm 1fr; gap: 0 3mm; align-items: start;
+  padding-bottom: 4mm; margin-bottom: 7mm; border-bottom: .45mm solid var(--ink); break-after: avoid;
+}
+.secao-num { font-size: 22pt; line-height: 1; font-weight: 300; font-stretch: 80%; color: var(--accent); font-variant-numeric: tabular-nums; padding-top: .6mm; }
+.secao-titulo h2 { font-size: 22pt; line-height: 1.05; font-weight: 730; font-stretch: 78%; letter-spacing: -.015em; }
+.secao-titulo p { margin: 1.6mm 0 0; color: var(--ink-2); font-size: 9.6pt; }
+.secao h3 { font-size: 12pt; font-weight: 690; font-stretch: 88%; margin: 6mm 0 2.4mm; letter-spacing: -.005em; }
+.texto { font-size: 10pt; }
+.texto.destaque { background: var(--sheet-2); border: .25mm solid var(--rule); border-left: .8mm solid var(--ink); padding: 3.5mm 4.5mm; border-radius: .6mm; }
+.citacao { margin-bottom: 3mm; }
+.citacao-ref { font-size: 8.4pt; color: var(--ink-3); font-weight: 560; margin-bottom: .8mm; }
+
+.indicadores { display: grid; grid-template-columns: repeat(4, 1fr); border-top: .25mm solid var(--rule-strong); border-bottom: .25mm solid var(--rule-strong); margin: 0 0 3mm; break-inside: avoid; }
+.indicadores > div { padding: 3mm 3mm 3.2mm; border-right: .25mm solid var(--rule); }
+.indicadores > div:last-child { border-right: 0; }
+.indicadores strong { display: block; font-size: 19pt; line-height: 1.05; font-weight: 720; font-stretch: 84%; font-variant-numeric: tabular-nums; }
+.indicadores span { font-size: 8pt; color: var(--ink-2); }
+
+.tabela { width: 100%; border-collapse: collapse; font-size: 9pt; break-inside: auto; margin-bottom: 4mm; }
+.tabela thead { display: table-header-group; }
+.tabela tr { break-inside: avoid; }
+.tabela th { text-align: left; font-size: 7.4pt; font-weight: 600; color: var(--ink-3); background: var(--sheet-2); border-bottom: .3mm solid var(--rule-strong); padding: 2mm 2.4mm; }
+.tabela td { padding: 2mm 2.4mm; border-bottom: .25mm solid var(--rule); vertical-align: top; font-variant-numeric: tabular-nums; }
+.tabela .n { text-align: right; white-space: nowrap; }
+
+/* ------------------------------------------------------------------ descoberta */
+.etapa { margin-bottom: 7mm; }
+.etapa-titulo { display: flex; align-items: baseline; gap: 3mm; padding: 2.2mm 0 2mm; border-bottom: .3mm solid var(--rule-strong); margin-bottom: 1.6mm; break-after: avoid; }
+.etapa-num { font-size: 8.2pt; font-weight: 700; color: var(--accent-text, var(--brand-accent-text)); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.etapa-titulo h3 { margin: 0; font-size: 14pt; font-weight: 720; font-stretch: 84%; }
+.etapa-desc { color: var(--ink-2); font-size: 8.8pt; font-style: italic; margin-bottom: 3mm; }
+
+.qa { padding: 3mm 0 3.4mm; border-bottom: .25mm solid var(--rule); break-inside: avoid; }
+.qa-longa { break-inside: auto; }
+.qa-pergunta { display: grid; grid-template-columns: 10mm 1fr; gap: 2mm; align-items: baseline; break-after: avoid; }
+.qa-pergunta .ref { min-width: 0; font-size: 8.6pt; }
+.qa-pergunta h4 { font-size: 10pt; font-weight: 650; line-height: 1.4; }
+.obrig { color: var(--brand-accent-text); font-weight: 700; }
+.qa-resposta { margin: 1.6mm 0 0 12mm; padding-left: 3.4mm; border-left: .5mm solid var(--line); color: var(--ink); font-size: 9.8pt; }
+.qa-resposta p, .qa-resposta li { color: color-mix(in oklab, var(--ink) 92%, #fff); }
+.qa-vazia { border-left-color: var(--rule-strong); }
+.valor { font-weight: 640; }
+.complemento { margin-top: 1.4mm; padding-top: 1.4mm; border-top: .2mm dashed var(--rule-strong); font-size: 9.4pt; color: var(--ink-2); }
+.escolhas { list-style: none; padding: 0; margin: 0 0 .3em; display: flex; flex-wrap: wrap; gap: 1.4mm 1.6mm; }
+.escolhas li { font-size: 8.6pt; padding: .7mm 2.2mm; border-radius: .6mm; border: .25mm solid var(--rule-strong); line-height: 1.3; }
+.escolhas li.on { background: var(--ink); border-color: var(--ink); color: #fff; font-weight: 620; }
+.escolhas li.off { color: var(--ink-3); border-style: dashed; }
+
+.nota, .nota-legal {
+  margin: 4mm 0 0; padding: 3.4mm 4.4mm; background: var(--sheet-2); border: .25mm solid var(--rule-strong); border-radius: .8mm; break-inside: avoid; font-size: 9.4pt;
+}
+.nota-titulo { font-size: 8pt; font-weight: 700; color: var(--ink-2); margin-bottom: 1.2mm; }
+.nota-legal { margin: 6mm 0 7mm; border-left: .9mm solid var(--accent); background: var(--sheet); font-size: 9.4pt; line-height: 1.6; }
+
+/* ------------------------------------------------------------------ 5 porquês */
+.porques { margin: 0 0 7mm; padding-bottom: 5mm; border-bottom: .3mm solid var(--rule-strong); break-inside: avoid; }
+.porques:last-child { border-bottom: 0; }
+.porques-rotulo { font-size: 8pt; font-weight: 700; color: var(--ink-3); margin-bottom: 1.2mm; }
+.porques-problema { font-size: 11pt; font-weight: 620; padding: 3mm 4mm; border: .3mm solid var(--ink); border-radius: .8mm; margin-bottom: 4mm; }
+.porques-cadeia { list-style: none; padding: 0; margin: 0 0 4mm; }
+.porques-cadeia li { display: grid; grid-template-columns: 8mm 1fr; gap: 3mm; position: relative; padding-bottom: 3.2mm; break-inside: avoid; }
+.porques-cadeia li:not(:last-child)::after { content: ""; position: absolute; left: 3.9mm; top: 7.6mm; bottom: .6mm; width: .25mm; background: var(--rule-strong); }
+.porques-n {
+  width: 7.6mm; height: 7.6mm; display: grid; place-items: center; border: .3mm solid var(--line); border-radius: .8mm;
+  font-size: 9pt; font-weight: 720; color: var(--line); font-variant-numeric: tabular-nums; background: var(--sheet);
+}
+.porques-p { font-weight: 650; margin-bottom: .6mm; }
+.porques-causa { padding: 3.4mm 4.4mm; background: var(--ink); color: #fff; border-radius: .8mm; break-inside: avoid; }
+.porques-causa .porques-rotulo { color: color-mix(in oklab, #fff 72%, var(--ink)); }
+.porques-causa p, .porques-causa a { color: #fff; }
+.porques-causa .vazio { color: color-mix(in oklab, #fff 70%, var(--ink)); }
+.porques-obs { margin-top: 3mm; font-size: 9.4pt; }
+
+/* ------------------------------------------------------------------ consolidação */
+.tema { margin-bottom: 5.5mm; padding-bottom: 4mm; border-bottom: .25mm solid var(--rule); }
+.tema:last-child { border-bottom: 0; }
+.tema h3 { margin-top: 0; }
+.lista-refs { list-style: none; padding: 0; margin: 0; font-size: 9.2pt; }
+.lista-refs li { display: grid; grid-template-columns: 11mm 1fr; gap: 0 1mm; padding: 1.4mm 0; border-bottom: .2mm dotted var(--rule-strong); break-inside: avoid; }
+.lista-refs li:last-child { border-bottom: 0; }
+.lista-refs .ref { font-size: 8.4pt; }
+.lista-q { color: var(--ink-3); font-weight: 560; }
+.lista-q::after { content: " —"; }
+.lista-refs.secundaria { margin-top: 2.4mm; color: var(--ink-2); }
+.lista-refs-titulo { font-size: 8pt; font-weight: 700; color: var(--ink-3); border-bottom: 0 !important; padding-left: 0 !important; text-indent: 0 !important; }
+.pendencias { margin-top: 3mm; }
+.refs-inline { margin: 1.6mm 0 0; font-size: 8.4pt; color: var(--ink-3); }
+.fecho { break-inside: avoid; }
+.secao + .secao:not(.secao-quebra) { margin-top: 12mm; }
+
+.carimbo-final { margin-top: 2mm; }
+
+/* ------------------------------------------------------------------ pré-visualização em tela */
+@media screen {
+  body.relatorio.modo-previa { background: var(--paper); padding: 0 0 48px; }
+  .modo-previa .doc { max-width: 210mm; margin: 0 auto; }
+  .modo-previa .secao, .modo-previa .capa { background: var(--sheet); box-shadow: 0 1px 0 var(--rule), 0 18px 40px -30px color-mix(in oklab, var(--ink) 60%, transparent); margin: 0 auto 24px; }
+  .modo-previa .secao { padding: 22mm 19mm; }
+  .modo-previa .capa { height: auto; aspect-ratio: 210 / 297; }
+  .previa-barra {
+    position: sticky; top: 0; z-index: 5; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px;
+    padding: 10px 16px; margin-bottom: 24px; background: color-mix(in oklab, var(--paper) 92%, transparent); border-bottom: 1px solid var(--rule-strong);
+    font-size: 14px; backdrop-filter: blur(6px);
+  }
+  .previa-barra strong { font-weight: 680; }
+  .previa-barra span { color: var(--ink-2); }
+  @media (max-width: 820px) {
+    .modo-previa .doc { max-width: none; zoom: .48; }
+    .previa-barra { zoom: 1; }
+  }
+}
+@media print { .previa-barra { display: none; } }

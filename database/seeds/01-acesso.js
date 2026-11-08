@@ -47,7 +47,13 @@ export const PERMISSIONS = [
   ['implantacoes.editar', 'Criar implantações e registrar informações do cliente', 'implantacao'],
   ['implantacoes.executar', 'Iniciar, retomar e testar instalações no servidor', 'implantacao'],
   ['implantacoes.receitas', 'Configurar receitas de implantação dos softwares', 'implantacao'],
-  ['implantacoes.segredos', 'Definir credenciais sigilosas das instalações', 'implantacao']
+  ['implantacoes.segredos', 'Definir credenciais sigilosas das instalações', 'implantacao'],
+  ['levantamentos.ver', 'Consultar levantamentos de requisitos, versões, históricos e relatórios', 'descoberta'],
+  ['levantamentos.criar', 'Criar e duplicar levantamentos, clientes e projetos da descoberta', 'descoberta'],
+  ['levantamentos.editar', 'Registrar respostas, 5 porquês, consolidação e arquivar levantamentos', 'descoberta'],
+  ['levantamentos.perguntas', 'Gerenciar o banco de perguntas, etapas e categorias', 'descoberta'],
+  ['levantamentos.concluir', 'Concluir e reabrir levantamentos', 'descoberta'],
+  ['levantamentos.pdf', 'Gerar relatórios PDF de levantamentos', 'descoberta']
 ];
 
 const ROLES = [
@@ -57,7 +63,8 @@ const ROLES = [
     perms: ['dashboard.ver', 'produtos.ver', 'produtos.editar', 'produtos.publicar', 'categorias.ver', 'servicos.ver', 'planos.ver', 'planos.editar',
       'midia.ver', 'leads.ver', 'leads.editar', 'leads.exportar', 'clientes.ver', 'clientes.editar', 'clientes.exportar', 'orcamentos.ver',
       'orcamentos.editar', 'pedidos.ver', 'pedidos.editar', 'pedidos.autorizar_desconto', 'pagamentos.registrar', 'pagamentos.confirmar',
-      'contratos.ver', 'contratos.editar', 'suporte.ver', 'suporte.editar', 'relatorios.ver', 'lgpd.ver']
+      'contratos.ver', 'contratos.editar', 'suporte.ver', 'suporte.editar', 'relatorios.ver', 'lgpd.ver',
+      'levantamentos.ver', 'levantamentos.criar', 'levantamentos.editar', 'levantamentos.concluir', 'levantamentos.pdf']
   },
   {
     codigo: 'editor_conteudo', nome: 'Editor de conteúdo', descricao: 'Páginas, imagens, categorias, serviços e conteúdo do site.',

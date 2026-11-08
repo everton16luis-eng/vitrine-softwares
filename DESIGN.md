@@ -100,3 +100,6 @@ sobre o papel e escolhe `--on-accent` / `--accent-text` / `--line-text` para man
   conteúdo da demo, não um cartão.
 - O detector do Impeccable marca a malha do hero como "decorative grid": aqui ela é a superfície de
   desenho técnico da tese (exceção prevista pela própria regra para "blueprint/measurement").
+- **Relatório de levantamento de requisitos** (`relatorio-requisitos.css`): documento A4 impresso pelo
+  Chrome. Mesma prancha (papel, tinta, filetes, carimbo, vermelhão como marca de revisão), mas com
+  medidas em milímetros, capa com malha milimetrada e regras `@page` para cabeçalho, rodapé e numeração.

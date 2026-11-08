@@ -25,7 +25,7 @@ const VIEWPORTS = {
 };
 
 const ADMIN_ROUTES = ['', 'produtos', 'categorias', 'servicos', 'planos', 'leads', 'clientes', 'orcamentos', 'pedidos', 'contratos', 'suporte',
-  'implantacoes', 'receitas', 'dominios', 'conteudo', 'parceiros', 'midia', 'relatorios', 'lgpd', 'auditoria', 'usuarios', 'configuracoes', 'perfil'];
+  'levantamentos', 'levantamentos/perguntas', 'implantacoes', 'receitas', 'dominios', 'conteudo', 'parceiros', 'midia', 'relatorios', 'lgpd', 'auditoria', 'usuarios', 'configuracoes', 'perfil'];
 const CLIENT_ROUTES = ['', 'pedidos', 'orcamentos', 'contratos', 'arquivos', 'suporte', 'dados'];
 
 mkdirSync(OUT, { recursive: true });

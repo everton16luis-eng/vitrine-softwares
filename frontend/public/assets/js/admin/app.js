@@ -20,6 +20,7 @@ const ROUTES = {
   pedidos: () => import('./pages/orders.js'),
   contratos: () => import('./pages/contracts.js'),
   suporte: () => import('./pages/support.js'),
+  levantamentos: () => import('./pages/requirements.js'),
   implantacoes: () => import('./pages/deployments.js'),
   receitas: () => import('./pages/recipes.js'),
   dominios: () => import('./pages/domains.js'),
@@ -46,6 +47,9 @@ const MENU = [
     { route: 'pedidos', label: 'Pedidos e pagamentos', icon: 'receipt', perm: 'pedidos.ver' },
     { route: 'contratos', label: 'Contratos e licenças', icon: 'file-earmark-lock', perm: 'contratos.ver' },
     { route: 'suporte', label: 'Chamados', icon: 'life-preserver', perm: 'suporte.ver' }
+  ] },
+  { group: 'Descoberta', items: [
+    { route: 'levantamentos', label: 'Levantamento de Requisitos', icon: 'clipboard2-check', perm: 'levantamentos.ver' }
   ] },
   { group: 'Implantação', items: [
     { route: 'implantacoes', label: 'Implantações', icon: 'rocket-takeoff', perm: 'implantacoes.ver' },

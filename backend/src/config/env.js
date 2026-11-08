@@ -49,6 +49,11 @@ export const env = Object.freeze({
     emailSsl: process.env.IMPLANTACAO_EMAIL_SSL || '',
     helper: process.env.IMPLANTACAO_HELPER || '/usr/local/lib/vitrine-implantacao/helper.mjs'
   },
+  pdf: {
+    // Chrome/Chromium usado para gerar os PDFs (ex.: /usr/bin/google-chrome). Vazio = detecção automática.
+    chromePath: (process.env.PDF_CHROME_PATH || '').trim(),
+    timeoutMs: int(process.env.PDF_TIMEOUT_SEGUNDOS, 90) * 1000
+  },
   payments: {
     provider: process.env.PAYMENT_PROVIDER || '',
     mercadopagoAccessToken: process.env.MERCADOPAGO_ACCESS_TOKEN || '',
