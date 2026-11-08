@@ -81,63 +81,172 @@ Os projetos exibidos neste site informam sua situação real. Projetos marcados 
   ['politica-de-privacidade', 'Política de Privacidade', 'juridica', true,
     `> MODELO — revise com profissional habilitado antes da publicação definitiva.
 
+Esta política explica quais dados pessoais tratamos neste site, para quê, por quanto tempo e como você exerce seus direitos, conforme a Lei Geral de Proteção de Dados (Lei nº 13.709/2018, LGPD).
+
 ## 1. Quem é o controlador
 
-[Nome/razão social, CNPJ/CPF e contato do controlador — configure em Configurações e ajuste este texto.]
+[Razão social], inscrita no CNPJ sob o nº [CNPJ], com endereço em [endereço], é a controladora dos dados tratados neste site.
 
-## 2. Quais dados coletamos
+**Encarregado (canal de privacidade):** [nome ou "Canal de Privacidade"], pelo e-mail [e-mail de privacidade] ou pelo [formulário de solicitações](/privacidade/solicitacao).
 
-- **Formulários de contato e orçamento:** nome, e-mail, telefone (opcional), empresa (opcional) e a mensagem enviada.
-- **Área do cliente:** dados cadastrais necessários à prestação do serviço contratado.
-- **Dados técnicos:** um identificador irreversível (hash) do endereço IP, usado somente para prevenção de abusos.
+## 2. Quais dados tratamos
 
-## 3. Finalidades e bases legais
+**Quando você envia um formulário** (contato, orçamento, pedido de apresentação ou desenvolvimento sob medida):
 
-- Responder solicitações e elaborar propostas (procedimentos preliminares a contrato — art. 7º, V, LGPD).
-- Executar contratos e emitir documentos (execução de contrato e obrigação legal).
-- Enviar novidades apenas a quem consentiu expressamente (consentimento — art. 7º, I).
+- nome, e-mail e a mensagem (obrigatórios);
+- telefone e empresa (opcionais);
+- as respostas do levantamento de requisitos, quando você pede um sistema sob medida;
+- a data em que você declarou ciência desta política e, se marcou, a autorização para receber comunicações;
+- um código irreversível (hash) derivado do seu endereço IP, usado só contra spam e abuso. O IP em si não é guardado.
 
-## 4. Compartilhamento
+**Quando você é cliente:**
 
-Não vendemos dados. Podemos utilizar provedores de hospedagem e envio de e-mails, que atuam como operadores.
+- dados cadastrais: nome, e-mail, telefone, empresa e, somente quando necessário para contrato ou documento fiscal, CPF ou CNPJ;
+- orçamentos, pedidos, pagamentos (valor, forma e situação; não guardamos número de cartão), contratos, licenças, arquivos compartilhados e chamados de suporte;
+- dados de acesso à área do cliente: e-mail, senha (guardada apenas em forma irreversível), data do último acesso e, em cada sessão, endereço IP e navegador utilizado.
 
-## 5. Retenção
+**Quando você só navega:** não coletamos dados pessoais. A contagem de visualizações dos softwares é agregada por dia, sem cookies e sem identificar visitantes. Detalhes na [Política de Cookies](/politica-de-cookies).
 
-Os dados são mantidos pelo tempo necessário às finalidades acima e às obrigações legais.
+Não pedimos dados sensíveis (saúde, religião, biometria etc.). Não inclua esse tipo de informação nas mensagens.
 
-## 6. Direitos do titular
+## 3. Para que usamos e com qual base legal
 
-Você pode solicitar confirmação, acesso, correção, anonimização, portabilidade, eliminação e revogação de consentimento pelo formulário de solicitações de titulares.
+- **Responder seu contato e preparar propostas:** procedimentos preliminares a um contrato, a seu pedido (art. 7º, V).
+- **Prestar os serviços contratados**, manter a área do cliente, emitir documentos e prestar suporte: execução de contrato (art. 7º, V).
+- **Cumprir obrigações legais e fiscais** e guardar registros de acesso exigidos pelo Marco Civil da Internet: obrigação legal (art. 7º, II).
+- **Proteger o site e as contas** (bloqueio de tentativas de invasão, prevenção de spam, registro de auditoria): legítimo interesse (art. 7º, IX), limitado ao necessário.
+- **Enviar novidades e materiais:** somente com seu consentimento (art. 7º, I), que nunca vem pré-marcado e pode ser revogado a qualquer momento.
+- **Exercer direitos em processos:** exercício regular de direitos (art. 7º, VI).
 
-## 7. Cookies
+Não tomamos decisões automatizadas sobre você e não usamos seus dados para publicidade de terceiros.
 
-Utilizamos apenas cookies essenciais. Consulte a Política de Cookies.`],
+## 4. Com quem compartilhamos
+
+Não vendemos nem alugamos dados pessoais. Eles só são acessados por:
+
+- **nossa equipe**, conforme o perfil de acesso de cada pessoa, com registro em auditoria;
+- **fornecedores que atuam como operadores**, apenas no necessário para o serviço: hospedagem do site e das cópias de segurança, envio de e-mails e, se você optar por pagar por eles, processadores de pagamento (como Mercado Pago ou Stripe);
+- **autoridades públicas**, quando houver obrigação legal ou ordem judicial.
+
+Alguns desses fornecedores podem manter servidores fora do Brasil. Nesse caso, a transferência segue as hipóteses do art. 33 da LGPD, como cláusulas contratuais e garantias adequadas de proteção.
+
+## 5. Sistemas que hospedamos para clientes
+
+Quando desenvolvemos, implantamos ou hospedamos um sistema para uma empresa cliente, os dados das pessoas que usam esse sistema pertencem ao cliente, que é o controlador. Nesse caso atuamos como operadores, seguindo as instruções e o contrato firmado com o cliente. Dúvidas sobre esses dados devem ser dirigidas primeiro à empresa responsável pelo sistema.
+
+## 6. Por quanto tempo guardamos
+
+- **Contatos que não resultaram em contratação:** até [24 meses] após a última interação, depois anonimizados ou excluídos.
+- **Dados de clientes e documentos comerciais e fiscais:** durante o contrato e pelos prazos legais depois dele (em regra, 5 anos para obrigações fiscais e de consumo).
+- **Registros de acesso** (IP, data e hora): no mínimo 6 meses, como exige o art. 15 do Marco Civil da Internet.
+- **Sessões encerradas ou expiradas:** apagadas automaticamente 7 dias depois.
+- **Autorização para comunicações:** até você revogar.
+- **Cópias de segurança:** cifradas e substituídas em ciclo; cada cópia é descartada em até [6 meses].
+
+Terminado o prazo, os dados são excluídos ou anonimizados de forma irreversível.
+
+## 7. Como protegemos
+
+Conexão sempre cifrada (HTTPS), senhas guardadas com algoritmo próprio para senhas (Argon2id), sessões que expiram por inatividade, bloqueio após tentativas de login malsucedidas, permissões por perfil, registro de auditoria das ações da equipe, arquivos privados acessíveis apenas a quem tem permissão e cópias de segurança cifradas. Nenhum sistema é totalmente imune a incidentes; se ocorrer um incidente que possa causar risco ou dano relevante, comunicaremos você e a Autoridade Nacional de Proteção de Dados (ANPD), conforme o art. 48.
+
+## 8. Seus direitos
+
+Você pode, a qualquer momento e sem custo:
+
+- confirmar se tratamos seus dados e acessá-los;
+- corrigir dados incompletos, inexatos ou desatualizados;
+- pedir anonimização, bloqueio ou eliminação de dados desnecessários ou tratados em desconformidade;
+- pedir a portabilidade dos seus dados;
+- saber com quem compartilhamos seus dados;
+- revogar o consentimento para comunicações e ser informado das consequências;
+- opor-se a um tratamento baseado em legítimo interesse.
+
+Faça seu pedido pelo [formulário de solicitações](/privacidade/solicitacao). Para proteger você, podemos pedir confirmação de identidade antes de atender. Respondemos em até 15 dias. Alguns dados podem ser mantidos mesmo após um pedido de exclusão, quando a lei exigir (por exemplo, documentos fiscais). Se não ficar satisfeito com a resposta, você pode reclamar à ANPD (gov.br/anpd).
+
+## 9. Crianças e adolescentes
+
+Este site é voltado a empresas e profissionais. Não coletamos intencionalmente dados de menores de 18 anos.
+
+## 10. Alterações
+
+Podemos atualizar esta política para refletir mudanças no site ou na lei. A versão em vigor é sempre a publicada nesta página, com a data abaixo. Mudanças relevantes serão destacadas no site e, para clientes, avisadas por e-mail.
+
+Última atualização: [data].`],
   ['termos-de-uso', 'Termos de Uso', 'juridica', true,
     `> MODELO — revise com profissional habilitado antes da publicação definitiva.
 
-## 1. Objeto
+Estes termos regulam o uso deste site, oferecido por [Razão social], CNPJ [CNPJ] ("nós"). Ao usar o site você concorda com eles. Se não concordar, não utilize o site.
 
-Estes termos regulam o uso deste site, que apresenta softwares e serviços de desenvolvimento.
+## 1. O que é este site
 
-## 2. Informações dos produtos
+Este site apresenta os softwares e os serviços de desenvolvimento que oferecemos, permite pedir orçamentos e apresentações e dá aos clientes acesso a uma área restrita para acompanhar pedidos, orçamentos, contratos, licenças e suporte.
 
-As descrições, telas e situações comerciais dos produtos são informativas. Produtos identificados como demonstrativos ou em desenvolvimento não estão disponíveis para contratação imediata.
+## 2. Informações sobre softwares e serviços
 
-## 3. Orçamentos
+- Cada software informa sua situação real: em planejamento, em desenvolvimento, demonstração disponível ou disponível para contratação. Somente os marcados como "Disponível para contratação" podem ser contratados de imediato.
+- Descrições, telas, funcionalidades e preços exibidos são informativos e podem mudar. O que vale para uma contratação é o que constar na proposta aceita e no contrato.
+- Fazemos o possível para manter as informações corretas e atualizadas, mas podem ocorrer erros de digitação ou desatualização. Se encontrar algo assim, avise pela [página de contato](/contato).
 
-Solicitações de orçamento não geram obrigação de contratação. Propostas são válidas pelo prazo nelas indicado.
+## 3. Demonstrações
 
-## 4. Área do cliente
+As demonstrações usam exclusivamente dados fictícios, funcionam no seu navegador e não salvam informações. Não digite dados reais nelas. Uma demonstração mostra o funcionamento geral do software e pode ser diferente da versão entregue a cada cliente.
 
-O acesso é pessoal e intransferível. O usuário é responsável por manter a confidencialidade da sua senha.
+## 4. Orçamentos e contratação
 
-## 5. Propriedade intelectual
+- Pedir um orçamento é gratuito e não obriga você nem nós a contratar.
+- Cada proposta informa escopo, valores, prazos e validade. A contratação só acontece com o aceite da proposta e, quando houver, a assinatura do contrato.
+- Em caso de diferença entre estes termos e a proposta ou o contrato, valem a proposta e o contrato.
+- Pagamentos seguem as condições da proposta. Quando feitos por processador de pagamento, também se aplicam os termos desse processador.
 
-Os softwares, marcas e conteúdos deste site são protegidos pela legislação aplicável.
+## 5. Área do cliente
 
-## 6. Contato
+- O acesso é criado por nós, por convite enviado ao e-mail do cliente. É pessoal e intransferível.
+- Você é responsável por guardar sua senha em sigilo e pelas ações feitas com seu acesso. Se suspeitar de uso indevido, troque a senha e nos avise imediatamente.
+- Podemos suspender um acesso em caso de uso indevido, risco à segurança ou fim do contrato, avisando o cliente sempre que possível.
 
-Dúvidas sobre estes termos podem ser enviadas pela página de contato.`],
+## 6. Uso permitido
+
+Ao usar o site, você se compromete a não:
+
+- tentar acessar áreas, contas ou dados sem autorização, nem contornar medidas de segurança;
+- enviar spam, conteúdo ilícito, ofensivo ou que viole direitos de terceiros pelos formulários;
+- sobrecarregar o site, usar robôs para coletar conteúdo em massa ou enviar programas maliciosos;
+- usar o site para fins ilegais ou passar-se por outra pessoa.
+
+Encontrou uma falha de segurança? Comunique-nos pela [página de contato](/contato) em vez de explorá-la.
+
+## 7. Propriedade intelectual
+
+Os softwares, textos, telas, marcas, logotipos e demais conteúdos deste site pertencem a nós ou a seus respectivos titulares e são protegidos por lei (incluindo a Lei de Software, nº 9.609/1998, e a Lei de Direitos Autorais, nº 9.610/1998). Você pode consultá-los para conhecer nossos serviços, mas não pode copiá-los, modificá-los, distribuí-los ou usá-los comercialmente sem autorização por escrito. Marcas de clientes e parceiros só são exibidas com autorização deles. Os direitos sobre softwares contratados seguem o que for definido no contrato.
+
+## 8. Links e serviços de terceiros
+
+O site pode ter links ou conteúdo de terceiros, como WhatsApp, vídeos do YouTube ou do Vimeo e processadores de pagamento. Esses serviços têm termos e políticas próprios, e não respondemos pelo conteúdo ou funcionamento deles.
+
+## 9. Disponibilidade e responsabilidade
+
+- Trabalhamos para manter o site no ar e seguro, mas ele pode ficar indisponível por manutenção, falhas técnicas ou motivos fora do nosso controle.
+- Não respondemos por danos causados por uso indevido do site, por falhas de equipamentos, conexões ou serviços de terceiros, nem por decisões tomadas apenas com base nas informações gerais do site.
+- Nada nestes termos afasta direitos garantidos pelo Código de Defesa do Consumidor, quando ele for aplicável.
+- Níveis de serviço, suporte e garantias de softwares contratados são definidos na proposta e no contrato.
+
+## 10. Privacidade
+
+O tratamento dos seus dados pessoais está descrito na [Política de Privacidade](/politica-de-privacidade) e na [Política de Cookies](/politica-de-cookies), que fazem parte destes termos.
+
+## 11. Alterações
+
+Podemos atualizar estes termos a qualquer momento. A versão em vigor é sempre a publicada nesta página, com a data abaixo. Mudanças relevantes serão destacadas no site e, para clientes, avisadas por e-mail.
+
+## 12. Lei e foro
+
+Estes termos seguem as leis brasileiras. Fica eleito o foro da comarca de [cidade/UF] para resolver qualquer questão, ressalvado o direito do consumidor de propor ação no foro do seu domicílio.
+
+## 13. Contato
+
+Dúvidas sobre estes termos podem ser enviadas pela [página de contato](/contato).
+
+Última atualização: [data].`],
   ['politica-de-cookies', 'Política de Cookies', 'juridica', true,
     `> MODELO — revise com profissional habilitado antes da publicação definitiva.
 
